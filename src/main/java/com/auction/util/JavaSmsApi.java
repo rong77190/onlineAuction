@@ -18,9 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by yuan on 16-5-21.
- */
 public class JavaSmsApi {
 
     //查账户信息的http地址

@@ -70,4 +70,17 @@ public class Student {
     public void setStuclass(String stuclass) {
         this.stuclass = stuclass == null ? null : stuclass.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", createdate='" + createdate + '\'' +
+                ", stuclass='" + stuclass + '\'' +
+                '}';
+    }
 }

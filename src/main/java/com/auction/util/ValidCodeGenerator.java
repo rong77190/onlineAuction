@@ -6,9 +6,6 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-/**
- * Created by yuan on 16-5-9.
- */
 @org.springframework.stereotype.Component
 public class ValidCodeGenerator {
     /**

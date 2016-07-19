@@ -18,7 +18,9 @@ public class StudentController {
     @RequestMapping("show")
     @ResponseBody
     public Object show(Student student){
+        System.out.println(student);
         student = studentService.getStudent(student.getId());
+        System.out.println(student);
         return MyResult.getResult(1,"",student);
     }
 }

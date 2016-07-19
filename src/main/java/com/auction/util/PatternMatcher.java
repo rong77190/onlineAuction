@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by yuan on 16-5-14.
  */
 public class PatternMatcher {
     /**
