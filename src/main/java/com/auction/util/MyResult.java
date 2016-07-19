@@ -30,7 +30,7 @@ public class MyResult {
 	 */
 	public static Object getResult(){
 		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("status", 200);
+		map.put("status", 1);
 		map.put("error", "");
 		map.put("date", "");
 		return map;
@@ -41,14 +41,14 @@ public class MyResult {
 	 */
 	public static Object getResult(Object date){
 		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("status", 200);
+		map.put("status", 1);
 		map.put("error", "");
 		map.put("date", date);
 		return map;
 	}
 	public static Object getResultParmNull(){
 		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("status", 400);
+		map.put("status", 0);
 		map.put("error", "参数为空！");
 		map.put("date", "");
 		return map;
@@ -82,6 +82,10 @@ public class MyResult {
 		this.data = data;
 	}
 
+
+	public MyResult(){
+		super();
+	}
 	public MyResult(int status, String error, Object data) {
 		this.status=status;
 		this.error = error;
