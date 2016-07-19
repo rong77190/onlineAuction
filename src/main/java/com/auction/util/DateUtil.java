@@ -5,7 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**用于格式化输出当前时间，时间戳
- * @author xiecchur
+ * @author chuankun
+ *@2016年5月15日 下午3:00:55
+ * email:yichuankun@qq.com
  */
 public class DateUtil {
 

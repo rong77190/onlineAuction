@@ -2,7 +2,6 @@ package com.auction.util.Mail;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
-
 /**
  * Created by xiechur on 2016/7/2.
  */

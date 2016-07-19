@@ -1,7 +1,6 @@
 package com.auction.util.Mail;
 
 import java.util.Properties;
-
 /**
  * Created by xiechur on 2016/7/2.
  */
