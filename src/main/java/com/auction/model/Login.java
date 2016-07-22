@@ -1,9 +1,11 @@
 package com.auction.model;
 
+import java.io.Serializable;
+
 /**
  * Created by dell on 2016/7/19.
  */
-public class Login {
+public class Login implements Serializable {
     private String userName;
     private String password;
     private String validCode;
