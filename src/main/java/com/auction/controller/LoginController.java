@@ -48,7 +48,7 @@ public class LoginController {
             if (user==null){
                 return MyResult.getResult(0,"用户名或密码错误","");
             }else {
-                session.setAttribute("userName",login.getUserName());
+                session.setAttribute("user",user);
                 return MyResult.getResult(1,"",user);
             }
         }
@@ -71,7 +71,12 @@ public class LoginController {
             System.out.println("验证码错误");
             return MyResult.getResult(0,"验证码错误","");
         }
-        return loginService.register(register);
+        int result = loginService.register(register);
+        if (result >= 0){
+            return MyResult.getResult(1,"注册成功","");
+        }else {
+            return MyResult.getResult(0,"注册失败","");
+        }
     }
 
 
@@ -115,7 +120,7 @@ public class LoginController {
     @RequestMapping("/logout")
     @ResponseBody
     public Object logout(HttpSession session){
-        session.removeAttribute("userName");
+        session.removeAttribute("user");
         return MyResult.getResult();
     }
 

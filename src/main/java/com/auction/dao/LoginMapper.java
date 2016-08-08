@@ -1,5 +1,6 @@
 package com.auction.dao;
 
+import com.auction.model.Register;
 import com.auction.model.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -8,4 +9,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface LoginMapper {
     public User login(@Param("userName")String userName, @Param("password")String password);
+//    public Register register(@Param("userName")String userName, @Param("password")String password,@Param("userEmail")String userEmail);
+    int register(Register register);
 }

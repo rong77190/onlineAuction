@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.auction.dao.ManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.auction.model.Manager" >
+    <id column="sys_user_id" property="sysUserId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="manager_email" property="managerEmail" jdbcType="VARCHAR" />
+    <result column="freeze" property="freeze" jdbcType="INTEGER" />
+    <result column="role" property="role" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sys_user_id, name, password, manager_email, freeze, role
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from manager
+    where sys_user_id = #{sysUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from manager
+    where sys_user_id = #{sysUserId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.auction.model.Manager" >
+    insert into manager (sys_user_id, name, password, 
+      manager_email, freeze, role
+      )
+    values (#{sysUserId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{managerEmail,jdbcType=VARCHAR}, #{freeze,jdbcType=INTEGER}, #{role,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.auction.model.Manager" >
+    insert into manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysUserId != null" >
+        sys_user_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="managerEmail != null" >
+        manager_email,
+      </if>
+      <if test="freeze != null" >
+        freeze,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysUserId != null" >
+        #{sysUserId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null" >
+        #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="freeze != null" >
+        #{freeze,jdbcType=INTEGER},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.auction.model.Manager" >
+    update manager
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null" >
+        manager_email = #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="freeze != null" >
+        freeze = #{freeze,jdbcType=INTEGER},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sys_user_id = #{sysUserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.auction.model.Manager" >
+    update manager
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      manager_email = #{managerEmail,jdbcType=VARCHAR},
+      freeze = #{freeze,jdbcType=INTEGER},
+      role = #{role,jdbcType=INTEGER}
+    where sys_user_id = #{sysUserId,jdbcType=INTEGER}
+  </update>
+</mapper>

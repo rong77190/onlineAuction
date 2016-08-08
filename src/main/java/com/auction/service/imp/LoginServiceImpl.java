@@ -1,5 +1,6 @@
 package com.auction.service.imp;
 
+import com.auction.dao.LoginMapper;
 import com.auction.dao.UserMapper;
 import com.auction.model.Login;
 import com.auction.model.Register;
@@ -26,22 +27,19 @@ public class LoginServiceImpl implements LoginService{
     @Resource
     private UserMapper userMapper;
     @Resource
+    private LoginMapper loginMapper;
+    @Resource
     private ValidCodeGenerator validCodeGenerator;
 
     public User login(Login login) {
         String userName = login.getUserName();
         String password = login.getPassword();
-        return userMapper.login(userName,password);
+        return loginMapper.login(userName,password);
     }
 
 
     public int register(Register register) {
-        User user = new User();
-        user.setUserName(register.getUserName());
-        user.setPhone(register.getPhone());
-        user.setPassword(register.getPassword());
-        user.setUserEmail(register.getUserEmail());
-        return userMapper.insertSelective(user);
+        return loginMapper.register(register);
     }
 
     /**

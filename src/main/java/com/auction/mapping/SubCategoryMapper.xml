@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.auction.dao.SubCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.auction.model.SubCategory" >
+    <id column="sub_category_id" property="subCategoryId" jdbcType="INTEGER" />
+    <result column="sub_category_name" property="subCategoryName" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sub_category_id, sub_category_name, category_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sub_category
+    where sub_category_id = #{subCategoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sub_category
+    where sub_category_id = #{subCategoryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.auction.model.SubCategory" >
+    insert into sub_category (sub_category_id, sub_category_name, category_id, 
+      create_time)
+    values (#{subCategoryId,jdbcType=INTEGER}, #{subCategoryName,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.auction.model.SubCategory" >
+    insert into sub_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subCategoryId != null" >
+        sub_category_id,
+      </if>
+      <if test="subCategoryName != null" >
+        sub_category_name,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subCategoryId != null" >
+        #{subCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="subCategoryName != null" >
+        #{subCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.auction.model.SubCategory" >
+    update sub_category
+    <set >
+      <if test="subCategoryName != null" >
+        sub_category_name = #{subCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sub_category_id = #{subCategoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.auction.model.SubCategory" >
+    update sub_category
+    set sub_category_name = #{subCategoryName,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where sub_category_id = #{subCategoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

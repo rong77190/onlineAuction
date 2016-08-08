@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.auction.dao.GoodMapper" >
+  <resultMap id="BaseResultMap" type="com.auction.model.Good" >
+    <id column="good_id" property="goodId" jdbcType="INTEGER" />
+    <result column="sub_category_id" property="subCategoryId" jdbcType="INTEGER" />
+    <result column="good_name" property="goodName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="curr_price" property="currPrice" jdbcType="DECIMAL" />
+    <result column="begin_price" property="beginPrice" jdbcType="DECIMAL" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="up_time" property="upTime" jdbcType="TIMESTAMP" />
+    <result column="good_state" property="goodState" jdbcType="VARCHAR" />
+    <result column="complete_time" property="completeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    good_id, sub_category_id, good_name, price, curr_price, begin_price, image, introduction, 
+    create_time, is_delete, up_time, good_state, complete_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from good
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from good
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.auction.model.Good" >
+    insert into good (good_id, sub_category_id, good_name, 
+      price, curr_price, begin_price, 
+      image, introduction, create_time, 
+      is_delete, up_time, good_state, 
+      complete_time)
+    values (#{goodId,jdbcType=INTEGER}, #{subCategoryId,jdbcType=INTEGER}, #{goodName,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{currPrice,jdbcType=DECIMAL}, #{beginPrice,jdbcType=DECIMAL}, 
+      #{image,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=INTEGER}, #{upTime,jdbcType=TIMESTAMP}, #{goodState,jdbcType=VARCHAR}, 
+      #{completeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.auction.model.Good" >
+    insert into good
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodId != null" >
+        good_id,
+      </if>
+      <if test="subCategoryId != null" >
+        sub_category_id,
+      </if>
+      <if test="goodName != null" >
+        good_name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="currPrice != null" >
+        curr_price,
+      </if>
+      <if test="beginPrice != null" >
+        begin_price,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="upTime != null" >
+        up_time,
+      </if>
+      <if test="goodState != null" >
+        good_state,
+      </if>
+      <if test="completeTime != null" >
+        complete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodId != null" >
+        #{goodId,jdbcType=INTEGER},
+      </if>
+      <if test="subCategoryId != null" >
+        #{subCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="goodName != null" >
+        #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="currPrice != null" >
+        #{currPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="beginPrice != null" >
+        #{beginPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="upTime != null" >
+        #{upTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodState != null" >
+        #{goodState,jdbcType=VARCHAR},
+      </if>
+      <if test="completeTime != null" >
+        #{completeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.auction.model.Good" >
+    update good
+    <set >
+      <if test="subCategoryId != null" >
+        sub_category_id = #{subCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="goodName != null" >
+        good_name = #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="currPrice != null" >
+        curr_price = #{currPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="beginPrice != null" >
+        begin_price = #{beginPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="upTime != null" >
+        up_time = #{upTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodState != null" >
+        good_state = #{goodState,jdbcType=VARCHAR},
+      </if>
+      <if test="completeTime != null" >
+        complete_time = #{completeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.auction.model.Good" >
+    update good
+    set sub_category_id = #{subCategoryId,jdbcType=INTEGER},
+      good_name = #{goodName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      curr_price = #{currPrice,jdbcType=DECIMAL},
+      begin_price = #{beginPrice,jdbcType=DECIMAL},
+      image = #{image,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      up_time = #{upTime,jdbcType=TIMESTAMP},
+      good_state = #{goodState,jdbcType=VARCHAR},
+      complete_time = #{completeTime,jdbcType=TIMESTAMP}
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+</mapper>

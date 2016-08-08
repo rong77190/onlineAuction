@@ -5,17 +5,20 @@
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="user_image" property="userImage" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="birthday" property="birthday" jdbcType="VARCHAR" />
     <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
     <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="freeze" property="freeze" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, user_name, password, phone, sex, birthday, user_email, register_time
+    user_id, user_name, password, user_image, phone, sex, birthday, user_email, register_time,
+    freeze
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from user
     where user_id = #{userId,jdbcType=INTEGER}
@@ -25,12 +28,14 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.auction.model.User" >
-    insert into user (user_id, user_name, password, 
-      phone, sex, birthday, 
-      user_email, register_time)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
-      #{userEmail,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP})
+    insert into user (user_id, user_name, password,
+    user_image, phone, sex,
+    birthday, user_email, register_time,
+    freeze)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{userImage,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+    #{birthday,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP},
+    #{freeze,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.User" >
     insert into user
@@ -43,6 +48,9 @@
       </if>
       <if test="password != null" >
         password,
+      </if>
+      <if test="userImage != null" >
+        user_image,
       </if>
       <if test="phone != null" >
         phone,
@@ -59,6 +67,9 @@
       <if test="registerTime != null" >
         register_time,
       </if>
+      <if test="freeze != null" >
+        freeze,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -69,6 +80,9 @@
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userImage != null" >
+        #{userImage,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
@@ -85,6 +99,9 @@
       <if test="registerTime != null" >
         #{registerTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="freeze != null" >
+        #{freeze,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.auction.model.User" >
@@ -95,6 +112,9 @@
       </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userImage != null" >
+        user_image = #{userImage,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
@@ -111,25 +131,24 @@
       <if test="registerTime != null" >
         register_time = #{registerTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="freeze != null" >
+        freeze = #{freeze,jdbcType=INTEGER},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.auction.model.User" >
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=VARCHAR},
-      user_email = #{userEmail,jdbcType=VARCHAR},
-      register_time = #{registerTime,jdbcType=TIMESTAMP}
+    password = #{password,jdbcType=VARCHAR},
+    user_image = #{userImage,jdbcType=VARCHAR},
+    phone = #{phone,jdbcType=VARCHAR},
+    sex = #{sex,jdbcType=VARCHAR},
+    birthday = #{birthday,jdbcType=VARCHAR},
+    user_email = #{userEmail,jdbcType=VARCHAR},
+    register_time = #{registerTime,jdbcType=TIMESTAMP},
+    freeze = #{freeze,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 
-  <select id="login" resultType="com.auction.model.User">
-    select
-    <include refid="Base_Column_List" />
-    from user
-    where user_name = #{userName} AND password = #{password}
-  </select>
 </mapper>

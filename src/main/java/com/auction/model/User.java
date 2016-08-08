@@ -1,14 +1,15 @@
 package com.auction.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class User {
     private Integer userId;
 
     private String userName;
 
     private String password;
+
+    private String userImage;
 
     private String phone;
 
@@ -19,6 +20,8 @@ public class User implements Serializable {
     private String userEmail;
 
     private Date registerTime;
+
+    private Integer freeze;
 
     public Integer getUserId() {
         return userId;
@@ -42,6 +45,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage == null ? null : userImage.trim();
     }
 
     public String getPhone() {
@@ -82,5 +93,13 @@ public class User implements Serializable {
 
     public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
+    }
+
+    public Integer getFreeze() {
+        return freeze;
+    }
+
+    public void setFreeze(Integer freeze) {
+        this.freeze = freeze;
     }
 }
