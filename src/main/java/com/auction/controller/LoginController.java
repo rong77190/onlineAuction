@@ -56,7 +56,7 @@ public class LoginController {
 
 
     /**
-     * 登录
+     * 注册
      * @param register
      * @param request
      * @return
@@ -86,7 +86,7 @@ public class LoginController {
     public Object sendSMS(@RequestParam("userEmail") String userEmail,HttpServletRequest request){
 //        System.out.println(userEmail);
         HttpSession session = request.getSession(false);
-        String registerValidCode = RegisterValidCode(validCodeLength);
+        String registerValidCode = RegisterValidCode(validCodeLength);//
 //        System.out.println("registercode"+registerValidCode);
         session.setAttribute("registerValidCode",registerValidCode);
 //        System.out.println("session::"+session.getAttribute("registerValidCode").toString());
@@ -157,4 +157,5 @@ public class LoginController {
         }
         return sb.toString();
     }
+
 }

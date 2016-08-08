@@ -10,7 +10,7 @@ import java.util.Map;
 public class MyResult {
 
 
-	// 定义jackson对象
+	// 定义json对象
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 
 	/**
@@ -32,25 +32,25 @@ public class MyResult {
 		Map<String , Object> map = new HashMap<String, Object>();
 		map.put("status", 1);
 		map.put("error", "");
-		map.put("date", "");
+		map.put("data", "");
 		return map;
 	}
 	/**成功，并有返回值
-	 * @param date
+	 * @param data
 	 * @return
 	 */
-	public static Object getResult(Object date){
+	public static Object getResult(Object data){
 		Map<String , Object> map = new HashMap<String, Object>();
 		map.put("status", 1);
 		map.put("error", "");
-		map.put("date", date);
+		map.put("data", data);
 		return map;
 	}
 	public static Object getResultParmNull(){
 		Map<String , Object> map = new HashMap<String, Object>();
 		map.put("status", 0);
 		map.put("error", "参数为空！");
-		map.put("date", "");
+		map.put("data", "");
 		return map;
 	}
 //@xiechur

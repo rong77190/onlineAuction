@@ -15,7 +15,7 @@ public class StudentController {
     @Resource
     private StudentService studentService;
 //可以运行在本地服务器 用url 请求；     http://localhost:8080/student/show?id=1 然后返回json格式的数据
-    @RequestMapping("show")
+    @RequestMapping("/show")
     @ResponseBody
     public Object show(Student student){
         System.out.println(student);
