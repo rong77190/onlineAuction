@@ -74,7 +74,7 @@ public class LoginController {
         int result = loginService.register(register);
         if (result >= 0){
             return MyResult.getResult(1,"注册成功","");
-        }else {
+         }else {
             return MyResult.getResult(0,"注册失败","");
         }
     }
