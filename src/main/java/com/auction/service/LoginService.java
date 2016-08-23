@@ -23,4 +23,9 @@ public interface LoginService {
 
     //注册
     public int register(Register register);
+
+    public int updatePassword(int userId,String password);
+
+
+    public Object SendResetValidCodeToEmail(String userEmail , HttpSession session);
 }

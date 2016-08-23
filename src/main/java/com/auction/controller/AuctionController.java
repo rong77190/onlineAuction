@@ -27,7 +27,6 @@ public class AuctionController{
     @Resource
     private UserService userService;
 
-
     /**
      * 检查押金状态
      * @param userId

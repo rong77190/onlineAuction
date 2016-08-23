@@ -112,4 +112,21 @@ public class User {
     public void setFreeze(Integer freeze) {
         this.freeze = freeze;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userImage='" + userImage + '\'' +
+                ", phone='" + phone + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", registerTime=" + registerTime +
+                ", balance=" + balance +
+                ", freeze=" + freeze +
+                '}';
+    }
 }
