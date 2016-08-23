@@ -1,6 +1,5 @@
 package com.auction.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Good {
@@ -10,11 +9,11 @@ public class Good {
 
     private String goodName;
 
-    private BigDecimal price;
+    private Double price;
 
-    private BigDecimal currPrice;
+    private Double currPrice;
 
-    private Long beginPrice;
+    private Double beginPrice;
 
     private String image;
 
@@ -54,27 +53,27 @@ public class Good {
         this.goodName = goodName == null ? null : goodName.trim();
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public BigDecimal getCurrPrice() {
+    public Double getCurrPrice() {
         return currPrice;
     }
 
-    public void setCurrPrice(BigDecimal currPrice) {
+    public void setCurrPrice(Double currPrice) {
         this.currPrice = currPrice;
     }
 
-    public Long getBeginPrice() {
+    public Double getBeginPrice() {
         return beginPrice;
     }
 
-    public void setBeginPrice(Long beginPrice) {
+    public void setBeginPrice(Double beginPrice) {
         this.beginPrice = beginPrice;
     }
 

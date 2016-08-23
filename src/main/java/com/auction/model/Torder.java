@@ -1,6 +1,5 @@
 package com.auction.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Torder {
@@ -12,7 +11,7 @@ public class Torder {
 
     private Date updateTime;
 
-    private BigDecimal orderPrice;
+    private Double orderPrice;
 
     private Integer orderState;
 
@@ -50,11 +49,11 @@ public class Torder {
         this.updateTime = updateTime;
     }
 
-    public BigDecimal getOrderPrice() {
+    public Double getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(BigDecimal orderPrice) {
+    public void setOrderPrice(Double orderPrice) {
         this.orderPrice = orderPrice;
     }
 

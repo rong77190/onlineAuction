@@ -6,7 +6,7 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="order_price" property="orderPrice" jdbcType="DECIMAL" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
     <result column="order_state" property="orderState" jdbcType="INTEGER" />
     <result column="pay_way" property="payWay" jdbcType="INTEGER" />
   </resultMap>
@@ -14,7 +14,7 @@
     order_id, user_id, create_time, update_time, order_price, order_state, pay_way
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from torder
     where order_id = #{orderId,jdbcType=INTEGER}
@@ -24,12 +24,12 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.auction.model.Torder" >
-    insert into torder (order_id, user_id, create_time, 
-      update_time, order_price, order_state, 
-      pay_way)
-    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{orderPrice,jdbcType=DECIMAL}, #{orderState,jdbcType=INTEGER}, 
-      #{payWay,jdbcType=INTEGER})
+    insert into torder (order_id, user_id, create_time,
+    update_time, order_price, order_state,
+    pay_way)
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP}, #{orderPrice,jdbcType=DOUBLE}, #{orderState,jdbcType=INTEGER},
+    #{payWay,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.Torder" >
     insert into torder
@@ -70,7 +70,7 @@
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="orderPrice != null" >
-        #{orderPrice,jdbcType=DECIMAL},
+        #{orderPrice,jdbcType=DOUBLE},
       </if>
       <if test="orderState != null" >
         #{orderState,jdbcType=INTEGER},
@@ -93,7 +93,7 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="orderPrice != null" >
-        order_price = #{orderPrice,jdbcType=DECIMAL},
+        order_price = #{orderPrice,jdbcType=DOUBLE},
       </if>
       <if test="orderState != null" >
         order_state = #{orderState,jdbcType=INTEGER},
@@ -109,7 +109,7 @@
     set user_id = #{userId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      order_price = #{orderPrice,jdbcType=DECIMAL},
+      order_price = #{orderPrice,jdbcType=DOUBLE},
       order_state = #{orderState,jdbcType=INTEGER},
       pay_way = #{payWay,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=INTEGER}

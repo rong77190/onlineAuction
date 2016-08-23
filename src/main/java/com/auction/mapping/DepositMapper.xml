@@ -6,14 +6,14 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="good_id" property="goodId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     deposit_id, user_id, good_id, create_time, price, state
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from deposit
     where deposit_id = #{depositId,jdbcType=INTEGER}
@@ -23,12 +23,12 @@
     where deposit_id = #{depositId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.auction.model.Deposit" >
-    insert into deposit (deposit_id, user_id, good_id, 
-      create_time, price, state
-      )
-    values (#{depositId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, #{state,jdbcType=INTEGER}
-      )
+    insert into deposit (deposit_id, user_id, good_id,
+    create_time, price, state
+    )
+    values (#{depositId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER},
+    #{createTime,jdbcType=TIMESTAMP}, #{price,jdbcType=DOUBLE}, #{state,jdbcType=INTEGER}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.Deposit" >
     insert into deposit
@@ -66,7 +66,7 @@
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
+        #{price,jdbcType=DOUBLE},
       </if>
       <if test="state != null" >
         #{state,jdbcType=INTEGER},
@@ -86,7 +86,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
+        price = #{price,jdbcType=DOUBLE},
       </if>
       <if test="state != null" >
         state = #{state,jdbcType=INTEGER},
@@ -97,10 +97,19 @@
   <update id="updateByPrimaryKey" parameterType="com.auction.model.Deposit" >
     update deposit
     set user_id = #{userId,jdbcType=INTEGER},
-      good_id = #{goodId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      price = #{price,jdbcType=DECIMAL},
-      state = #{state,jdbcType=INTEGER}
+    good_id = #{goodId,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    price = #{price,jdbcType=DOUBLE},
+    state = #{state,jdbcType=INTEGER}
     where deposit_id = #{depositId,jdbcType=INTEGER}
   </update>
+
+  <!--补充-->
+
+  <select id="checkDepositState" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from deposit
+    where user_id =#{userId,jdbcType=INTEGER} AND good_id =#{goodId,jdbcType=INTEGER}
+  </select>
 </mapper>

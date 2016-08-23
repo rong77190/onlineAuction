@@ -11,11 +11,12 @@
     <result column="birthday" property="birthday" jdbcType="VARCHAR" />
     <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
     <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
     <result column="freeze" property="freeze" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     user_id, user_name, password, user_image, phone, sex, birthday, user_email, register_time,
-    freeze
+    balance, freeze
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -31,11 +32,11 @@
     insert into user (user_id, user_name, password,
     user_image, phone, sex,
     birthday, user_email, register_time,
-    freeze)
+    balance, freeze)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
     #{userImage,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
     #{birthday,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP},
-    #{freeze,jdbcType=INTEGER})
+    #{balance,jdbcType=DOUBLE}, #{freeze,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.User" >
     insert into user
@@ -66,6 +67,9 @@
       </if>
       <if test="registerTime != null" >
         register_time,
+      </if>
+      <if test="balance != null" >
+        balance,
       </if>
       <if test="freeze != null" >
         freeze,
@@ -99,6 +103,9 @@
       <if test="registerTime != null" >
         #{registerTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DOUBLE},
+      </if>
       <if test="freeze != null" >
         #{freeze,jdbcType=INTEGER},
       </if>
@@ -131,6 +138,9 @@
       <if test="registerTime != null" >
         register_time = #{registerTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
       <if test="freeze != null" >
         freeze = #{freeze,jdbcType=INTEGER},
       </if>
@@ -147,8 +157,14 @@
     birthday = #{birthday,jdbcType=VARCHAR},
     user_email = #{userEmail,jdbcType=VARCHAR},
     register_time = #{registerTime,jdbcType=TIMESTAMP},
+    balance = #{balance,jdbcType=DOUBLE},
     freeze = #{freeze,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 
+  <update id="pay" >
+    UPDATE USER
+    set balance = balance - #{price}
+    WHERE user_id = #{userId}
+  </update>
 </mapper>

@@ -5,9 +5,9 @@
     <id column="good_id" property="goodId" jdbcType="INTEGER" />
     <result column="sub_category_id" property="subCategoryId" jdbcType="INTEGER" />
     <result column="good_name" property="goodName" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="curr_price" property="currPrice" jdbcType="DECIMAL" />
-    <result column="begin_price" property="beginPrice" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="curr_price" property="currPrice" jdbcType="DOUBLE" />
+    <result column="begin_price" property="beginPrice" jdbcType="DOUBLE" />
     <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -17,11 +17,11 @@
     <result column="complete_time" property="completeTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    good_id, sub_category_id, good_name, price, curr_price, begin_price, image, introduction, 
+    good_id, sub_category_id, good_name, price, curr_price, begin_price, image, introduction,
     create_time, is_delete, up_time, good_state, complete_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from good
     where good_id = #{goodId,jdbcType=INTEGER}
@@ -31,16 +31,16 @@
     where good_id = #{goodId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.auction.model.Good" >
-    insert into good (good_id, sub_category_id, good_name, 
-      price, curr_price, begin_price, 
-      image, introduction, create_time, 
-      is_delete, up_time, good_state, 
-      complete_time)
-    values (#{goodId,jdbcType=INTEGER}, #{subCategoryId,jdbcType=INTEGER}, #{goodName,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{currPrice,jdbcType=DECIMAL}, #{beginPrice,jdbcType=DECIMAL}, 
-      #{image,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{isDelete,jdbcType=INTEGER}, #{upTime,jdbcType=TIMESTAMP}, #{goodState,jdbcType=VARCHAR}, 
-      #{completeTime,jdbcType=TIMESTAMP})
+    insert into good (good_id, sub_category_id, good_name,
+    price, curr_price, begin_price,
+    image, introduction, create_time,
+    is_delete, up_time, good_state,
+    complete_time)
+    values (#{goodId,jdbcType=INTEGER}, #{subCategoryId,jdbcType=INTEGER}, #{goodName,jdbcType=VARCHAR},
+    #{price,jdbcType=DOUBLE}, #{currPrice,jdbcType=DOUBLE}, #{beginPrice,jdbcType=DOUBLE},
+    #{image,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+    #{isDelete,jdbcType=INTEGER}, #{upTime,jdbcType=TIMESTAMP}, #{goodState,jdbcType=VARCHAR},
+    #{completeTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.Good" >
     insert into good
@@ -96,13 +96,13 @@
         #{goodName,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
+        #{price,jdbcType=DOUBLE},
       </if>
       <if test="currPrice != null" >
-        #{currPrice,jdbcType=DECIMAL},
+        #{currPrice,jdbcType=DOUBLE},
       </if>
       <if test="beginPrice != null" >
-        #{beginPrice,jdbcType=DECIMAL},
+        #{beginPrice,jdbcType=DOUBLE},
       </if>
       <if test="image != null" >
         #{image,jdbcType=VARCHAR},
@@ -137,13 +137,13 @@
         good_name = #{goodName,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
+        price = #{price,jdbcType=DOUBLE},
       </if>
       <if test="currPrice != null" >
-        curr_price = #{currPrice,jdbcType=DECIMAL},
+        curr_price = #{currPrice,jdbcType=DOUBLE},
       </if>
       <if test="beginPrice != null" >
-        begin_price = #{beginPrice,jdbcType=DECIMAL},
+        begin_price = #{beginPrice,jdbcType=DOUBLE},
       </if>
       <if test="image != null" >
         image = #{image,jdbcType=VARCHAR},
@@ -173,9 +173,9 @@
     update good
     set sub_category_id = #{subCategoryId,jdbcType=INTEGER},
       good_name = #{goodName,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      curr_price = #{currPrice,jdbcType=DECIMAL},
-      begin_price = #{beginPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DOUBLE},
+      curr_price = #{currPrice,jdbcType=DOUBLE},
+      begin_price = #{beginPrice,jdbcType=DOUBLE},
       image = #{image,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

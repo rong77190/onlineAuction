@@ -13,7 +13,7 @@
     sys_user_id, name, password, manager_email, freeze, role
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from manager
     where sys_user_id = #{sysUserId,jdbcType=INTEGER}
@@ -23,10 +23,10 @@
     where sys_user_id = #{sysUserId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.auction.model.Manager" >
-    insert into manager (sys_user_id, name, password, 
+    insert into manager (sys_user_id, name, password,
       manager_email, freeze, role
       )
-    values (#{sysUserId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{sysUserId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{managerEmail,jdbcType=VARCHAR}, #{freeze,jdbcType=INTEGER}, #{role,jdbcType=INTEGER}
       )
   </insert>
@@ -103,4 +103,13 @@
       role = #{role,jdbcType=INTEGER}
     where sys_user_id = #{sysUserId,jdbcType=INTEGER}
   </update>
+
+
+  <select id="login" resultType="com.auction.model.Manager">
+    select
+      <include refid="Base_Column_List" />
+    from manager
+    where name = #{name} AND password = #{password}
+  </select>
+
 </mapper>

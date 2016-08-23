@@ -11,7 +11,7 @@ public class Deposit {
 
     private Date createTime;
 
-    private Long price;
+    private Double price;
 
     private Integer state;
 
@@ -47,11 +47,11 @@ public class Deposit {
         this.createTime = createTime;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

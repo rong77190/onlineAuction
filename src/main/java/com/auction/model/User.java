@@ -21,6 +21,8 @@ public class User {
 
     private Date registerTime;
 
+    private Double balance;
+
     private Integer freeze;
 
     public Integer getUserId() {
@@ -93,6 +95,14 @@ public class User {
 
     public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
     public Integer getFreeze() {
