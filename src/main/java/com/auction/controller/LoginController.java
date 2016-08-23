@@ -44,11 +44,16 @@ public class LoginController {
             System.out.println("验证码错误");
             return MyResult.getResult(0,"验证码错误","");
         }else {
-            User user = loginService.login(login);
+            User user =null;
+            user = loginService.login(login);
+            System.out.println(user.toString());
             if (user==null){
                 return MyResult.getResult(0,"用户名或密码错误","");
             }else {
                 session.setAttribute("user",user);
+                System.out.println(
+                        "session 中的user"+session.getAttribute("user")
+                );
                 return MyResult.getResult(1,"",user);
             }
         }
@@ -74,7 +79,7 @@ public class LoginController {
         int result = loginService.register(register);
         if (result >= 0){
             return MyResult.getResult(1,"注册成功","");
-         }else {
+        }else {
             return MyResult.getResult(0,"注册失败","");
         }
     }
@@ -111,7 +116,7 @@ public class LoginController {
         loginService.generateNewValidCode(request,response,session);
     }
 
-
+//    @RequestMapping
     /**
      * 登出
      * @param session
@@ -162,5 +167,49 @@ public class LoginController {
         }
         return sb.toString();
     }
+
+    /**
+     * 忘记密码发送验证码大到邮箱
+     * @return
+     */
+    @RequestMapping("sendResetValidCode")
+    @ResponseBody
+    public Object sendResetValidCode(@RequestParam("userEmail") String userEmail,HttpServletRequest request){
+        if (userEmail==null || userEmail == ""){
+            return MyResult.getResult(0,"邮箱不能为空","");
+        }else {
+            HttpSession session = request.getSession(false);
+//            User user = (User) session.getAttribute("user");
+            String resetValidCode = RegisterValidCode(validCodeLength);//
+            System.out.println(resetValidCode);
+            session.setAttribute("resetValidCode",resetValidCode);
+//            System.out.println(session.getAttribute("resetValidCode").toString());
+            return loginService.SendResetValidCodeToEmail(userEmail,session);
+        }
+    }
+
+    /**
+     * 忘记密码
+     * @return
+     */
+    @RequestMapping("resetPassword")
+    @ResponseBody
+    public Object resetPassword(@RequestParam("resetValidCode") String resetValidCode,@RequestParam("password") String password,HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        System.out.println(user.toString());
+        int userId = user.getUserId();
+        if (resetValidCode.equals(session.getAttribute("resetValidCode").toString())){
+            int result = loginService.updatePassword(userId,password);
+            if (result > 0){
+                return MyResult.getResult();
+            }else {
+                return MyResult.getResult(0,"重设密码失败","");
+            }
+        }else {
+            return MyResult.getResult(0,"验证码不正确","");
+        }
+    }
+
 
 }
