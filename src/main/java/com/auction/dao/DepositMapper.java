@@ -2,6 +2,7 @@ package com.auction.dao;
 
 import com.auction.model.Deposit;
 import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 public interface DepositMapper {
     int deleteByPrimaryKey(Integer depositId);
@@ -18,4 +19,10 @@ public interface DepositMapper {
 
     //补充
     Deposit checkDepositState(@Param("userId")int  userId,@Param("goodId")int goodId);
+
+    //获取某商品所有押金信息
+    List getDepositByGoodId(@Param("goodId")int goodId);
+
+    //获取某商品未返押金信息
+    List getDepositByGoodId2(@Param("goodId")int goodId);
 }

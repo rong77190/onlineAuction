@@ -112,4 +112,23 @@
     from deposit
     where user_id =#{userId,jdbcType=INTEGER} AND good_id =#{goodId,jdbcType=INTEGER}
   </select>
+
+  <!--获取某商品所有的押金信息-->
+  <select id="getDepositByGoodId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from deposit
+    where good_id =#{goodId,jdbcType=INTEGER}
+    ORDER BY create_time DESC
+  </select>
+
+  <!--获取某商品未返押金信息-->
+  <select id="getDepositByGoodId2" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from deposit
+    where good_id =#{goodId,jdbcType=INTEGER} AND state=0
+    ORDER BY create_time DESC
+  </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.auction.dao;
 
 import com.auction.model.Good;
+import org.apache.ibatis.annotations.Param;
 
 public interface GoodMapper {
     int deleteByPrimaryKey(Integer goodId);
@@ -14,4 +15,7 @@ public interface GoodMapper {
     int updateByPrimaryKeySelective(Good record);
 
     int updateByPrimaryKey(Good record);
+
+    //更新当前价
+    int updateCurrPrice(@Param("userId")int userId,@Param("goodId")int goodId,@Param("currPrice")double currPrice);
 }

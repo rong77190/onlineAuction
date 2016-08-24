@@ -37,8 +37,6 @@ public class DateUtil {
 	/**
 	 * 返回当前的时间戳
 	 *@return
-	 * @author chuankun
-	 *  2016年6月17日 下午7:29:06
 	 */
 	public static String getTimestap(){
 		Date now = new Date();

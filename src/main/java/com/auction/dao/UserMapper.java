@@ -1,6 +1,7 @@
 package com.auction.dao;
 
 import com.auction.model.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -15,5 +16,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    int pay(int userId,double price);
+    int pay(@Param("userId")int userId, @Param("price") double price);
+
+    int backDepositToUser(@Param("userId")int userId,@Param("price") double price);
 }

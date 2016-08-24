@@ -10,4 +10,6 @@ public interface UserService {
     int pay(int userId,double price);
 
     User findById(int userId);
+
+    int backDepositToUser(int userId,double price);
 }

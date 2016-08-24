@@ -1,6 +1,7 @@
 package com.auction.service.imp;
 
 import com.auction.dao.UserMapper;
+import com.auction.model.Good;
 import com.auction.model.User;
 import com.auction.service.UserService;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,9 @@ public class UserServiceImpl implements UserService {
 
     public User findById(int userId) {
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    public int backDepositToUser(int userId, double price) {
+        return userMapper.backDepositToUser(userId,price);
     }
 }

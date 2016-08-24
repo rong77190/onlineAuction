@@ -1,8 +1,9 @@
 package com.auction.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private Integer userId;
 
     private String userName;
@@ -19,6 +20,7 @@ public class User {
 
     private String userEmail;
 
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registerTime;
 
     private Double balance;

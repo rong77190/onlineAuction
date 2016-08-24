@@ -167,4 +167,10 @@
     set balance = balance - #{price}
     WHERE user_id = #{userId}
   </update>
+  <update id="backDepositToUser" >
+    UPDATE USER
+    set balance = balance + #{price}
+    WHERE user_id = #{userId}
+  </update>
+
 </mapper>

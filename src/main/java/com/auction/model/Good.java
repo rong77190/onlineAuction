@@ -1,8 +1,9 @@
 package com.auction.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Good {
+public class Good implements Serializable {
     private Integer goodId;
 
     private Integer subCategoryId;
@@ -23,11 +24,15 @@ public class Good {
 
     private Integer isDelete;
 
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date upTime;
 
     private String goodState;
 
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date completeTime;
+
+    private Integer userId;
 
     public Integer getGoodId() {
         return goodId;
@@ -131,5 +136,13 @@ public class Good {
 
     public void setCompleteTime(Date completeTime) {
         this.completeTime = completeTime;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
