@@ -1,7 +1,9 @@
 package com.auction.dao;
 
 import com.auction.model.SubCategory;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SubCategoryMapper {
     int deleteByPrimaryKey(Integer subCategoryId);
 

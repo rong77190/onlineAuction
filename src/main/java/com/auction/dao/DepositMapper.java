@@ -1,7 +1,9 @@
 package com.auction.dao;
 
 import com.auction.model.Deposit;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DepositMapper {
     int deleteByPrimaryKey(Integer depositId);
 

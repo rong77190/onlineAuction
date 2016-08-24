@@ -1,7 +1,9 @@
 package com.auction.dao;
 
 import com.auction.model.Manager;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ManagerMapper {
     int deleteByPrimaryKey(Integer sysUserId);
 

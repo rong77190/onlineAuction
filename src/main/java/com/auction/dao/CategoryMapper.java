@@ -1,7 +1,9 @@
 package com.auction.dao;
 
 import com.auction.model.Category;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CategoryMapper {
     int deleteByPrimaryKey(Integer categoryId);
 

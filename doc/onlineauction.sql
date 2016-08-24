@@ -40,7 +40,7 @@ CREATE TABLE `address` (
 -- ----------------------------
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
-  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cart_id` int(11) NOT NULL,   /*常荣钊：此处将cart_id该为非自增，因为一个用户对应一个购物车*/
   `user_id` int(11) DEFAULT NULL,
   `good_id` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
@@ -171,6 +171,7 @@ DROP TABLE IF EXISTS `torder`;
 CREATE TABLE `torder` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
+  `good_id` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `order_price` decimal(10,2) DEFAULT NULL,

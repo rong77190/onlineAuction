@@ -1,8 +1,10 @@
 package com.auction.dao;
 
 import com.auction.model.User;
+import org.springframework.stereotype.Repository;
 import org.apache.ibatis.annotations.Param;
 
+@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
 

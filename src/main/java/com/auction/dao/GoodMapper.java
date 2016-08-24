@@ -1,7 +1,9 @@
 package com.auction.dao;
 
 import com.auction.model.Good;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GoodMapper {
     int deleteByPrimaryKey(Integer goodId);
 

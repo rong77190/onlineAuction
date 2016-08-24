@@ -19,7 +19,7 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cart
-    where cart_id = #{cartId,jdbcType=INTEGER}
+    where good_id = #{goodId,jdbcType=INTEGER}   /*常荣钊：按拍卖品id删除     */
   </delete>
   <insert id="insert" parameterType="com.auction.model.Cart" >
     insert into cart (cart_id, user_id, good_id, 

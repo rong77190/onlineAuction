@@ -1,7 +1,9 @@
 package com.auction.dao;
 
 import com.auction.model.Address;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AddressMapper {
     int deleteByPrimaryKey(Integer addressId);
 
