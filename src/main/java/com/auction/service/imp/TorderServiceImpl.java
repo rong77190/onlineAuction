@@ -60,4 +60,12 @@ public class TorderServiceImpl implements TorderService {
         torderMapper.deleteByPrimaryKey(orderId);
     }
 
+
+    public int getbuyerinfo(int orderId){
+        return torderMapper.selectbuyerid(orderId);
+    }
+
+    public int getsellerinfo(int orderId){
+        return torderMapper.selectsellerid(orderId);
+    }
 }

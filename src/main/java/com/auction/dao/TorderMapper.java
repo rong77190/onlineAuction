@@ -19,4 +19,8 @@ public interface TorderMapper {
     int updateByPrimaryKeySelective(Torder record);
 
     int updateByPrimaryKey(Torder record);
+
+    int selectbuyerid(Integer orderId);
+
+    int selectsellerid(Integer orderId);
 }

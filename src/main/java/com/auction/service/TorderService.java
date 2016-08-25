@@ -18,5 +18,9 @@ public interface TorderService {
 
     public void updateTorder(int orderId,int goodId, Double orderPrice,int orderState,int payWay);
 
+    public int getbuyerinfo(int orderId);
+
+    public int getsellerinfo(int orderId);
+
     public Date getTime();
 }
