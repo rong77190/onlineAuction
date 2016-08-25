@@ -10,7 +10,7 @@ public interface CartService {
 
     public void addGood(int userId,Good good);
 
-    public void deleteGood(Good good,Cart cart);
+    public void deleteGood(Good good);
 
     public Date getTime();
 

@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,7 +17,6 @@ public class CartController {
     private CartService cartService;
 
     @RequestMapping(method=RequestMethod.GET)
-    @ResponseBody
     public String show(@PathVariable int  userId, Model model) {
         List<Cart> favourite =cartService.getCart(userId);
         model.addAttribute("favourite",favourite);

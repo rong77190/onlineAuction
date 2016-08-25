@@ -35,8 +35,8 @@ public class CartServiceImpl implements CartService {
         return cartMapper.selectByPrimaryKey(cartId);
     }
 
-    public void deleteGood(Good good,Cart cart){
-        cartMapper.deleteByPrimaryKey(cart.getGoodId());
+    public void deleteGood(Good good){
+        cartMapper.deleteByPrimaryKey(good.getGoodId());
     }
 
 

@@ -2,8 +2,8 @@ package com.auction.controller;
 
 import com.auction.model.Torder;
 import com.auction.service.TorderService;
+import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,25 +18,22 @@ public class TorderController {
 
     @ResponseBody
     @RequestMapping("/{userId}/torders")
-    public String usersTorders(@PathVariable int userId,Model model){
+    public Object usersTorders(@PathVariable int userId){
         List<Torder> torders=torderService.getUserAllTorders(userId);
-        model.addAttribute("torders",torders);
-        return "usersTorders";
+        return  MyResult.getResult(1, "", torders);
     }
 
     @ResponseBody
     @RequestMapping("/manage/torders")
-    public String checkTorders(Model model){
+    public Object checkTorders(){
         List<Torder> torders=torderService.getAllTorders();
-        model.addAttribute("torders",torders);
-        return "allTorders";
+        return  MyResult.getResult(1, "", torders);
     }
 
     @RequestMapping("/manage/torders/search")
-    public  String updateTorder(@RequestParam  int orderId, Model model){
+    public  Object updateTorder(@RequestParam  int orderId){
         Torder torder=torderService.getTorder(orderId);
-        model.addAttribute("torder",torder);
-        return  "result";
+        return  MyResult.getResult(1, "", torder);
     }
 
 
