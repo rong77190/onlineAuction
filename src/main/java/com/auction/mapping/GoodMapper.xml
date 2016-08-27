@@ -15,11 +15,12 @@
     <result column="up_time" property="upTime" jdbcType="TIMESTAMP" />
     <result column="good_state" property="goodState" jdbcType="VARCHAR" />
     <result column="complete_time" property="completeTime" jdbcType="TIMESTAMP" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="buyer_id" property="buyerId" jdbcType="INTEGER" />
+    <result column="seller_id" property="sellerId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     good_id, sub_category_id, good_name, price, curr_price, begin_price, image, introduction,
-    create_time, is_delete, up_time, good_state, complete_time, user_id
+    create_time, is_delete, up_time, good_state, complete_time, buyer_id, seller_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -36,12 +37,14 @@
     price, curr_price, begin_price,
     image, introduction, create_time,
     is_delete, up_time, good_state,
-    complete_time, user_id)
+    complete_time, buyer_id, seller_id
+    )
     values (#{goodId,jdbcType=INTEGER}, #{subCategoryId,jdbcType=INTEGER}, #{goodName,jdbcType=VARCHAR},
     #{price,jdbcType=DOUBLE}, #{currPrice,jdbcType=DOUBLE}, #{beginPrice,jdbcType=DOUBLE},
     #{image,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
     #{isDelete,jdbcType=INTEGER}, #{upTime,jdbcType=TIMESTAMP}, #{goodState,jdbcType=VARCHAR},
-    #{completeTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER})
+    #{completeTime,jdbcType=TIMESTAMP}, #{buyerId,jdbcType=INTEGER}, #{sellerId,jdbcType=INTEGER}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.Good" >
     insert into good
@@ -85,8 +88,11 @@
       <if test="completeTime != null" >
         complete_time,
       </if>
-      <if test="userId != null" >
-        user_id,
+      <if test="buyerId != null" >
+        buyer_id,
+      </if>
+      <if test="sellerId != null" >
+        seller_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -129,8 +135,11 @@
       <if test="completeTime != null" >
         #{completeTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="buyerId != null" >
+        #{buyerId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -173,8 +182,11 @@
       <if test="completeTime != null" >
         complete_time = #{completeTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="buyerId != null" >
+        buyer_id = #{buyerId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=INTEGER},
       </if>
     </set>
     where good_id = #{goodId,jdbcType=INTEGER}
@@ -193,7 +205,8 @@
     up_time = #{upTime,jdbcType=TIMESTAMP},
     good_state = #{goodState,jdbcType=VARCHAR},
     complete_time = #{completeTime,jdbcType=TIMESTAMP},
-    user_id = #{userId,jdbcType=INTEGER}
+    buyer_id = #{buyerId,jdbcType=INTEGER},
+    seller_id = #{sellerId,jdbcType=INTEGER}
     where good_id = #{goodId,jdbcType=INTEGER}
   </update>
 
@@ -201,7 +214,7 @@
   <!--补充-->
   <update id="updateCurrPrice">
       UPDATE `good`
-      SET `curr_price`=#{currPrice},`user_id` = #{userId}
+      SET `curr_price`=#{currPrice},`buyer_id` = #{buyerId}
       WHERE `good_id`=#{goodId}
   </update>
 </mapper>

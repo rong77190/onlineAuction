@@ -20,4 +20,9 @@ public class GoodServiceImpl implements GoodService {
         return goodMapper.selectByPrimaryKey(goodId);
     }
 
+    public int updateState(Good good) {
+        return goodMapper.updateByPrimaryKeySelective(good);
+    }
+
+
 }

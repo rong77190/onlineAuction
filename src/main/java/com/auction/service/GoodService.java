@@ -7,5 +7,5 @@ import com.auction.model.Good;
  */
 public interface GoodService {
     Good findGoodById(int goodId);
-
+    int updateState(Good good);
 }

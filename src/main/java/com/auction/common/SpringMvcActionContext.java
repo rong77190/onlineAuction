@@ -30,7 +30,7 @@ public class SpringMvcActionContext extends SpringMvcContextHolder {
 	}
 
 	public static HttpSession getSession() {
-		return getRequest().getSession(false);
+		return getRequest().getSession();
 	}
 
 }

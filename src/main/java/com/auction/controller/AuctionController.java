@@ -3,6 +3,7 @@ package com.auction.controller;
 import com.auction.common.SpringMvcActionContext;
 import com.auction.model.Deposit;
 import com.auction.model.Good;
+import com.auction.model.Torder;
 import com.auction.model.User;
 import com.auction.service.AuctionService;
 import com.auction.service.GoodService;
@@ -141,6 +142,7 @@ public class AuctionController extends SpringMvcActionContext{
     /**
      * 竞拍
      * 前提：登录，已交保证金
+     * 后续，成功拍到则生成订单
      * @param
      * @param
      * @return
@@ -153,10 +155,10 @@ public class AuctionController extends SpringMvcActionContext{
         if (user == null){
             MyResult.getResult(0,"请前往登陆","");
         }
-        int userId = user.getUserId();
+        int buyerId = user.getUserId();
 //        int result1 = userService.pay(userId,currPrice);
 
-        int result2 = auctionService.updateCurrPrice(userId,goodId,currPrice);
+        int result2 = auctionService.updateCurrPrice(buyerId,goodId,currPrice);
         if (result2 > 0){
             return MyResult.getResult();
         }else{
@@ -177,17 +179,20 @@ public class AuctionController extends SpringMvcActionContext{
         return MyResult.getResult(1,"",good);
     }
 
-
-
-
-    /**
-     * 扣除保证金
-     * @param userId
-     * @param goodId
-     * @return
-     */
-
-
+    @RequestMapping("pay")
+    @ResponseBody
+    public Object pay(Torder torder){
+        User user = (User) getSession().getAttribute("user");
+        if (user == null){
+            return MyResult.getResult(0,"未登录，快去登录","");
+        }
+        int result = userService.pay(torder.getUserId(),torder.getPayWay());
+        if (result > 0){
+            return MyResult.getResult();
+        }else {
+            return MyResult.getResult(0,"支付失败","");
+        }
+    }
 
 
 

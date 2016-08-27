@@ -11,7 +11,6 @@ public class Login implements Serializable {
     private String validCode;
 
     public String getPassword() {
-
         return password;
     }
 

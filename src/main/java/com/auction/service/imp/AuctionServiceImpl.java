@@ -32,7 +32,7 @@ public class AuctionServiceImpl implements AuctionService {
     }
 
     //更新当前价格
-    public int updateCurrPrice(int userId, int goodId, double currPrice) {
-        return goodMapper.updateCurrPrice(userId,goodId,currPrice);
+    public int updateCurrPrice(int buyerId, int goodId, double currPrice) {
+        return goodMapper.updateCurrPrice(buyerId,goodId,currPrice);
     }
 }

@@ -17,5 +17,5 @@ public interface GoodMapper {
     int updateByPrimaryKey(Good record);
 
     //更新当前价
-    int updateCurrPrice(@Param("userId")int userId,@Param("goodId")int goodId,@Param("currPrice")double currPrice);
+    int updateCurrPrice(@Param("buyerId")int buyerId,@Param("goodId")int goodId,@Param("currPrice")double currPrice);
 }

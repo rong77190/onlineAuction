@@ -2,7 +2,9 @@ package com.auction.controller;
 
 import com.auction.common.SpringMvcActionContext;
 import com.auction.model.Deposit;
+import com.auction.model.Good;
 import com.auction.model.Manager;
+import com.auction.service.GoodService;
 import com.auction.service.ManagerService;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
@@ -25,6 +27,9 @@ public class ManageController extends SpringMvcActionContext {
     private ManagerService managerService;
     @Resource
     private UserService userService;
+
+    @Resource
+    private GoodService goodService;
 
     /**
      * 管理员登陆
@@ -75,7 +80,6 @@ public class ManageController extends SpringMvcActionContext {
 
     /**
      * 返回保证金，成功拍到的用户不放回
-     *
      * @param goodId
      * @return
      */
@@ -88,7 +92,7 @@ public class ManageController extends SpringMvcActionContext {
             Deposit deposit = depositList.get(i);
             backToUser(deposit);
         }
-        return null;
+        return MyResult.getResult();
     }
 
 
@@ -105,10 +109,25 @@ public class ManageController extends SpringMvcActionContext {
 
     /**
      * 更新商品状态  manage
-     * @param userId
-     * @param goodId
+     * @param good
      * @return
      */
+
+    @RequestMapping("updateGoodState")
+    @ResponseBody
+    public Object updateGoodState(Good good,String state){
+//        Manager manager = (Manager)getSession().getAttribute("manager");
+//        if (manager == null){
+//            return MyResult.getResult(0,"管理员未登录","");
+//        }
+        good.setGoodState(state);
+        int result = goodService.updateState(good);
+        if (result > 0){
+            return MyResult.getResult();
+        }else {
+            return MyResult.getResult(0,"更新商品状态失败","");
+        }
+    }
 
 
 }

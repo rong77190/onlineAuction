@@ -3,6 +3,8 @@ package com.auction.dao;
 import com.auction.model.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
 
@@ -19,4 +21,9 @@ public interface UserMapper {
     int pay(@Param("userId")int userId, @Param("price") double price);
 
     int backDepositToUser(@Param("userId")int userId,@Param("price") double price);
+
+
+    List<User> selectAll();
+
+
 }

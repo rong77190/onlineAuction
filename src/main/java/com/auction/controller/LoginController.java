@@ -29,12 +29,18 @@ public class LoginController extends SpringMvcActionContext{
     private LoginService loginService;
 
 
+
+    @RequestMapping(value = "")
+    public String toLogin(){
+        return "/login";
+    }
+
     /**
      * 登录
      * @param login
      * @return
      */
-    @RequestMapping("login")
+    @RequestMapping(value = "/login")
     @ResponseBody
     public Object login(Login login){
         HttpSession session = getSession();
@@ -65,7 +71,7 @@ public class LoginController extends SpringMvcActionContext{
      * @param register
      * @return
      */
-    @RequestMapping("register")
+    @RequestMapping(value = "register")
     @ResponseBody
     public Object register(Register register){
         HttpSession session = getSession();
@@ -89,7 +95,7 @@ public class LoginController extends SpringMvcActionContext{
      * @param userEmail
      * @return
      */
-    @RequestMapping("sendEmail")
+    @RequestMapping(value = "sendEmail")
     @ResponseBody
     public Object sendSMS(@RequestParam("userEmail") String userEmail){
 //        System.out.println(userEmail);
@@ -106,7 +112,7 @@ public class LoginController extends SpringMvcActionContext{
     /**
      * 获取登录验证码
      */
-    @RequestMapping("/getNewValidCode")
+    @RequestMapping(value = "/getNewValidCode")
     public void getNewValidCode(HttpServletRequest request, HttpServletResponse response,HttpSession session){
         loginService.generateNewValidCode(request,response,session);
     }
@@ -116,7 +122,7 @@ public class LoginController extends SpringMvcActionContext{
      * 登出
      * @return
      */
-    @RequestMapping("/logout")
+    @RequestMapping(value = "/logout")
     @ResponseBody
     public Object logout(){
 //        User user = (User)getSession().getAttribute("user");
@@ -168,7 +174,7 @@ public class LoginController extends SpringMvcActionContext{
      * 忘记密码发送验证码大到邮箱
      * @return
      */
-    @RequestMapping("sendResetValidCode")
+    @RequestMapping(value = "sendResetValidCode")
     @ResponseBody
     public Object sendResetValidCode(@RequestParam("userEmail") String userEmail){
         if (userEmail==null || userEmail == ""){
@@ -187,7 +193,7 @@ public class LoginController extends SpringMvcActionContext{
      * 忘记密码
      * @return
      */
-    @RequestMapping("resetPassword")
+    @RequestMapping(value = "resetPassword")
     @ResponseBody
     public Object resetPassword(@RequestParam("resetValidCode") String resetValidCode,@RequestParam("password") String password,HttpServletRequest request){
         HttpSession session = request.getSession(false);

@@ -11,5 +11,5 @@ public interface AuctionService {
 
     int payDeposit(Deposit deposit);
 
-    int updateCurrPrice(int userId,int goodId,double price);
+    int updateCurrPrice(int buyerId,int goodId,double price);
 }

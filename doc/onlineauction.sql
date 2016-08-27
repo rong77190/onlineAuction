@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50545
 File Encoding         : 65001
 
-Date: 2016-08-24 15:50:32
+Date: 2016-08-27 22:50:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -110,15 +110,16 @@ CREATE TABLE `good` (
   `up_time` datetime DEFAULT NULL COMMENT '上架时间',
   `good_state` varchar(50) DEFAULT NULL COMMENT '状态(“0：未审核”1：审核过，上架 2：下架)',
   `complete_time` datetime DEFAULT NULL COMMENT '结束时间',
-  `user_id` int(11) DEFAULT NULL COMMENT '出价人',
+  `buyer_id` int(11) DEFAULT NULL COMMENT '出价人',
+  `seller_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`good_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '1', '1123', '10000.00', '110.23', '11', null, null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1');
-INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '0', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null);
+INSERT INTO `good` VALUES ('1', '1', '1123', '10000.00', '119.23', '11', null, null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null);
+INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '0', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null);
 
 -- ----------------------------
 -- Table structure for manager

@@ -1,8 +1,10 @@
 package com.auction.controller;
 
+import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -19,12 +21,14 @@ import java.util.Iterator;
 public class UploadController {
 	
 	@RequestMapping("/upload")
-	public String addUser(@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws IOException{
+	@ResponseBody
+	public Object addUser(@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws IOException{
 		System.out.println("fileName---->" + file.getOriginalFilename());
 
 		if(!file.isEmpty()){
 			try {
-				FileOutputStream os = new FileOutputStream("D:/" + new Date().getTime() + file.getOriginalFilename());
+				String savePath = request.getSession().getServletContext().getRealPath("resources/upload");
+				FileOutputStream os = new FileOutputStream(savePath +"/"+ new Date().getTime() + file.getOriginalFilename());
 				InputStream in = file.getInputStream();
 				int b = 0;
 				while((b=in.read()) != -1)	{
@@ -38,7 +42,7 @@ public class UploadController {
 				e.printStackTrace();
 			}
 		}
-		return "/success";
+		return MyResult.getResult();
 	}
 	
 	@RequestMapping("/upload2")

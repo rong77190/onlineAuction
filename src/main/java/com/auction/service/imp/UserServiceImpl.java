@@ -7,6 +7,7 @@ import com.auction.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by xiechur on 2016/8/22.
@@ -26,5 +27,17 @@ public class UserServiceImpl implements UserService {
 
     public int backDepositToUser(int userId, double price) {
         return userMapper.backDepositToUser(userId,price);
+    }
+
+    public List<User> selectAll() {
+        return userMapper.selectAll();
+    }
+
+    public int add(User user) {
+        return userMapper.insertSelective(user);
+    }
+
+    public int update(User user) {
+        return userMapper.updateByPrimaryKeySelective(user);
     }
 }

@@ -173,4 +173,9 @@
     WHERE user_id = #{userId}
   </update>
 
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT *
+    FROM USER
+  </select>
+
 </mapper>
