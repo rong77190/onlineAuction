@@ -12,7 +12,7 @@
     <result column="pay_way" property="payWay" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, user_id, good_id, create_time, update_time, order_price, order_state, pay_way
+    order_id, user_id,good_id, create_time, update_time, order_price, order_state, pay_way
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -20,17 +20,28 @@
     from torder
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from torder
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from torder
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from torder
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.auction.model.Torder" >
-    insert into torder (order_id, user_id, good_id,
-    create_time, update_time, order_price,
-    order_state, pay_way)
-    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER},
-    #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{orderPrice,jdbcType=DOUBLE},
-    #{orderState,jdbcType=INTEGER}, #{payWay,jdbcType=INTEGER})
+    insert into torder (order_id, user_id,good_id, create_time,
+    update_time, order_price, order_state,
+    pay_way)
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},#{goodId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP}, #{orderPrice,jdbcType=DOUBLE}, #{orderState,jdbcType=INTEGER},
+    #{payWay,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.Torder" >
     insert into torder
@@ -117,12 +128,24 @@
   <update id="updateByPrimaryKey" parameterType="com.auction.model.Torder" >
     update torder
     set user_id = #{userId,jdbcType=INTEGER},
-      good_id = #{goodId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      order_price = #{orderPrice,jdbcType=DOUBLE},
-      order_state = #{orderState,jdbcType=INTEGER},
-      pay_way = #{payWay,jdbcType=INTEGER}
+    good_id = #{userId,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    order_price = #{orderPrice,jdbcType=DOUBLE},
+    order_state = #{orderState,jdbcType=INTEGER},
+    pay_way = #{payWay,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
+  <select id="selectbuyerid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    good.buyer_id
+    from torder,good
+    where torder.order_id = #{orderId,jdbcType=INTEGER} AND torder.good_id=good.good_id
+  </select>
+  <select id="selectsellerid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    good.seller_id
+    from torder,good
+    where torder.order_id = #{orderId,jdbcType=INTEGER} AND torder.good_id=good.good_id
+  </select>
 </mapper>
