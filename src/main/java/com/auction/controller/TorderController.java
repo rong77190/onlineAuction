@@ -41,6 +41,14 @@ public class TorderController {
     }
 
 
+    @ResponseBody
+    @RequestMapping("/manage/torders/{orderId}")
+    public  Object checkTorder(@PathVariable  int orderId){
+        Torder torder=torderService.getTorder(orderId);
+        return  MyResult.getResult(1, "", torder);
+    }
+
+
 
     @ResponseBody
     @RequestMapping("/manage/torders/{orderId}/tradersinfo")
