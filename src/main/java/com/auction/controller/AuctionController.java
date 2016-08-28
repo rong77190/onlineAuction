@@ -3,13 +3,14 @@ package com.auction.controller;
 import com.auction.common.SpringMvcActionContext;
 import com.auction.model.Deposit;
 import com.auction.model.Good;
-import com.auction.model.Torder;
 import com.auction.model.User;
 import com.auction.service.AuctionService;
 import com.auction.service.GoodService;
 import com.auction.service.UserService;
+import com.auction.service.CartService;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +33,8 @@ public class AuctionController extends SpringMvcActionContext{
     private GoodService goodService;
     @Resource
     private UserService userService;
+    @Resource
+    private CartService cartService;
 
     /**
      * 检查押金状态
@@ -142,7 +145,6 @@ public class AuctionController extends SpringMvcActionContext{
     /**
      * 竞拍
      * 前提：登录，已交保证金
-     * 后续，成功拍到则生成订单
      * @param
      * @param
      * @return
@@ -155,10 +157,10 @@ public class AuctionController extends SpringMvcActionContext{
         if (user == null){
             MyResult.getResult(0,"请前往登陆","");
         }
-        int buyerId = user.getUserId();
+        int userId = user.getUserId();
 //        int result1 = userService.pay(userId,currPrice);
 
-        int result2 = auctionService.updateCurrPrice(buyerId,goodId,currPrice);
+        int result2 = auctionService.updateCurrPrice(userId,goodId,currPrice);
         if (result2 > 0){
             return MyResult.getResult();
         }else{
@@ -179,20 +181,26 @@ public class AuctionController extends SpringMvcActionContext{
         return MyResult.getResult(1,"",good);
     }
 
-    @RequestMapping("pay")
+
+    @RequestMapping("addtofavourite")
     @ResponseBody
-    public Object pay(Torder torder){
-        User user = (User) getSession().getAttribute("user");
-        if (user == null){
-            return MyResult.getResult(0,"未登录，快去登录","");
-        }
-        int result = userService.pay(torder.getUserId(),torder.getPayWay());
-        if (result > 0){
-            return MyResult.getResult();
-        }else {
-            return MyResult.getResult(0,"支付失败","");
-        }
+    public Object addGoodtoFavourite(@RequestParam int userId,@RequestParam  int goodId){
+        Good good = goodService.findGoodById(goodId);
+        cartService.addGood(userId,good);
+        return MyResult.getResult(1,"加入收藏成功！","");
+
     }
+
+
+
+    /**
+     * 扣除保证金
+     * @param userId
+     * @param goodId
+     * @return
+     */
+
+
 
 
 
