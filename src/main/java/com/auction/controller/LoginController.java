@@ -32,7 +32,7 @@ public class LoginController extends SpringMvcActionContext{
 
     @RequestMapping(value = "")
     public String toLogin(){
-        return "/login";
+        return "syslogin";
     }
 
     /**

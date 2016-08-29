@@ -38,8 +38,13 @@ public class GoodServiceImpl implements GoodService {
         if (category ==null)
         {
             SubCategory subCategory = subCategoryMapper.selectBySelectiveName(key);
-            if(subCategory != null) {
-                return goodMapper.selectBySubCategoryId(subCategory.getSubCategoryId());
+            if(subCategory != null){
+                List<Good> goodList = goodMapper.selectBySelectiveName(key);
+                if (goodList != null && goodList.size() > 0){
+                    return getAllGood();
+                }else {
+                    return null;
+                }
             } else {
                 List<Good> goodList = goodMapper.selectBySelectiveName(key);
                 if (goodList != null){

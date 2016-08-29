@@ -23,7 +23,7 @@ public class User implements Serializable {
 //    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registerTime;
 
-    private Double balance;
+    private Double balance;//余额
 
     private Integer freeze;
 

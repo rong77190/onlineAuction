@@ -17,7 +17,12 @@ public class GoodController extends SpringMvcActionContext{
 
 	@Resource
 	private GoodService goodService;
-	
+
+    /**
+     * 搜索
+     * @param key
+     * @return
+     */
 	@RequestMapping(value="searchGoodByKey")
     @ResponseBody
     public Object searchGoodByKey(String key){
@@ -28,26 +33,39 @@ public class GoodController extends SpringMvcActionContext{
             return MyResult.getResult(0,"没有查询结果","");
         }
     }
-	
+
+
 	@RequestMapping(value="addGood")
     @ResponseBody
     public Object applyGood(Good good){
-		if(good.getBeginPrice() == null && good.getGoodName() == null 
-		   && good.getImage() == null && good.getIntroduction() == null)
+		if(good.getBeginPrice() == null || good.getGoodName() == null
+		   || good.getImage() == null || good.getIntroduction() == null)
 		{
 			return MyResult.getResult(0, "信息不全", "");
 		}else{
             int result = goodService.addGood(good);
-            return MyResult.getResult();
+            if(result > 0){
+                return MyResult.getResult(1,"",good);
+            }else{
+                return MyResult.getResult(0,"添加失败","");
+            }
+
 		}
     }
-	
-	@RequestMapping("/show")
+
+
+	@RequestMapping("/getDetail")
     @ResponseBody
     public Object showGood(Good good){
         good = goodService.findGoodById(good.getGoodId());
-        getSession().setAttribute("good",good);
-        return MyResult.getResult(1,"",good);
+//        getSession().setAttribute("good",good);
+        if(good != null){
+            return MyResult.getResult(1,"",good);
+        }else{
+            return MyResult.getResult(0,"获取失败","");
+        }
     }
+
+
 	
 }

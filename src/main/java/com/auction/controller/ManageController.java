@@ -38,15 +38,15 @@ public class ManageController extends SpringMvcActionContext {
      * @return
      */
     @RequestMapping("login")
-    @ResponseBody
-    public Object manageLogin(Manager manager) {
+    public String manageLogin(Manager manager) {
         HttpSession session = getSession();
         manager = managerService.login(manager);
         if (manager == null) {
-            return MyResult.getResult(0, "用户名或密码错误", "");
+            getRequest().setAttribute("error","用户名或密码错误");
+            return "syslogin";
         } else {
             session.setAttribute("manager", manager);
-            return MyResult.getResult(1, "", manager);
+            return "/main";
         }
     }
 
