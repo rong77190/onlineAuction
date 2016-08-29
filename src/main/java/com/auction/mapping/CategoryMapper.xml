@@ -55,4 +55,15 @@
     set category_name = #{categoryName,jdbcType=VARCHAR}
     where category_id = #{categoryId,jdbcType=INTEGER}
   </update>
+
+
+  <!--补充-->
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from category
+    where category_name Like #{categoryName}
+  </select>
+
+
 </mapper>

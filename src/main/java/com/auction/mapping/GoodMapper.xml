@@ -217,4 +217,40 @@
       SET `curr_price`=#{currPrice},`buyer_id` = #{buyerId}
       WHERE `good_id`=#{goodId}
   </update>
+
+
+  <select id="getAllGood" resultMap="BaseResultMap">
+    SELECT *
+    FROM good
+  </select>
+
+  <select id="getAuctioningGood" resultMap="BaseResultMap">
+    SELECT *
+    FROM good
+    WHERE good_state=1 and is_delete=0
+  </select>
+
+  <select id="getNotAudit" resultMap="BaseResultMap">
+    SELECT *
+    FROM good
+    where  good_state=0
+  </select>
+
+
+  <select id="selectBySelectiveName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from good
+    where good_name LIKE #{name}
+  </select>
+
+
+  <select id="selectBySubCategoryId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from good
+    where sub_category_id = #{subCategoryId,jdbcType=INTEGER}
+  </select>
+
+
 </mapper>

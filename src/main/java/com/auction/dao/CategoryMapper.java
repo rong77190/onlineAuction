@@ -1,6 +1,7 @@
 package com.auction.dao;
 
 import com.auction.model.Category;
+import org.apache.ibatis.annotations.Param;
 
 public interface CategoryMapper {
     int deleteByPrimaryKey(Integer categoryId);
@@ -14,4 +15,6 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    Category selectByName(@Param("categoryName")String categoryName);
 }

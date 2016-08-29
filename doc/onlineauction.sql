@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50545
 File Encoding         : 65001
 
-Date: 2016-08-27 22:50:39
+Date: 2016-08-29 10:57:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,11 +46,12 @@ CREATE TABLE `cart` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
+INSERT INTO `cart` VALUES ('1', '1', '1', '2016-08-01 10:09:50', null);
 
 -- ----------------------------
 -- Table structure for category
@@ -60,12 +61,13 @@ CREATE TABLE `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(50) NOT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO `category` VALUES ('1', '1');
+INSERT INTO `category` VALUES ('1', '书籍');
+INSERT INTO `category` VALUES ('2', '服装');
 
 -- ----------------------------
 -- Table structure for deposit
@@ -108,7 +110,7 @@ CREATE TABLE `good` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `is_delete` int(10) DEFAULT '0' COMMENT '是否删除(1是：0否默认为0)',
   `up_time` datetime DEFAULT NULL COMMENT '上架时间',
-  `good_state` varchar(50) DEFAULT NULL COMMENT '状态(“0：未审核”1：审核过，上架 2：下架)',
+  `good_state` int(4) DEFAULT NULL COMMENT '状态(“0：未审核”1：审核过，上架 2：下架)',
   `complete_time` datetime DEFAULT NULL COMMENT '结束时间',
   `buyer_id` int(11) DEFAULT NULL COMMENT '出价人',
   `seller_id` int(11) DEFAULT NULL,
@@ -118,8 +120,8 @@ CREATE TABLE `good` (
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '1', '1123', '10000.00', '119.23', '11', null, null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null);
-INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '0', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null);
+INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', null, null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null);
+INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '1', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null);
 
 -- ----------------------------
 -- Table structure for manager
@@ -171,12 +173,13 @@ CREATE TABLE `sub_category` (
   `category_id` int(11) NOT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`sub_category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sub_category
 -- ----------------------------
-INSERT INTO `sub_category` VALUES ('1', '1', '1', '2016-08-02 12:27:41');
+INSERT INTO `sub_category` VALUES ('1', '计算机', '1', '2016-08-02 12:27:41');
+INSERT INTO `sub_category` VALUES ('2', '女装', '2', null);
 
 -- ----------------------------
 -- Table structure for torder

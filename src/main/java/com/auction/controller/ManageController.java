@@ -106,6 +106,46 @@ public class ManageController extends SpringMvcActionContext {
         }
     }
 
+    /**
+     *  获取所有的拍品
+     * @return
+     */
+
+    @RequestMapping("/getALlGood")
+    @ResponseBody
+    public Object getAllGood(){
+        List<Good> goodList = goodService.getAllGood();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+    /**
+     * 获取正在拍卖的拍品
+     * @return
+     */
+
+    @RequestMapping("/getAuctioningGood")
+    @ResponseBody
+    public Object getAuctioningGood(){
+        List<Good> goodList = goodService.getAuctioningGood();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+
+    /**
+     * 获取未审核的拍品
+     * @return
+     */
+
+    @RequestMapping("/getNotAudit")
+    @ResponseBody
+    public Object getNotAudit(){
+        List<Good> goodList = goodService.getNotAudit();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
 
     /**
      * 更新商品状态  manage
