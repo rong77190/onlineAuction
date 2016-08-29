@@ -15,15 +15,15 @@ import java.util.List;
 @RequestMapping("/good")
 public class GoodController extends SpringMvcActionContext{
 
-	@Resource
-	private GoodService goodService;
+    @Resource
+    private GoodService goodService;
 
     /**
      * 搜索
      * @param key
      * @return
      */
-	@RequestMapping(value="searchGoodByKey")
+    @RequestMapping(value="searchGoodByKey")
     @ResponseBody
     public Object searchGoodByKey(String key){
         List<Good> goodList = goodService.searchGoodByKey(key);
@@ -35,14 +35,14 @@ public class GoodController extends SpringMvcActionContext{
     }
 
 
-	@RequestMapping(value="addGood")
+    @RequestMapping(value="addGood")
     @ResponseBody
     public Object applyGood(Good good){
-		if(good.getBeginPrice() == null || good.getGoodName() == null
-		   || good.getImage() == null || good.getIntroduction() == null)
-		{
-			return MyResult.getResult(0, "信息不全", "");
-		}else{
+        if(good.getBeginPrice() == null || good.getGoodName() == null
+                || good.getImage() == null || good.getIntroduction() == null)
+        {
+            return MyResult.getResult(0, "信息不全", "");
+        }else{
             int result = goodService.addGood(good);
             if(result > 0){
                 return MyResult.getResult(1,"",good);
@@ -50,11 +50,11 @@ public class GoodController extends SpringMvcActionContext{
                 return MyResult.getResult(0,"添加失败","");
             }
 
-		}
+        }
     }
 
 
-	@RequestMapping("/getDetail")
+    @RequestMapping("/getDetail")
     @ResponseBody
     public Object showGood(Good good){
         good = goodService.findGoodById(good.getGoodId());
@@ -66,6 +66,33 @@ public class GoodController extends SpringMvcActionContext{
         }
     }
 
+    /**
+     *  获取所有的拍品
+     * @return
+     */
 
-	
+    @RequestMapping("/getAllGood")
+    @ResponseBody
+    public Object getAllGood(){
+        List<Good> goodList = goodService.getAllGood();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+    /**
+     * 获取正在拍卖的拍品
+     * @return
+     */
+
+    @RequestMapping("/getAuctioningGood")
+    @ResponseBody
+    public Object getAuctioningGood(){
+        List<Good> goodList = goodService.getAuctioningGood();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+
+
+
 }
