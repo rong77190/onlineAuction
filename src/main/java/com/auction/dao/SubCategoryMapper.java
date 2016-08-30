@@ -2,6 +2,7 @@ package com.auction.dao;
 
 import com.auction.model.SubCategory;
 import org.apache.ibatis.annotations.Param;
+
 public interface SubCategoryMapper {
     int deleteByPrimaryKey(Integer subCategoryId);
 
@@ -13,7 +14,7 @@ public interface SubCategoryMapper {
 
     SubCategory selectByCategoryId(Integer cId);
 
-    SubCategory selectBySelectiveName(@Param("name")String name);
+    SubCategory selectBySelectiveName(@Param("name") String name);
 
     int updateByPrimaryKeySelective(SubCategory record);
 

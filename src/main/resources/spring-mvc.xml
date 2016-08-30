@@ -64,17 +64,20 @@
 			<!--<bean class="com.auction.interceptor.ManagerMvcInterceptor"></bean>-->
 		<!--</mvc:interceptor>-->
 	<!--<mvc:interceptor>-->
-		<!--<mvc:mapping path="${adminPath}/**" />-->
+		<!--<mvc:interceptor>-->
+		<!--<mvc:mapping path="/**" />-->
 		<!--<mvc:exclude-mapping path="${adminPath}/"/>-->
 		<!--<mvc:exclude-mapping path="${adminPath}/login"/>-->
 		<!--<mvc:exclude-mapping path="${adminPath}/sys/menu/tree"/>-->
 		<!--<mvc:exclude-mapping path="${adminPath}/sys/menu/treeData"/>-->
 		<!--<mvc:exclude-mapping path="${adminPath}/oa/oaNotify/self/count"/>-->
 		<!--<bean class="com.auction.interceptor.LoginInterceptor" />-->
+		<!--</mvc:interceptor>-->
 	<!--</mvc:interceptor>-->
 		<!--<mvc:interceptor>-->
-			<!--<mvc:mapping path="/*" />-->
-			<!--<bean class="com.auction.interceptor.FrontMvcInterceptor"></bean>-->
+			<!--&lt;!&ndash; 如果不配置或/*,将拦截所有的Controller &ndash;&gt;-->
+			<!--<mvc:mapping path="/user/**" />-->
+			<!--<bean class="com.auction.interceptor.LoginInterceptor"></bean>-->
 		<!--</mvc:interceptor>-->
 	<!--</mvc:interceptors>-->
 

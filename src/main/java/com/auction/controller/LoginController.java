@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/login")
-public class LoginController extends SpringMvcActionContext{
+public class LoginController extends SpringMvcActionContext {
     String seedStr="0123456789";
     int validCodeLength=6;
 
@@ -32,7 +32,7 @@ public class LoginController extends SpringMvcActionContext{
 
     @RequestMapping(value = "")
     public String toLogin(){
-        return "syslogin";
+        return "/login";
     }
 
     /**
@@ -113,7 +113,7 @@ public class LoginController extends SpringMvcActionContext{
      * 获取登录验证码
      */
     @RequestMapping(value = "/getNewValidCode")
-    public void getNewValidCode(HttpServletRequest request, HttpServletResponse response,HttpSession session){
+    public void getNewValidCode(HttpServletRequest request, HttpServletResponse response, HttpSession session){
         loginService.generateNewValidCode(request,response,session);
     }
 
@@ -195,7 +195,7 @@ public class LoginController extends SpringMvcActionContext{
      */
     @RequestMapping(value = "resetPassword")
     @ResponseBody
-    public Object resetPassword(@RequestParam("resetValidCode") String resetValidCode,@RequestParam("password") String password,HttpServletRequest request){
+    public Object resetPassword(@RequestParam("resetValidCode") String resetValidCode, @RequestParam("password") String password, HttpServletRequest request){
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
         if (user ==null){

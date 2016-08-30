@@ -38,15 +38,15 @@ public class ManageController extends SpringMvcActionContext {
      * @return
      */
     @RequestMapping("login")
-    public String manageLogin(Manager manager) {
+    @ResponseBody
+    public Object manageLogin(Manager manager) {
         HttpSession session = getSession();
         manager = managerService.login(manager);
         if (manager == null) {
-            getRequest().setAttribute("error","用户名或密码错误");
-            return "syslogin";
+            return MyResult.getResult(0, "用户名或密码错误", "");
         } else {
             session.setAttribute("manager", manager);
-            return "/main";
+            return MyResult.getResult(1, "", manager);
         }
     }
 
@@ -111,7 +111,7 @@ public class ManageController extends SpringMvcActionContext {
      * @return
      */
 
-    @RequestMapping("/getAllGood")
+    @RequestMapping("/getALlGood")
     @ResponseBody
     public Object getAllGood(){
         List<Good> goodList = goodService.getAllGood();
@@ -155,7 +155,7 @@ public class ManageController extends SpringMvcActionContext {
 
     @RequestMapping("updateGoodState")
     @ResponseBody
-    public Object updateGoodState(Good good,String state){
+    public Object updateGoodState(Good good, String state){
 //        Manager manager = (Manager)getSession().getAttribute("manager");
 //        if (manager == null){
 //            return MyResult.getResult(0,"管理员未登录","");

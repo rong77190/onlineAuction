@@ -1,8 +1,8 @@
 package com.auction.controller;
 
 import com.auction.model.Torder;
-import com.auction.service.TorderService;
 import com.auction.model.User;
+import com.auction.service.TorderService;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TorderController {
@@ -35,7 +37,7 @@ public class TorderController {
 
     @ResponseBody
     @RequestMapping("/manage/torders/search")
-    public  Object searchTorder(@RequestParam  int orderId){
+    public  Object searchTorder(@RequestParam int orderId){
         Torder torder=torderService.getTorder(orderId);
         return  MyResult.getResult(1, "", torder);
     }
@@ -43,7 +45,7 @@ public class TorderController {
 
     @ResponseBody
     @RequestMapping("/manage/torders/{orderId}")
-    public  Object checkTorder(@PathVariable  int orderId){
+    public  Object checkTorder(@PathVariable int orderId){
         Torder torder=torderService.getTorder(orderId);
         return  MyResult.getResult(1, "", torder);
     }
@@ -52,7 +54,7 @@ public class TorderController {
 
     @ResponseBody
     @RequestMapping("/manage/torders/{orderId}/tradersinfo")
-    public  Object checkBuyerSellerInfo(@PathVariable  int orderId){
+    public  Object checkBuyerSellerInfo(@PathVariable int orderId){
         int buyerId=torderService.getbuyerinfo(orderId);
         User buyer=userService.findById(buyerId);
         int sellerId=torderService.getsellerinfo(orderId);

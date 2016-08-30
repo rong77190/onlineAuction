@@ -149,11 +149,11 @@
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
         </dependency>
-        <dependency>
-            <groupId>org.ansj</groupId>
-            <artifactId>ansj_seg</artifactId>
-            <version>0.9</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.ansj</groupId>-->
+            <!--<artifactId>ansj_seg</artifactId>-->
+            <!--<version>0.9</version>-->
+        <!--</dependency>-->
 
 
         <!-- 格式化对象，方便输出日志 -->

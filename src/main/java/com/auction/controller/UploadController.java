@@ -1,7 +1,5 @@
 package com.auction.controller;
 
-import com.auction.common.SpringMvcActionContext;
-import com.auction.model.User;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +18,8 @@ import java.util.Iterator;
 
 @Controller
 @RequestMapping("/file")
-public class UploadController extends SpringMvcActionContext{
-	User user = (User)getSession().getAttribute("user");
+public class UploadController {
+	
 	@RequestMapping("/upload")
 	@ResponseBody
 	public Object addUser(@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws IOException{
@@ -29,11 +27,8 @@ public class UploadController extends SpringMvcActionContext{
 
 		if(!file.isEmpty()){
 			try {
-				String savePath = request.getSession().getServletContext().getRealPath("resources/upload/images");
-				String saveUrl  = savePath +"/"+ new Date().getTime() + file.getOriginalFilename();
-				user.setUserImage(saveUrl);
-				FileOutputStream os = new FileOutputStream(saveUrl);
-
+				String savePath = request.getSession().getServletContext().getRealPath("resources/upload");
+				FileOutputStream os = new FileOutputStream(savePath +"/"+ new Date().getTime() + file.getOriginalFilename());
 				InputStream in = file.getInputStream();
 				int b = 0;
 				while((b=in.read()) != -1)	{

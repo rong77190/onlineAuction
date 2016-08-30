@@ -18,9 +18,9 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    int pay(@Param("userId")int userId, @Param("price") double price);
+    int pay(@Param("userId") int userId, @Param("price") double price);
 
-    int backDepositToUser(@Param("userId")int userId,@Param("price") double price);
+    int backDepositToUser(@Param("userId") int userId, @Param("price") double price);
 
 
     List<User> selectAll();

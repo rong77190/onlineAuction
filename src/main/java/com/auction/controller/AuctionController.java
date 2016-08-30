@@ -5,12 +5,11 @@ import com.auction.model.Deposit;
 import com.auction.model.Good;
 import com.auction.model.User;
 import com.auction.service.AuctionService;
+import com.auction.service.CartService;
 import com.auction.service.GoodService;
 import com.auction.service.UserService;
-import com.auction.service.CartService;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +23,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("auction")
-public class AuctionController extends SpringMvcActionContext{
+public class AuctionController extends SpringMvcActionContext {
 
 
     @Resource
@@ -151,7 +150,7 @@ public class AuctionController extends SpringMvcActionContext{
      */
     @RequestMapping("doAuction")
     @ResponseBody
-    public Object doAuction(@RequestParam("currPrice")double currPrice,@RequestParam("goodId")int goodId){
+    public Object doAuction(@RequestParam("currPrice")double currPrice, @RequestParam("goodId")int goodId){
         User user = null;
         user = (User) getSession().getAttribute("user");
         if (user == null){
@@ -184,7 +183,7 @@ public class AuctionController extends SpringMvcActionContext{
 
     @RequestMapping("addtofavourite")
     @ResponseBody
-    public Object addGoodtoFavourite(@RequestParam int userId,@RequestParam  int goodId){
+    public Object addGoodtoFavourite(@RequestParam int userId, @RequestParam int goodId){
         Good good = goodService.findGoodById(goodId);
         cartService.addGood(userId,good);
         return MyResult.getResult(1,"加入收藏成功！","");

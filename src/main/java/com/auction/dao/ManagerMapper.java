@@ -16,5 +16,5 @@ public interface ManagerMapper {
 
     int updateByPrimaryKey(Manager record);
 
-    Manager login(@Param("name")String userName, @Param("password")String password);
+    Manager login(@Param("name") String userName, @Param("password") String password);
 }
