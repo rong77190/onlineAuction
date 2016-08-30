@@ -27,7 +27,7 @@
 	var url;
 	function searchUser() {
 		$("#dg").datagrid('load', {
-			"userName" : $("#userName").val()
+			"userName" : $("#userName1").val()
 		});
 	}
 	function openUserAddDialog() {
@@ -46,7 +46,7 @@
 		$("#fm").form("load", row);
 		url = "${pageContext.request.contextPath}/manage/user/save?userId=" + row.userId;
 	}
-	
+
 	function saveUser() {
 		$("#fm").form("submit", {
 			url : url,
@@ -113,7 +113,7 @@
 
 	<table id="dg" title="用户管理" class="easyui-datagrid" fitColumns="true"
 		pagination="true" rownumbers="true"
-		url="${pageContext.request.contextPath}/manage/user/list" fit="true"
+		url="${pageContext.request.contextPath}/manage/userList" fit="true"
 		toolbar="#tb">
 		<thead>
 			<tr>
@@ -140,7 +140,7 @@
 			href="javascript:deleteUser()" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true">删除</a>
 		<div>
-			&nbsp;用户名：&nbsp;<input type="text" id="userName" size="20"
+			&nbsp;用户名：&nbsp;<input type="text" id="userName1" size="20"
 				onkeydown="if(event.keyCode == 13)searchUser()" /> <a
 				href="javascript:searchUser()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a>

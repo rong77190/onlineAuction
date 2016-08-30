@@ -3,6 +3,7 @@ package com.auction.dao;
 import com.auction.model.Student;
 import com.auction.model.User;
 
+
 public interface StudentMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -1,5 +1,7 @@
 package com.auction.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,7 +22,7 @@ public class User implements Serializable {
 
     private String userEmail;
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registerTime;
 
     private Double balance;//余额

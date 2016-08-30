@@ -6,6 +6,7 @@ import com.auction.service.GoodService;
 import com.auction.service.ManagerService;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
+import com.auction.util.ResponseUtil;
 import com.auction.util.StringUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -185,9 +186,9 @@ public class ManageController extends SpringMvcActionContext {
     /*
    * 分页查询
    * */
-    @RequestMapping("/user/list")
+    @RequestMapping("/userList")
     @ResponseBody
-    public Object list(@RequestParam(value = "page",required = false)String page,@RequestParam(value = "rows",required = false)String rows,User s_user)throws Exception{
+    public Object userList(@RequestParam(value = "page",required = false)String page,@RequestParam(value = "rows",required = false)String rows,User s_user)throws Exception{
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("userName", StringUtil.formatLike(s_user.getUserName()));
@@ -199,6 +200,7 @@ public class ManageController extends SpringMvcActionContext {
         JSONArray jsonArray= JSONArray.fromObject(userList);
         result.put("rows", jsonArray);
         result.put("total", total);
+        System.out.println(result.toString());
         return result;
     }
 
@@ -207,8 +209,8 @@ public class ManageController extends SpringMvcActionContext {
     /*
    * 分页查询
    * */
-    @RequestMapping("/good/list")
-    @ResponseBody
+    @RequestMapping("/goodList")
+//    @ResponseBody
     public Object goodList(@RequestParam(value = "page",required = false)String page,@RequestParam(value = "rows",required = false)String rows,Good good)throws Exception{
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
         Map<String,Object> map = new HashMap<String, Object>();
@@ -221,6 +223,8 @@ public class ManageController extends SpringMvcActionContext {
         JSONArray jsonArray= JSONArray.fromObject(goodList);
         result.put("rows", jsonArray);
         result.put("total", total);
-        return result;
+        System.out.println(result.toString());
+        ResponseUtil.write(getResponse(), result);
+        return null;
     }
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50545
 File Encoding         : 65001
 
-Date: 2016-08-29 10:57:24
+Date: 2016-08-30 22:36:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,13 +61,14 @@ CREATE TABLE `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(50) NOT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
 INSERT INTO `category` VALUES ('1', '书籍');
 INSERT INTO `category` VALUES ('2', '服装');
+INSERT INTO `category` VALUES ('3', '3');
 
 -- ----------------------------
 -- Table structure for deposit
@@ -115,13 +116,17 @@ CREATE TABLE `good` (
   `buyer_id` int(11) DEFAULT NULL COMMENT '出价人',
   `seller_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`good_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
 -- ----------------------------
 INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', null, null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null);
 INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '1', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null);
+INSERT INTO `good` VALUES ('3', '3', '不阿双方都', null, null, null, null, null, null, '0', null, null, null, null, null);
+INSERT INTO `good` VALUES ('4', '3', '啊但是看见', null, null, null, null, null, null, '0', null, null, null, null, null);
+INSERT INTO `good` VALUES ('5', null, '123', null, null, '1', '12', '123', null, '0', null, null, null, null, null);
+INSERT INTO `good` VALUES ('6', null, '123', null, null, null, '12', '123', null, '0', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for manager
@@ -140,7 +145,7 @@ CREATE TABLE `manager` (
 -- ----------------------------
 -- Records of manager
 -- ----------------------------
-INSERT INTO `manager` VALUES ('1', '1', '1', '1', '0', '1');
+INSERT INTO `manager` VALUES ('1', 'admin', '1', '1', '0', '1');
 
 -- ----------------------------
 -- Table structure for student
@@ -173,13 +178,14 @@ CREATE TABLE `sub_category` (
   `category_id` int(11) NOT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`sub_category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sub_category
 -- ----------------------------
 INSERT INTO `sub_category` VALUES ('1', '计算机', '1', '2016-08-02 12:27:41');
-INSERT INTO `sub_category` VALUES ('2', '女装', '2', null);
+INSERT INTO `sub_category` VALUES ('2', '女装', '2', '2016-08-02 20:32:38');
+INSERT INTO `sub_category` VALUES ('3', '10', '3', '2016-08-03 20:32:41');
 
 -- ----------------------------
 -- Table structure for torder
@@ -200,7 +206,7 @@ CREATE TABLE `torder` (
 -- ----------------------------
 -- Records of torder
 -- ----------------------------
-INSERT INTO `torder` VALUES ('1', null, null, null, null, '1.77', null, null);
+INSERT INTO `torder` VALUES ('1', '1', '1', '2016-08-29 20:31:57', null, '1.77', null, null);
 
 -- ----------------------------
 -- Table structure for user
@@ -219,18 +225,15 @@ CREATE TABLE `user` (
   `balance` double(10,2) DEFAULT '0.00' COMMENT '账户余额',
   `freeze` int(4) DEFAULT '0',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '1', '1', null, '1', '1', '1', '1', '2016-07-05 17:41:57', '196.96', '0');
-INSERT INTO `user` VALUES ('2', '12312', '123', null, '12137098', null, null, '12918312908', '2016-07-12 17:41:57', '91.00', '0');
-INSERT INTO `user` VALUES ('3', '1232', '123', null, '12137098', null, '2016-07-22', '12918312908', '2016-07-22 17:41:57', '1.00', '0');
-INSERT INTO `user` VALUES ('4', '3', '1234567', null, null, null, null, '12918312908', '2016-07-22 17:49:26', '15.00', '0');
-INSERT INTO `user` VALUES ('5', '123213', '12132123', null, null, null, null, null, '2016-08-07 21:40:58', '0.00', '0');
-INSERT INTO `user` VALUES ('6', '1cfefa', '12321', null, null, null, null, '140656', '2016-08-08 22:03:08', '0.00', '0');
-INSERT INTO `user` VALUES ('7', 'xcr1', '123', null, null, null, null, null, '2016-08-08 22:04:15', '1.23', '0');
-INSERT INTO `user` VALUES ('8', null, null, null, null, null, null, null, null, '89.00', '0');
-INSERT INTO `user` VALUES ('9', null, null, null, null, null, null, null, null, '100.00', '0');
-INSERT INTO `user` VALUES ('10', 'fadsfasdfasdfa', '123', null, null, null, null, null, '2016-08-24 01:22:07', '0.00', '0');
+INSERT INTO `user` VALUES ('1', '1', '1', null, '1', '1', '2016-07-22', '1', '2016-07-05 17:41:57', '196.96', '0');
+INSERT INTO `user` VALUES ('2', '老二', '123', null, '12137098', '1', '2016-07-22', '12918312908', '2016-07-12 17:41:57', '91.00', '0');
+INSERT INTO `user` VALUES ('3', '张三', '123', null, '12137098', '1', '2016-07-22', '12918312908', '2016-07-22 17:41:57', '1.00', '0');
+INSERT INTO `user` VALUES ('4', '李四', '1234567', null, null, '1', '2016-07-22', '12918312908', '2016-07-22 17:49:26', '15.00', '0');
+INSERT INTO `user` VALUES ('5', '王五', '12132123', null, null, '1', '2016-07-22', null, '2016-08-07 21:40:58', '0.00', '0');
+INSERT INTO `user` VALUES ('6', '找刘', '12321', null, null, '1', '2016-07-22', '140656', '2016-08-08 22:03:08', '0.00', '0');
+INSERT INTO `user` VALUES ('7', '谢楚荣', '123', null, null, '1', '2016-07-22', null, '2016-08-08 22:04:15', '1.23', '0');

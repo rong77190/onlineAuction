@@ -4,6 +4,7 @@ import com.auction.dao.UserMapper;
 import com.auction.model.Good;
 import com.auction.model.User;
 import com.auction.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
