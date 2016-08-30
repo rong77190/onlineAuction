@@ -111,7 +111,7 @@ public class ManageController extends SpringMvcActionContext {
      * @return
      */
 
-    @RequestMapping("/getALlGood")
+    @RequestMapping("/getAllGood")
     @ResponseBody
     public Object getAllGood(){
         List<Good> goodList = goodService.getAllGood();

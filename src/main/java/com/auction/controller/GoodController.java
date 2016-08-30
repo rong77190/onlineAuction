@@ -42,12 +42,41 @@ public class GoodController extends SpringMvcActionContext {
 		}
     }
 	
-	@RequestMapping("/show")
+	@RequestMapping("/getDetail")
     @ResponseBody
-    public Object showGood(Good good){
+    public Object getDetail(Good good){
         good = goodService.findGoodById(good.getGoodId());
         getSession().setAttribute("good",good);
         return MyResult.getResult(1,"",good);
     }
-	
+
+
+    /**
+     *  获取所有的拍品
+     * @return
+     */
+
+    @RequestMapping("/getAllGood")
+    @ResponseBody
+    public Object getAllGood(){
+        List<Good> goodList = goodService.getAllGood();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+    /**
+     * 获取正在拍卖的拍品
+     * @return
+     */
+
+    @RequestMapping("/getAuctioningGood")
+    @ResponseBody
+    public Object getAuctioningGood(){
+        List<Good> goodList = goodService.getAuctioningGood();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+
+
 }
