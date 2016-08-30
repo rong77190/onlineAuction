@@ -1,0 +1,78 @@
+.header-top-defined{
+    height: 52px;
+    width: 100%;
+    background-color: #a1afb9;
+}
+.header-defined{
+    position: relative;
+    height: 430px;
+    width: 100%;
+    background: -moz-linear-gradient(top, #a1afb9 0%, #a0c6c4 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#a1afb9),color-stop(100%,#a0c6c4));
+    background: -webkit-linear-gradient(top,#a1afb9 0%,#a0c6c4 100%);
+    background: -o-linear-gradient(top,#a1afb9 0%,#a0c6c4 100%);
+    background: -ms-linear-gradient(top,#a1afb9 0%,#a0c6c4 100%);
+    background: linear-gradient(to bottom,#a1afb9 0%,#a0c6c4 100%);
+}
+.header-defined-child{
+    position: relative;
+    height: 80px;
+    width: 100%;
+    background: -moz-linear-gradient(top, #a1afb9 0%, #a0c6c4 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#a1afb9),color-stop(100%,#a0c6c4));
+    background: -webkit-linear-gradient(top,#a1afb9 0%,#a0c6c4 100%);
+    background: -o-linear-gradient(top,#a1afb9 0%,#a0c6c4 100%);
+    background: -ms-linear-gradient(top,#a1afb9 0%,#a0c6c4 100%);
+    background: linear-gradient(to bottom,#a1afb9 0%,#a0c6c4 100%);
+}
+.head-caption{
+    position: absolute;
+    left: 23%;
+    top: 0;
+    z-index: 10;
+    color: #f6f6f6;
+}
+.head-caption:hover{
+    cursor: default;
+}
+.head-logo{
+    position: absolute;
+    left: 15%;
+    top: 8px;
+    z-index: 10;
+    height: 58px;
+    width: 83px;
+    background-image: url("../tu/logo1.png");
+}
+.carousel-defined{
+    position: relative;
+    top: 85px;
+}
+.maxh{
+    max-height: 295px;
+    width: 900px;
+}
+.left-defined{
+    position: absolute;
+    background-image: url("../tu/arrow-l.png");
+    width: 50px;
+    height: 50px;
+    opacity: 0.5;
+    top: 120px;
+    left: 0;
+}
+.left-defined:hover{
+    opacity: 0.9;
+}
+.right-defined{
+    position: absolute;
+    background-image: url("../tu/arrow-r.png");
+    width: 50px;
+    height: 50px;
+    opacity: 0.5;
+    top: 124px;
+    right: 0;
+}
+.right-defined:hover{
+    opacity: 0.9;
+}

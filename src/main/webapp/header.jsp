@@ -7,25 +7,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-<title>政策法规平台</title>
+<title>SnowSlide大学生拍卖平台</title>
 
 
 <!-- Place favicon.ico in the root directory -->
 
 <!-- build:css styles\vendor.css -->
 <!-- bower:css -->
-<link rel="stylesheet" href="<c:url value='/js/bootstrap-select/dist/css/bootstrap-select.min.css?version=20160108'/>">
-<link rel="stylesheet" href="<c:url value='/js/bootstrap/dist/css/bootstrap.min.css?version=20160108' />">
+<link rel="stylesheet" href="<c:url value='resources/js/bootstrap-select/dist/css/bootstrap-select.min.css?version=20160108'/>">
+<link rel="stylesheet" href="<c:url value='resources/js/bootstrap/dist/css/bootstrap.min.css?version=20160108' />">
 
 <!-- endbower -->
 <!-- endbuild -->
 
 <!-- build:css styles\main.css -->
 
-<link rel="stylesheet" href="<c:url value='/css/app/main.css?version=20160108' />">
-<link rel="stylesheet" href="<c:url value='/css/app/mycss.css?version=20160108' />">
+<link rel="stylesheet" href="<c:url value='resources/css/app/main.css?version=20160108' />">
+<link rel="stylesheet" href="<c:url value='resources/css/app/mycss.css?version=20160108' />">
 
-<link rel="stylesheet" href="<c:url value='/js/Datepicker/css/jquery-ui.css?version=20160108' />">
+<link rel="stylesheet" href="<c:url value='resources/js/Datepicker/css/jquery-ui.css?version=20160108' />">
 
 
 
@@ -47,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">政策法规平台</a>
+        <a class="navbar-brand" href="#">SnowSlide大学生拍卖平台</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,13 +69,13 @@
           -->
           
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color:transparent">政策管理 <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color:transparent">拍卖管理 <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="<c:url value='/gdpt/index'/>">政策机构</a></li>
-              <li><a href="<c:url value='/gp/list/form'/>">政策法规</a></li>
-              
+              <li><a href="<c:url value='/gdpt/index'/>">我的收藏</a></li>
+              <li><a href="<c:url value='/page.jsp'/>">我的拍卖</a></li>
+                   <li><a href="<c:url value='/index.jsp'/>">回到主页</a></li>
             </ul>
-          </li>
+  <%--         </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color:transparent">后台管理 <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -85,11 +85,11 @@
               <li><a href="<c:url value='/sec/resourceSort'/>">资源排序</a></li>
             </ul>
           </li>
-          
+           --%>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color:transparent">个人中心 <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="<c:url value='/user/user'/>">个人信息</a></li>
+              <li><a href="<c:url value='/WEB-INF/pages/user/user.jsp'/>">个人信息</a></li>
               <li><a href="<c:url value='/logout'/>">退出登录</a></li>
             </ul>
           </li>
@@ -109,14 +109,14 @@
 
 
 <!-- 项目主体内容 -->
-<script type="text/javascript" src="<c:url value='/js/jquery.min.js' /> "></script>
-<script type="text/javascript" src="<c:url value='/js/jquery.cookie.js' /> "></script>
+<script type="text/javascript" src="<c:url value='resources/js/jquery.min.js' /> "></script>
+<script type="text/javascript" src="<c:url value='resources/js/jquery.cookie.js' /> "></script>
 
-<script type="text/javascript" src="<c:url value='/js/bootstrap-select/dist/js/bootstrap-select.js' /> "></script>
+<script type="text/javascript" src="<c:url value='resources/js/bootstrap-select/dist/js/bootstrap-select.js' /> "></script>
 
-<script type="text/javascript" src="<c:url value='/js/myFunction.js' /> "></script>
+<script type="text/javascript" src="<c:url value='resources/js/myFunction.js' /> "></script>
 
-<script type="text/javascript" src="<c:url value='/js/ckEditor/ckeditor.js' /> "></script>
+<script type="text/javascript" src="<c:url value='resources/js/ckEditor/ckeditor.js' /> "></script>
 
 
 

@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-<title>政策管理-用户注册</title>
+<title>用户注册</title>
 
 
 <!-- Place favicon.ico in the root directory -->
@@ -41,36 +41,54 @@
           <input type="text"  id="username"  name="username"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
         </li>
         
-        <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+ <!--        <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
           <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">名称</span>
           <input type="text"  id="shouwname"  name="shouwname"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
-        </li>
+        </li> -->
         
-        <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
-          <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">E-mail</span>
-          <input type="text"  id="email"  name="email"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
-        </li>
-        
-        <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+         <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
           <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">密码</span>
           <input type="password"  id="password"  name="password"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
         </li>
         
-        <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+          <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+          <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">E-mail</span>
+          <input type="text"  id="email"  name="userEmail"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
+          <button type="button" onclick="send()">发送验证码</button>
+        </li>
+        
+        
+             <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+          <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.2em; font-weight:bold;">邮箱验证码</span>
+          <input type="text"  id="validCode"  name="validCode"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
+         
+        </li> 
+        
+     <!--    <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+          <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">E-mail</span>
+          <input type="text"  id="email"  name="email"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
+        </li> -->
+        
+      <!--   <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+          <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">密码</span>
+          <input type="password"  id="password"  name="password"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
+        </li> -->
+        
+      <!--   <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
           <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">确认密码</span>
           <input type="password"  id="rpassword"  name="rpassword"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
         </li>
         
-        
+         -->
         <li style="list-style-type:none;padding:0.5em 0 0.5em 0.8em;">
-          <input type="submit"  value="确定" style="padding:0.4em 1em; color:#fff; font-size:1.2em; height:100%; border:none; border-radius:0.3em; background-color:#5bc0de;">
+          <input type="button" onclick="finish()" value="确定" style="padding:0.4em 1em; color:#fff; font-size:1.2em; height:100%; border:none; border-radius:0.3em; background-color:#5bc0de;">
           <input type="button" onclick="cancle()" value="取消" style="padding:0.4em 1em; color:#fff; font-size:1.2em; height:100%; border:none; border-radius:0.3em; background-color:#ffaa25;">
         </li>
       </ul>
     </form>
   </div>
   <div class="col-xs-5" style="padding:30px">
-    <img src="<c:url value='resources/images/logo-name-two.png' />">
+    <img src="<c:url value='resources/images/snow.png ' />">
   </div>
 </div>
 </div>
@@ -83,5 +101,41 @@
 	function cancle(){
 		window.location = "<c:url value='login.jsp' />";
 	}
+	
+	function finish(){
+		window.location = "<c:url value='index.jsp' />";
+	}
+	
+	function send(){
+        var a = $("#email").val();
+        alert(a);
+		 var data = {
+	//			  "userame": $("#pname").val(),
+	//			  "password": $("#password").val(),
+	//			  "email": $("#email").val(),
+	//			  "vaildCode": timeStamp($("#vaildCode").val()),
+//				  "digest":  CKEDITOR.instances.ckAbstarct.getData(),
+//				  "content": CKEDITOR.instances.ckContext.getData()
+             "userEmail":$("#email").val()
+	}
+		  $.ajax({
+		        type: "post",
+		        url: "/login/sendEmail",
+		        data: JSON.stringify(data),
+		        contentType: "application/json; charset=utf-8",
+		        dataType: "json",
+		        success:function(data){
+		        	if (data.status=="1")
+		        	showMessage(data.updated,true,"#form");
+		        	$("body").animate({scrollTop:0},200);
+		            setTimeout(function(){
+		            	window.location = "<c:url value='index.jsp'/>";
+		            },1500);
+		        },
+		        error:function(XMLHttpRequest){
+		        	showMessage(XMLHttpRequest.responseJSON["not-found"],false,"#form");		
+				}
+		    });
+	  };
 </script>
 </html>

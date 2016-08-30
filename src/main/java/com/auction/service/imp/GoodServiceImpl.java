@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xiechur on 2016/8/22.
@@ -90,6 +91,18 @@ public class GoodServiceImpl implements GoodService {
 
     public List<Good> getNotAudit() {
         return goodMapper.getNotAudit();
+    }
+
+    public List<Good> find(Map<String, Object> map) {
+        return goodMapper.find(map);
+    }
+
+    public Long getTotal(Map<String, Object> map) {
+        return goodMapper.getTotal(map);
+    }
+
+    public int delete(Integer userId) {
+        return 0;
     }
 
 }

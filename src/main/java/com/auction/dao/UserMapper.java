@@ -4,6 +4,7 @@ import com.auction.model.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -25,5 +26,16 @@ public interface UserMapper {
 
     List<User> selectAll();
 
-
+    /**
+     * 用户查询
+     * @param map
+     * @return用户集合
+     */
+    public List<User> find(Map<String, Object> map);
+    /**
+     * 获取总记录数
+     * @param map
+     * @return获取的total数
+     */
+    public Long getTotal(Map<String, Object> map);
 }

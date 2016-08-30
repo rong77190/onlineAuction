@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Controller
 public class TorderController {
     @Resource
@@ -22,7 +23,7 @@ public class TorderController {
     private UserService userService;
 
     @ResponseBody
-    @RequestMapping("/{userId}/torders")
+    @RequestMapping("/order/{userId}")
     public Object usersTorders(@PathVariable int userId){
         List<Torder> torders=torderService.getUserAllTorders(userId);
         return  MyResult.getResult(1, "", torders);

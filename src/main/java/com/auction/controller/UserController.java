@@ -47,6 +47,7 @@ public class UserController {
     @RequestMapping(value = "add")
     @ResponseBody
     public Object addUser(User user) {
+//        if ()
         userService.add(user);
 //        return "redirect:/user/list";
         return MyResult.getResult(1,"","");

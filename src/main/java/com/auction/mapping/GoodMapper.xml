@@ -253,4 +253,26 @@
   </select>
 
 
+  <!-- 拍品查询 -->
+  <select id="find" parameterType="Map" resultMap="BaseResultMap">
+    select * from good
+    <where>
+      <if test="goodName!=null and goodName!='' ">
+        and goodName like #{goodName}
+      </if>
+    </where>
+    <if test="start!=null and size!=null">
+      limit #{start},#{size}
+    </if>
+  </select>
+  <select id="getTotal" parameterType="Map" resultType="Long">
+    select count(*) from good
+    <where>
+      <if test="goodName!=null and goodName!='' ">
+        and goodName like #{goodName}
+      </if>
+    </where>
+  </select>
+
+
 </mapper>

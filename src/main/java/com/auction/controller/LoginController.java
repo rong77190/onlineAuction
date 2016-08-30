@@ -44,12 +44,12 @@ public class LoginController extends SpringMvcActionContext {
     @ResponseBody
     public Object login(Login login){
         HttpSession session = getSession();
-        String loginValidCode =(String) session.getAttribute("loginValidCode");
-        System.out.println("session中的validCode："+loginValidCode);
-        if(!checkValidCode(login.getValidCode(),loginValidCode)){
-            System.out.println("验证码错误");
-            return MyResult.getResult(0,"验证码错误","");
-        }else {
+//        String loginValidCode =(String) session.getAttribute("loginValidCode");
+//        System.out.println("session中的validCode  "+loginValidCode);
+//        if(!checkValidCode(login.getValidCode(),loginValidCode)){
+//            System.out.println("验证码错误");
+//            return MyResult.getResult(0,"验证码错误","");
+//        }else {
             User user =null;
             user = loginService.login(login);
             System.out.println(user.toString());
@@ -60,9 +60,9 @@ public class LoginController extends SpringMvcActionContext {
                 System.out.println(
                         "session 中的user"+session.getAttribute("user")
                 );
-                return MyResult.getResult(1,"",user);
+                return MyResult.getResult();
             }
-        }
+//        }
     }
 
 

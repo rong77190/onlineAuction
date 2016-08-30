@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xiechur on 2016/8/22.
@@ -39,5 +40,17 @@ public class UserServiceImpl implements UserService {
 
     public int update(User user) {
         return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    public List<User> find(Map<String, Object> map) {
+        return userMapper.find(map);
+    }
+
+    public Long getTotal(Map<String, Object> map) {
+        return userMapper.getTotal(map);
+    }
+
+    public int delete(Integer userId) {
+        return 0;
     }
 }
