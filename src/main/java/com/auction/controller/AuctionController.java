@@ -6,6 +6,7 @@ import com.auction.model.Good;
 import com.auction.model.User;
 import com.auction.service.AuctionService;
 import com.auction.service.CartService;
+import com.auction.service.TorderService;
 import com.auction.service.GoodService;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
@@ -34,6 +35,8 @@ public class AuctionController extends SpringMvcActionContext {
     private UserService userService;
     @Resource
     private CartService cartService;
+    @Resource
+    private TorderService torderService;
 
     /**
      * 检查押金状态
@@ -136,6 +139,7 @@ public class AuctionController extends SpringMvcActionContext {
             return MyResult.getResult();
         }else {
             //拍卖结束
+            torderService.createTorder(good.getBuyerId(),good.getGoodId(),good.getCurrPrice(),0,1); //生成订单
             return MyResult.getResult(0,"拍卖结束","");
         }
     }
