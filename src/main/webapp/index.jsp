@@ -7,13 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" /> 
 <title>SnowSlideTeam</title>
 
-<!-- Place favicon.ico in the root directory -->
 
-<!-- build:css styles\vendor.css -->
-<!-- bower:css -->
-<link rel="stylesheet" href="<c:url value='resources/js/bootstrap-select/dist/css/bootstrap-select.min.css?version=201100108'/>">
-<link rel="stylesheet" href="<c:url value='resources/js/bootstrap/distresources/css/bootstrap.min.css?version=201100108' />">
 
+
+<link rel="stylesheet" href="<c:url value='resources/css/app/bootstrap.min.css?version=201100108' />">
+<link rel="stylesheet" href="<c:url value='resources/js/bootstrap-select/dist/css/bootstrap.min.css?version=201100108'/>">
+  
+  <script type="text/javascript" src="<c:url value='resources/css/app/jquery-1.9.1.min.js' /> "></script>
+
+ <script type="text/javascript" src="<c:url value='resources/css/app/bootstrap.min.js' /> "></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -84,6 +86,7 @@
 
         })
     </script>
+   
 </head>
 <body>
     <div class="modal-backdrop-defined"></div>
@@ -95,11 +98,11 @@
                     <h4 class="modal-title-defined">登录提示</h4>
                 </div>
                 <div class="modal-body-defined">
-                    <P>请先登录才可查看已参与项目或发起众筹</P>
+                    <!-- <P>请先登录才可查看已参与项目或发起众筹</P> -->
                 </div>
                 <div class="modal-footer-defined">
-                    <a href="Login.html"><button class="btn-sm-glass-black" data-dismiss="modal">登录</button></a>
-                    <a href="Register.html"><button class="btn-sm-glass-black" data-dismiss="modal">注册</button></a>
+                    <a href="Login.jsp"><button class="btn-sm-glass-black" data-dismiss="modal">登录</button></a>
+                    <a href="register.jsp"><button class="btn-sm-glass-black" data-dismiss="modal">注册</button></a>
                 </div>
             </div>
         </div>
@@ -118,7 +121,7 @@
             <div class="navbar-right-defined">
                 <a href="Home.html"><button class="btn btn-glass">首页</button></a>
                 <div style="display: inline-block;position: relative" id="browsbody">
-                    <button class="btn btn-glass" id="brows">项目浏览</button>
+                    <button class="btn btn-glass" id="brows">分类浏览</button>
                     <ul class="down-menu" id="brows-menu">
                         <li class="one"><a href="#">食品</a></li>
                         <li class="two"><a href="#">玩具</a></li>
@@ -127,17 +130,17 @@
                     </ul>
                 </div>
                 <a class="tip-rec" href="#">
-                    <button class="btn btn-glass">已参与项目</button>
+                  <a href="page.jsp">  <button class="btn btn-glass">我的拍卖</button>
                 </a>
                 <div style="display: inline-block;position: relative" id="startbody">
-                   <a href="user/user"> <button class="btn btn-glass tip-rec" id="start" >个人中心</button>
+                   <a href="user/user"> <button class="btn btn-glass tip-rec" id="start" >个人中心</button></a>
                     
-                    <ul class="down-menu" id="start-menu">
+                 <!--  <!--  -->  <ul class="down-menu" id="start-menu">
                         <li class="one"><a class="tip-rec" href="#">食品</a></li>
                         <li class="two"><a class="tip-rec" href="#">玩具</a></li>
-                        <li class="three"><a class="tip-rec" href="#">户外</a></li>
-                        <li class="four"><a class="tip-rec" href="#">科技</a></li>
-                    </ul>
+                        <li class="three"><a class="tip-rec" href="#">化妆品</a></li>
+                        <li class="four"><a class="tip-rec" href="#">书籍</a></li>
+                    </ul> 
                 </div>
                 <form style="display: inline-block">
                     <div style="position: relative">
@@ -158,9 +161,9 @@
             <div class="carousel-defined">
                 <div id="myCarousel" style=";height: 340px" data-ride="carousel" data-interval="4000" data-pause="hover" data-wrap="true" class="carousel slide">
                     <div style="margin: 0 auto;width: 880px" class="carousel-inner">
-                        <div class="item active"><img class="maxh" alt="第一张图" src="resources/images/orange.jpg"></div>
-                        <div class="item"><img class="maxh" alt="第二张图" src="resources/images/perfume.jpg"></div>
-                        <div class="item"><img class="maxh" alt="第三张图" src="resources/images/light.jpg"></div>
+                        <div class="item active"><img class="maxh" alt="第一张图" src="resources/images/flower.jpg"></div>
+                        <div class="item"><img class="maxh" alt="第二张图" src="resources/images/green.jpg"></div>
+                        <div class="item"><img class="maxh" alt="第三张图" src="resources/images/juice.jpg"></div>
                     </div>
                     <ol style="bottom: 0" class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -184,73 +187,73 @@
                 <h3 style="display: inline">NEW最新上架</h3>
                 <div data-original-title="点击查看更多最新项目" id="newbtn" class="btn-defined label-more" data-placement="top"></div>
             </div>
-            <div class="proj-body" src="resources/images/perfume.jpg">
-                <div class="proj-container" src="resources/images/perfume.jpg">
-                    <div class="proj-status" src="resources/images/perfume.jpg"></div>
-                    <a href="#">
+            <div class="proj-body" src="images/perfume.jpg">
+                <div class="proj-container" src="images/perfume.jpg">
+                    <!--div class="proj-status"></div>-->
+                    <a href="Good1.jsp">
                         <div class="proj-img" > <img src="resources/images/perfume.jpg"></div>
                     </a>
                     <div class="proj-tag" rc="resources/images/perfume.jpg">
                         <div class="divider-pro" rc="resources/images/perfume.jpg"></div>
-                        <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        <h4>Daisy</h4>
+                        <h4>Perfume</h4>
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">500</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：230
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"> <img src="resources/images/tangbao.jpg"></div>
+                        <div class="proj-img"> <img src="resources/images/light.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
-                        <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        <h4>暖光灯</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">80</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：65
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"> <img src="resources/images/bicycle.jpg"></div>
+                        <div class="proj-img"> <img src="resources/images/shoe.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
-                        <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        <h4>全新白色板鞋</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">400</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：270
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"> <img src="resources/images/perfume.jpg"></div>
+                        <div class="proj-img"> <img src="resources/images/Upan.png"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
-                        <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        <h4>金士顿U盘128G</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
             </div>
@@ -262,71 +265,71 @@
             </div>
             <div class="proj-body">
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
                         <div class="proj-img"> <img src="resources/images/fengshan.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"></div>
+                        <div class="proj-img"> <img src="resources/images/basketball.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
                         <div class="proj-img"> <img src="resources/images/light.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"></div>
+                        <div class="proj-img"> <img src="resources/images/math.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
             </div>
@@ -338,71 +341,71 @@
             </div>
             <div class="proj-body">
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"></div>
+                        <div class="proj-img"> <img src="resources/images/shoe.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"></div>
+                        <div class="proj-img"> <img src="resources/images/Upan.png"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"></div>
+                        <div class="proj-img"> <img src="resources/images/basketball.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"></div>
+                        <div class="proj-img"> <img src="resources/images/fengshan.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
             </div>
@@ -414,71 +417,71 @@
             </div>
             <div class="proj-body">
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"></div>
+                        <div class="proj-img"> <img src="resources/images/操作系统.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
-                        <div class="proj-img"></div>
+                        <div class="proj-img"> <img src="resources/images/bicycle.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
-                        <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        <h4>Daisy</h4>
+                        <h4>Perfume</h4>
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">500</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：240
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
                         <div class="proj-img"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">56</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
                 <div class="proj-container">
-                    <div class="proj-status"></div>
+                    <!--div class="proj-status"></div>-->
                     <a href="#">
                         <div class="proj-img"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>
                         <h4>商品名</h4>
-                        <h4>项目名</h4>
+                        
                         <br/>
-                        一口价￥<h5 class="data-inline">5623</h5>
+                        一口价￥<h5 class="data-inline">172</h5>
                         <div class="progress bar-defined bar-defined-tag">
-                            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                            <div class="progress-bar progress-bar-warning" style="width: 78"></div>
                         </div>
-                        当前价格：100%
+                        当前价格：78
                     </div>
                 </div>
             </div>

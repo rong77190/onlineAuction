@@ -148,4 +148,6 @@
     from torder,good
     where torder.order_id = #{orderId,jdbcType=INTEGER} AND torder.good_id=good.good_id
   </select>
+
+
 </mapper>
