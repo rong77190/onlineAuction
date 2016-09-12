@@ -158,7 +158,7 @@
                     <h4 class="modal-title-defined">登录提示</h4>
                 </div>
                 <div class="modal-body-defined">
-                    <P>请先登录才可查看已参与项目或发起众筹</P>
+                    <P>请先登录</P>
                 </div>
                 <div class="modal-footer-defined">
                     <a href="login.jsp"><button class="btn-sm-glass-black" data-dismiss="modal">登录</button></a>
@@ -170,8 +170,8 @@
     <div class="body-type">
         <div class="navbar-defined">
             <div class="navbar-left-defined">
-                <a href="Login.html"><button class="btn btn-sm-glass">登录</button></a>
-                <a href="Register.html"><button class="btn btn-sm-glass">注册</button></a>
+                <%--<a href="Login.html"><button class="btn btn-sm-glass">登录</button></a>--%>
+                <%--<a href="Register.html"><button class="btn btn-sm-glass">注册</button></a>--%>
             </div>
             <div class="navbar-user">
                 <a class="data-inline" href="#">用户名</a>
@@ -179,7 +179,7 @@
                 <a class="data-inline" href="#">登出</a>
             </div>
             <div class="navbar-right-defined">
-                <a href="Home.html"><button class="btn btn-glass">首页</button></a>
+                <a href="loginEnd.jsp"><button class="btn btn-glass">首页</button></a>
                 <div style="display: inline-block;position: relative" id="browsbody">
                   <!--   <button class="btn btn-glass" id="brows">项目浏览</button> -->
                     <ul class="down-menu" id="brows-menu">
@@ -194,12 +194,12 @@
                 </a>
                 <div style="display: inline-block;position: relative" id="startbody">
                   <a href="page.jsp">  <button class="btn btn-glass tip-rec" id="start">我的拍卖</button></a>
-                    <ul class="down-menu" id="start-menu">
+                  <%--  <ul class="down-menu" id="start-menu">
                         <li class="one"><a class="tip-rec" href="#">食品</a></li>
                         <li class="two"><a class="tip-rec" href="#">玩具</a></li>
                         <li class="three"><a class="tip-rec" href="#">户外</a></li>
                         <li class="four"><a class="tip-rec" href="#">科技</a></li>
-                    </ul>
+                    </ul>--%>
                 </div>
                 <form style="display: inline-block">
                     <div style="position: relative">
@@ -370,10 +370,10 @@
     <div class="body-footer-child"></div>
 
 <script>
-function getSold(){
+/*getSoldfunction getSold(){
 	x=document.getElementById("onceprice");
 	x.innerHTML="290"
-}
+}*/
 function getEnd(){
 	x=document.getElementById("endDate")
 	x.innerHTML="拍卖结束"

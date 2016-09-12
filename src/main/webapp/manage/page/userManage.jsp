@@ -106,6 +106,14 @@
 			}
 		});
 	}
+
+	function formatBirthday(val,row){
+		if (val < 2022-08-02){
+			return '<span style="color:red;">('+val+')</span>';
+		} else {
+			return val;
+		}
+	}
 </script>
 </head>
 
@@ -169,6 +177,7 @@
 							class="easyui-validatebox" required="true" />&nbsp;<span
 							style="color: red">*</span>
 						</td>
+
 					</tr>
 				</table>
 			</form>

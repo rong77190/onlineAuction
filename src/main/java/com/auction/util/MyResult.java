@@ -20,9 +20,9 @@ public class MyResult {
 
 	public static Object getResult(int status,String error,Object data){
 		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("status", status);
-		map.put("error", error);
-		map.put("data", data);
+		map.put("status", status);//1:成功 0；失败
+		map.put("error", error);//错误信息
+		map.put("data", data);//返回的data
 		return map;
 	}
 	/**返回成功的结果

@@ -340,14 +340,14 @@
                 <h4 style="display: inline">我的拍品</h4>
                 <div data-original-title="点击查看更多最新项目" id="newbtn" class="btn-defined label-more" data-placement="top"></div>
             </div>
-            <div class="proj-body" src="images/perfume.jpg">
-                <div class="proj-container" src="images/perfume.jpg">
-                    <div class="proj-status" src="images/perfume.jpg"></div>
+            <div class="proj-body" src="resources/images/perfume.jpg">
+                <div class="proj-container" src="resources/images/perfume.jpg">
+                    <div class="proj-status" src="resources/images/perfume.jpg"></div>
                     <a href="#">
-                        <div class="proj-img" > <img src="images/perfume.jpg"></div>
+                        <div class="proj-img" > <img src="resources/images/perfume.jpg"></div>
                     </a>
-                    <div class="proj-tag" rc="images/perfume.jpg">
-                        <div class="divider-pro" rc="images/perfume.jpg"></div>
+                    <div class="proj-tag" rc="resources/images/perfume.jpg">
+                        <div class="divider-pro" rc="resources/images/perfume.jpg"></div>
                         <h4>商品名</h4>
                         <h4>项目名</h4>
                         <br/>
@@ -361,7 +361,7 @@
                 <div class="proj-container">
                     <div class="proj-status"></div>
                     <a href="#">
-                        <div class="proj-img"> <img src="images/tangbao.jpg"></div>
+                        <div class="proj-img"> <img src="resources/images/tangbao.jpg"></div>
                     </a>
                     <div class="proj-tag">
                         <div class="divider-pro"></div>

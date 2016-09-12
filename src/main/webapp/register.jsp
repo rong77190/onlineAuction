@@ -38,7 +38,7 @@
       <ul style="padding-left: 1em;">
         <li style="list-style-type:none; padding:1em 0 0.8em 0">
           <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">用户名</span>
-          <input type="text"  id="username"  name="username"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
+          <input type="text"  id="userName"  name="userName"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
         </li>
         
  <!--        <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
@@ -103,7 +103,43 @@
 	}
 	
 	function finish(){
-		window.location = "<c:url value='index.jsp' />";
+        var data = {
+            //			  "userame": $("#pname").val(),
+            //			  "password": $("#password").val(),
+            //			  "email": $("#email").val(),
+            //			  "vaildCode": timeStamp($("#vaildCode").val()),
+//				  "digest":  CKEDITOR.instances.ckAbstarct.getData(),
+//				  "content": CKEDITOR.instances.ckContext.getData()
+//            "userEmail":$("#email").val()
+            "userName":$("#userName").val(),
+            "password":$("#password").val(),
+            "validCode":$("#validCode").val()
+        }
+
+        $.ajax({
+            type: "get",
+            url: "/login/register",
+            data: JSON.stringify(data),
+//            data:"userEmail="+a,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success:function(data){
+                if (data.status=="0"){
+                    alert("注册失败")
+                }
+                if (data.status=="1"){
+                    alert("注册成功")
+                }
+                    showMessage(data.updated,true,"#form");
+                $("body").animate({scrollTop:0},200);
+                setTimeout(function(){
+                    window.location = "<c:url value='index.jsp'/>";
+                },1500);
+            },
+            error:function(XMLHttpRequest){
+                showMessage(XMLHttpRequest.responseJSON["not-found"],false,"#form");
+            }
+        });
 	}
 	
 	function send(){
@@ -119,9 +155,10 @@
              "userEmail":$("#email").val()
 	}
 		  $.ajax({
-		        type: "post",
+		        type: "get",
 		        url: "/login/sendEmail",
-		        data: JSON.stringify(data),
+//		        data: JSON.stringify(data),
+                data:"userEmail="+a,
 		        contentType: "application/json; charset=utf-8",
 		        dataType: "json",
 		        success:function(data){

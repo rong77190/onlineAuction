@@ -170,8 +170,8 @@
     <div class="body-type">
         <div class="navbar-defined">
             <div class="navbar-left-defined">
-                <a href="Login.html"><button class="btn btn-sm-glass">登录</button></a>
-                <a href="register.html"><button class="btn btn-sm-glass">注册</button></a>
+                <%--<a href="login.html"><button class="btn btn-sm-glass">登录</button></a>--%>
+                <%--<a href="register.html"><button class="btn btn-sm-glass">注册</button></a>--%>
             </div>
             <div class="navbar-user">
                 <a class="data-inline" href="#">用户名</a>
@@ -179,7 +179,7 @@
                 <a class="data-inline" href="#">登出</a>
             </div>
             <div class="navbar-right-defined">
-                <a href="Home.html"><button class="btn btn-glass">首页</button></a>
+                <a href="loginEnd.jsp"><button class="btn btn-glass">首页</button></a>
                 <div style="display: inline-block;position: relative" id="browsbody">
                   <!--   <button class="btn btn-glass" id="brows">项目浏览</button> -->
                     <ul class="down-menu" id="brows-menu">
@@ -192,8 +192,8 @@
                 <a class="tip-rec" href="#">
                 <!--     <button class="btn btn-glass">已参与项目</button> -->
                 </a>
-                <div style="display: inline-block;position: relative" id="startbody">
-                  <a href="page.jsp">  <button class="btn btn-glass tip-rec" id="start">我的拍卖</button></a>                    <ul class="down-menu" id="start-menu">
+                <a style="display: inline-block;position: relative" id="startbody">
+                  <a href="page.jsp"> <button class="btn btn-glass tip-rec" id="start">我的拍卖</button></a>                  <ul class="down-menu" id="start-menu">
                         <li class="one"><a class="tip-rec" href="#">食品</a></li>
                         <li class="two"><a class="tip-rec" href="#">玩具</a></li>
                         <li class="three"><a class="tip-rec" href="#">户外</a></li>
