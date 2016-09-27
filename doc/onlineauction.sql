@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
-Source Server Version : 50545
+Source Server         : localhost
+Source Server Version : 50519
 Source Host           : localhost:3306
 Source Database       : onlineauction
 
 Target Server Type    : MYSQL
-Target Server Version : 50545
+Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-08-30 22:36:29
+Date: 2016-09-27 23:40:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -115,18 +115,19 @@ CREATE TABLE `good` (
   `complete_time` datetime DEFAULT NULL COMMENT '结束时间',
   `buyer_id` int(11) DEFAULT NULL COMMENT '出价人',
   `seller_id` int(11) DEFAULT NULL,
+  `click` int(11) DEFAULT NULL,
   PRIMARY KEY (`good_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', null, null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null);
-INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '1', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null);
-INSERT INTO `good` VALUES ('3', '3', '不阿双方都', null, null, null, null, null, null, '0', null, null, null, null, null);
-INSERT INTO `good` VALUES ('4', '3', '啊但是看见', null, null, null, null, null, null, '0', null, null, null, null, null);
-INSERT INTO `good` VALUES ('5', null, '123', null, null, '1', '12', '123', null, '0', null, null, null, null, null);
-INSERT INTO `good` VALUES ('6', null, '123', null, null, null, '12', '123', null, '0', null, null, null, null, null);
+INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', null, null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null, null);
+INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '1', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null, null);
+INSERT INTO `good` VALUES ('3', '3', '不阿双方都', null, null, null, null, null, null, '0', null, null, null, null, null, null);
+INSERT INTO `good` VALUES ('4', '3', '啊但是看见', null, null, null, null, null, null, '0', null, null, null, null, null, null);
+INSERT INTO `good` VALUES ('5', null, '123', null, null, '1', '12', '123', null, '0', null, null, null, null, null, null);
+INSERT INTO `good` VALUES ('6', null, '123', null, null, null, '12', '123', null, '0', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for manager
@@ -224,16 +225,15 @@ CREATE TABLE `user` (
   `register_time` datetime DEFAULT NULL,
   `balance` double(10,2) DEFAULT '0.00' COMMENT '账户余额',
   `freeze` int(4) DEFAULT '0',
+  `pay_password` int(6) DEFAULT NULL,
+  `real_name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '1', '1', null, '1', '1', '2016-07-22', '1', '2016-07-05 17:41:57', '196.96', '0');
-INSERT INTO `user` VALUES ('2', '老二', '123', null, '12137098', '1', '2016-07-22', '12918312908', '2016-07-12 17:41:57', '91.00', '0');
-INSERT INTO `user` VALUES ('3', '张三', '123', null, '12137098', '1', '2016-07-22', '12918312908', '2016-07-22 17:41:57', '1.00', '0');
-INSERT INTO `user` VALUES ('4', '李四', '1234567', null, null, '1', '2016-07-22', '12918312908', '2016-07-22 17:49:26', '15.00', '0');
-INSERT INTO `user` VALUES ('5', '王五', '12132123', null, null, '1', '2016-07-22', null, '2016-08-07 21:40:58', '0.00', '0');
-INSERT INTO `user` VALUES ('6', '找刘', '12321', null, null, '1', '2016-07-22', '140656', '2016-08-08 22:03:08', '0.00', '0');
-INSERT INTO `user` VALUES ('7', '谢楚荣', '123', null, null, '1', '2016-07-22', null, '2016-08-08 22:04:15', '1.23', '0');
+INSERT INTO `user` VALUES ('1', '1', '1', null, '1', '1', '2016-07-22', '1', '2016-07-05 17:41:57', '196.96', '0', null, null);
+INSERT INTO `user` VALUES ('5', '王五', '12132123', null, null, '1', '2016-07-22', null, '2016-08-07 21:40:58', '0.00', '0', null, null);
+INSERT INTO `user` VALUES ('6', '找刘', '12321', null, null, '1', '2016-07-22', '140656', '2016-08-08 22:03:08', '0.00', '0', null, null);
+INSERT INTO `user` VALUES ('7', '谢楚荣', '123', null, null, '1', '2016-07-22', null, '2016-08-08 22:04:15', '1.23', '0', null, null);
