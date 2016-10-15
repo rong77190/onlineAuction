@@ -25,6 +25,7 @@ public class LoginController extends SpringMvcActionContext {
     String seedStr="0123456789";
     int validCodeLength=6;
 
+
     @Resource
     private LoginService loginService;
 
@@ -44,15 +45,16 @@ public class LoginController extends SpringMvcActionContext {
     @ResponseBody
     public Object login(Login login){
         HttpSession session = getSession();
-//        String loginValidCode =(String) session.getAttribute("loginValidCode");
-//        System.out.println("session中的validCode  "+loginValidCode);
-//        if(!checkValidCode(login.getValidCode(),loginValidCode)){
-//            System.out.println("验证码错误");
-//            return MyResult.getResult(0,"验证码错误","");
-//        }else {
+        System.out.println("login>>>>>>>>>>>>>>>>>>>>>>>>"+login);
+        String loginValidCode =(String) session.getAttribute("loginValidCode");
+        System.out.println("session中的validCode  "+loginValidCode);
+        if(!checkValidCode(login.getValidCode(),loginValidCode)){
+            System.out.println("验证码错误");
+            return MyResult.getResult(0,"验证码错误","");
+        }else {
             User user =null;
             user = loginService.login(login);
-            System.out.println(user.toString());
+//            System.out.println(user.toString());
             if (user==null){
                 return MyResult.getResult(0,"用户名或密码错误","");
             }else {
@@ -62,7 +64,7 @@ public class LoginController extends SpringMvcActionContext {
                 );
                 return MyResult.getResult();
             }
-//        }
+        }
     }
 
 

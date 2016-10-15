@@ -52,6 +52,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public int delete(Integer userId) {
-        return 0;
+        return userMapper.deleteByPrimaryKey(userId);
     }
 }

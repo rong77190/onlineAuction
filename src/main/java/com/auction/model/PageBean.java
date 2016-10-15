@@ -1,6 +1,7 @@
 package com.auction.model;
 
 public class PageBean {
+    public PageBean(){}
 
     private int page; // 第几页
     private int pageSize; // 每页记录数

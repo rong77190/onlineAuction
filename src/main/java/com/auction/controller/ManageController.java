@@ -6,6 +6,7 @@ import com.auction.service.GoodService;
 import com.auction.service.ManagerService;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
+import com.auction.util.ResponseUtil;
 import com.auction.util.StringUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -202,6 +204,25 @@ public class ManageController extends SpringMvcActionContext {
         System.out.println(result.toString());
         return result;
     }
+    /**
+     * 删除用户
+     * @param ids
+     * @param res
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/delete")
+    public String delete(@RequestParam(value="ids") String ids,HttpServletResponse res) throws Exception{
+        String[] idStr = ids.split(",");
+        JSONObject jsonObject = new JSONObject();
+        for (String id : idStr) {
+            userService.delete(Integer.parseInt(id));
+        }
+        jsonObject.put("success", true);
+        ResponseUtil.write(res, jsonObject);
+        return null;
+    }
+
 
 
 

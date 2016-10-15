@@ -19,6 +19,7 @@
         user_id, user_name, password, user_image, phone, sex, birthday, user_email, register_time,
         balance, freeze
     </sql>
+
     <select id="login" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
