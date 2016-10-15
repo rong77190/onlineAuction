@@ -40,12 +40,12 @@ public class UploadController {
 			return MyResult.getResult(0,"上传文件扩展名是不允许的扩展名。\n只允许" + extMap.get(dirName) + "格式。","");
 		}
 		if(!file.isEmpty()){
-			String basePath = "resources/upload";
-			String savePath = request.getSession().getServletContext().getRealPath(basePath);
-			System.out.println("savePath》》》》》》》》》》》》》》》》》》》》》"+savePath);
-			String newImageName = new Date().getTime() + file.getOriginalFilename();
-			String imagePath = savePath + "/"+ newImageName;
-			System.out.println("imagePath》》》》》》》》》》》》》》》》》》》》》"+imagePath);
+			String basePath = "resources/upload";//上传基本路径
+			String savePath = request.getSession().getServletContext().getRealPath(basePath);//上传保存路径，绝对路径
+//			System.out.println("savePath》》》》》》》》》》》》》》》》》》》》》"+savePath);
+			String newImageName = new Date().getTime() + file.getOriginalFilename();//文件重命名，防止重复
+			String imagePath = savePath + "/"+ newImageName;//文件保存绝对路径
+//			System.out.println("imagePath》》》》》》》》》》》》》》》》》》》》》"+imagePath);
 			try {
 				FileOutputStream os = new FileOutputStream(imagePath);
 				InputStream in = file.getInputStream();

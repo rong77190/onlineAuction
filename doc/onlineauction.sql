@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-09-27 23:40:08
+Date: 2016-10-15 22:52:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -122,12 +122,12 @@ CREATE TABLE `good` (
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', null, null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null, null);
+INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', 'goodImages/bicycle.jpg', null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null, null);
 INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '1', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null, null);
-INSERT INTO `good` VALUES ('3', '3', '不阿双方都', null, null, null, null, null, null, '0', null, null, null, null, null, null);
-INSERT INTO `good` VALUES ('4', '3', '啊但是看见', null, null, null, null, null, null, '0', null, null, null, null, null, null);
-INSERT INTO `good` VALUES ('5', null, '123', null, null, '1', '12', '123', null, '0', null, null, null, null, null, null);
-INSERT INTO `good` VALUES ('6', null, '123', null, null, null, '12', '123', null, '0', null, null, null, null, null, null);
+INSERT INTO `good` VALUES ('3', '3', '不阿双方都', null, null, null, null, null, null, '0', null, '1', null, null, null, null);
+INSERT INTO `good` VALUES ('4', '3', '啊但是看见', null, null, null, null, null, null, '0', null, '1', null, null, null, null);
+INSERT INTO `good` VALUES ('5', null, '123', null, null, '1', '12', '123', null, '0', null, '1', null, null, null, null);
+INSERT INTO `good` VALUES ('6', null, '123', null, null, null, '12', '123', null, '0', null, '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for manager
@@ -228,7 +228,7 @@ CREATE TABLE `user` (
   `pay_password` int(6) DEFAULT NULL,
   `real_name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -237,3 +237,5 @@ INSERT INTO `user` VALUES ('1', '1', '1', null, '1', '1', '2016-07-22', '1', '20
 INSERT INTO `user` VALUES ('5', '王五', '12132123', null, null, '1', '2016-07-22', null, '2016-08-07 21:40:58', '0.00', '0', null, null);
 INSERT INTO `user` VALUES ('6', '找刘', '12321', null, null, '1', '2016-07-22', '140656', '2016-08-08 22:03:08', '0.00', '0', null, null);
 INSERT INTO `user` VALUES ('7', '谢楚荣', '123', null, null, '1', '2016-07-22', null, '2016-08-08 22:04:15', '1.23', '0', null, null);
+INSERT INTO `user` VALUES ('8', 'rty', '123456', null, null, null, null, null, '2016-10-14 12:01:44', '0.00', '0', null, null);
+INSERT INTO `user` VALUES ('9', 'ertyu', '12345123', null, null, null, null, '1406561459@qq.com', '2016-10-14 12:06:34', '0.00', '0', null, null);
