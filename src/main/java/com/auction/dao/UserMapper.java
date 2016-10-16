@@ -2,10 +2,12 @@ package com.auction.dao;
 
 import com.auction.model.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
 
@@ -15,9 +17,13 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer userId);
 
+    User userSelect(Integer userId);
+
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    int userUpdateInfo(User record);
 
     int pay(@Param("userId") int userId, @Param("price") double price);
 

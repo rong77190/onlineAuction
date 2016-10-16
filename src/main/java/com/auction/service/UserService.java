@@ -14,6 +14,8 @@ public interface UserService {
 
     User findById(int userId);
 
+    User userInfo(int userId);
+
     int backDepositToUser(int userId,double price);
 
     List<User> selectAll();
@@ -21,6 +23,8 @@ public interface UserService {
     int add(User user);
 
     int update(User user);
+
+    int userUpdate(Integer userId,String userName,String phone,String sex,String birthday,String userEmail);
 
     /**
      * 用户查询

@@ -3,9 +3,11 @@ package com.auction.controller;
 import com.auction.model.User;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
+import org.hibernate.validator.constraints.EAN;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,6 +36,15 @@ public class UserController {
         return MyResult.getResult(1,"",userList);
     }
 
+    /**
+     * 用户查询个人信息
+     */
+    @RequestMapping(value = "checkUserInfo")
+    @ResponseBody
+    public Object checkUserInfo(@RequestParam int userId){
+        User user = userService.userInfo(userId);
+        return MyResult.getResult(1,"",user);
+    }
 
     //跳转到添加用户页面
     @RequestMapping(value = "toAdd", method = RequestMethod.GET)
@@ -71,6 +82,15 @@ public class UserController {
 //        return "redirect:/user/list";
         return MyResult.getResult(1,"",user);
     }
+    /**
+     * 用户修改个人信息
+     */
+//    @RequestMapping(value = "updateUserInfo")
+//    @ResponseBody
+//    public Object updateUserInfo(User user) {
+//        userService.userUpdate(Integer userId,String userName,String phone,String sex,String birthday,String userEmail);
+//        return MyResult.getResult(1,"",user);
+//    }
 
 
 

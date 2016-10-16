@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByPrimaryKey(userId);
     }
 
+    public User userInfo(int userId){return userMapper.userSelect(userId);}
+
     public int backDepositToUser(int userId, double price) {
         return userMapper.backDepositToUser(userId,price);
     }
@@ -41,6 +43,17 @@ public class UserServiceImpl implements UserService {
 
     public int update(User user) {
         return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    public int userUpdate(Integer userId,String userName,String phone,String sex,String birthday,String userEmail){
+        User record=new User();
+        record.setUserId(userId);
+        record.setUserName(userName);
+        record.setPhone(phone);
+        record.setSex(sex);
+        record.setBirthday(birthday);
+        record.setUserEmail(userEmail);
+        return  userMapper.userUpdateInfo(record);
     }
 
     public List<User> find(Map<String, Object> map) {
