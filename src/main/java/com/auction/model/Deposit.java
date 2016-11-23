@@ -1,7 +1,5 @@
 package com.auction.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class Deposit {
@@ -11,12 +9,13 @@ public class Deposit {
 
     private Integer goodId;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private Double price;
 
     private Integer state;
+
+    private Date updateTime;
 
     public Integer getDepositId() {
         return depositId;
@@ -66,15 +65,11 @@ public class Deposit {
         this.state = state;
     }
 
-    @Override
-    public String toString() {
-        return "Deposit{" +
-                "depositId=" + depositId +
-                ", userId=" + userId +
-                ", goodId=" + goodId +
-                ", createTime=" + createTime +
-                ", price=" + price +
-                ", state=" + state +
-                '}';
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

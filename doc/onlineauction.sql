@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-10-15 22:52:05
+Date: 2016-11-21 22:37:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,22 +36,20 @@ CREATE TABLE `address` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for cart
+-- Table structure for auction_log
 -- ----------------------------
-DROP TABLE IF EXISTS `cart`;
-CREATE TABLE `cart` (
-  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `auction_log`;
+CREATE TABLE `auction_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `good_id` int(11) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `price` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of cart
+-- Records of auction_log
 -- ----------------------------
-INSERT INTO `cart` VALUES ('1', '1', '1', '2016-08-01 10:09:50', null);
 
 -- ----------------------------
 -- Table structure for category
@@ -71,6 +69,20 @@ INSERT INTO `category` VALUES ('2', '服装');
 INSERT INTO `category` VALUES ('3', '3');
 
 -- ----------------------------
+-- Table structure for collection
+-- ----------------------------
+DROP TABLE IF EXISTS `collection`;
+CREATE TABLE `collection` (
+  `user_id` int(11) NOT NULL,
+  `good_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`good_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of collection
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for deposit
 -- ----------------------------
 DROP TABLE IF EXISTS `deposit`;
@@ -81,19 +93,20 @@ CREATE TABLE `deposit` (
   `create_time` datetime DEFAULT NULL,
   `price` double(10,2) DEFAULT NULL COMMENT '押金',
   `state` int(4) DEFAULT '0' COMMENT '状态(返还 0:1)',
+  `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`deposit_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of deposit
 -- ----------------------------
-INSERT INTO `deposit` VALUES ('1', '1', '1', '2016-08-08 00:52:33', '12.00', '0');
-INSERT INTO `deposit` VALUES ('2', '2', '1', '2016-08-08 00:52:37', '13.00', '0');
-INSERT INTO `deposit` VALUES ('3', '3', '1', '2016-08-21 11:36:12', '14.00', '0');
-INSERT INTO `deposit` VALUES ('4', '4', '1', '2016-08-02 12:24:22', '15.00', '0');
-INSERT INTO `deposit` VALUES ('5', '1', '2', null, '20.88', '0');
-INSERT INTO `deposit` VALUES ('6', '1', '2', '2016-08-24 13:01:05', '20.88', '0');
-INSERT INTO `deposit` VALUES ('9', '1', '2', '2016-08-24 15:33:55', '20.88', '0');
+INSERT INTO `deposit` VALUES ('1', '1', '1', '2016-08-08 00:52:33', '12.00', '0', null);
+INSERT INTO `deposit` VALUES ('2', '2', '1', '2016-08-08 00:52:37', '13.00', '0', null);
+INSERT INTO `deposit` VALUES ('3', '3', '1', '2016-08-21 11:36:12', '14.00', '0', null);
+INSERT INTO `deposit` VALUES ('4', '4', '1', '2016-08-02 12:24:22', '15.00', '0', null);
+INSERT INTO `deposit` VALUES ('5', '1', '2', null, '20.88', '0', null);
+INSERT INTO `deposit` VALUES ('6', '1', '2', '2016-08-24 13:01:05', '20.88', '0', null);
+INSERT INTO `deposit` VALUES ('9', '1', '2', '2016-08-24 15:33:55', '20.88', '0', null);
 
 -- ----------------------------
 -- Table structure for good
@@ -113,8 +126,8 @@ CREATE TABLE `good` (
   `up_time` datetime DEFAULT NULL COMMENT '上架时间',
   `good_state` int(4) DEFAULT NULL COMMENT '状态(“0：未审核”1：审核过，上架 2：下架)',
   `complete_time` datetime DEFAULT NULL COMMENT '结束时间',
-  `buyer_id` int(11) DEFAULT NULL COMMENT '出价人',
   `seller_id` int(11) DEFAULT NULL,
+  `buyer_id` int(11) DEFAULT NULL COMMENT '出价人',
   `click` int(11) DEFAULT NULL,
   PRIMARY KEY (`good_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
@@ -122,7 +135,7 @@ CREATE TABLE `good` (
 -- ----------------------------
 -- Records of good
 -- ----------------------------
-INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', 'goodImages/bicycle.jpg', null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', '1', null, null);
+INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', 'goodImages/bicycle.jpg', null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', null, '1', null);
 INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '1', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null, null);
 INSERT INTO `good` VALUES ('3', '3', '不阿双方都', null, null, null, null, null, null, '0', null, '1', null, null, null, null);
 INSERT INTO `good` VALUES ('4', '3', '啊但是看见', null, null, null, null, null, null, '0', null, '1', null, null, null, null);
@@ -201,13 +214,14 @@ CREATE TABLE `torder` (
   `order_price` double(10,2) DEFAULT NULL,
   `order_state` int(4) DEFAULT NULL,
   `pay_way` int(4) DEFAULT NULL,
+  `update_by` int(10) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of torder
 -- ----------------------------
-INSERT INTO `torder` VALUES ('1', '1', '1', '2016-08-29 20:31:57', null, '1.77', null, null);
+INSERT INTO `torder` VALUES ('1', '1', '1', '2016-08-29 20:31:57', null, '1.77', null, null, null);
 
 -- ----------------------------
 -- Table structure for user

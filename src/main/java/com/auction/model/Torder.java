@@ -19,6 +19,8 @@ public class Torder {
 
     private Integer payWay;
 
+    private Integer updateBy;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -81,5 +83,13 @@ public class Torder {
 
     public void setPayWay(Integer payWay) {
         this.payWay = payWay;
+    }
+
+    public Integer getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(Integer updateBy) {
+        this.updateBy = updateBy;
     }
 }

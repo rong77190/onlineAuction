@@ -160,7 +160,7 @@ public class ManageController extends SpringMvcActionContext {
 
     @RequestMapping("updateGoodState")
     @ResponseBody
-    public Object updateGoodState(Good good, String state){
+    public Object updateGoodState(Good good, int state){
 //        Manager manager = (Manager)getSession().getAttribute("manager");
 //        if (manager == null){
 //            return MyResult.getResult(0,"管理员未登录","");

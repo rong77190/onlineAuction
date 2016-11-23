@@ -1,10 +1,12 @@
 package com.auction.controller;
 
+import com.auction.common.BaseController;
 import com.auction.model.User;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
 import org.hibernate.validator.constraints.EAN;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +22,14 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserController{
 
     @Resource
     private UserService userService;
+
+
+
+
 
 
     /**
@@ -82,6 +88,8 @@ public class UserController {
 //        return "redirect:/user/list";
         return MyResult.getResult(1,"",user);
     }
+
+
     /**
      * 用户修改个人信息
      */

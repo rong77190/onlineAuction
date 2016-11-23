@@ -1,11 +1,8 @@
 package com.auction.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class User extends PageBean {
     private Integer userId;
 
     private String userName;
@@ -22,12 +19,15 @@ public class User implements Serializable {
 
     private String userEmail;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registerTime;
 
-    private Double balance;//余额
+    private Double balance;
 
     private Integer freeze;
+
+    private Integer payPassword;
+
+    private String realName;
 
     public Integer getUserId() {
         return userId;
@@ -117,20 +117,19 @@ public class User implements Serializable {
         this.freeze = freeze;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", userImage='" + userImage + '\'' +
-                ", phone='" + phone + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", registerTime=" + registerTime +
-                ", balance=" + balance +
-                ", freeze=" + freeze +
-                '}';
+    public Integer getPayPassword() {
+        return payPassword;
+    }
+
+    public void setPayPassword(Integer payPassword) {
+        this.payPassword = payPassword;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName == null ? null : realName.trim();
     }
 }

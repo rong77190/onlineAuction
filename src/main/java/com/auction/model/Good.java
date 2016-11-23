@@ -25,13 +25,15 @@ public class Good {
 
     private Date upTime;
 
-    private String goodState;
+    private Integer goodState;
 
     private Date completeTime;
 
+    private Integer sellerId;
+
     private Integer buyerId;
 
-    private Integer sellerId;
+    private Integer click;
 
     public Integer getGoodId() {
         return goodId;
@@ -121,12 +123,12 @@ public class Good {
         this.upTime = upTime;
     }
 
-    public String getGoodState() {
+    public Integer getGoodState() {
         return goodState;
     }
 
-    public void setGoodState(String goodState) {
-        this.goodState = goodState == null ? null : goodState.trim();
+    public void setGoodState(Integer goodState) {
+        this.goodState = goodState;
     }
 
     public Date getCompleteTime() {
@@ -137,6 +139,14 @@ public class Good {
         this.completeTime = completeTime;
     }
 
+    public Integer getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(Integer sellerId) {
+        this.sellerId = sellerId;
+    }
+
     public Integer getBuyerId() {
         return buyerId;
     }
@@ -145,11 +155,11 @@ public class Good {
         this.buyerId = buyerId;
     }
 
-    public Integer getSellerId() {
-        return sellerId;
+    public Integer getClick() {
+        return click;
     }
 
-    public void setSellerId(Integer sellerId) {
-        this.sellerId = sellerId;
+    public void setClick(Integer click) {
+        this.click = click;
     }
 }

@@ -9,7 +9,7 @@
     category_id, category_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from category
     where category_id = #{categoryId,jdbcType=INTEGER}
@@ -58,7 +58,7 @@
 
 
   <!--补充-->
-  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from category

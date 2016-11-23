@@ -2,36 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.auction.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.auction.model.User" >
-  <id column="user_id" property="userId" jdbcType="INTEGER" />
-  <result column="user_name" property="userName" jdbcType="VARCHAR" />
-  <result column="password" property="password" jdbcType="VARCHAR" />
-  <result column="user_image" property="userImage" jdbcType="VARCHAR" />
-  <result column="phone" property="phone" jdbcType="VARCHAR" />
-  <result column="sex" property="sex" jdbcType="VARCHAR" />
-  <result column="birthday" property="birthday" jdbcType="VARCHAR" />
-  <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
-  <result column="register_time" property="registerTime"/>
-  <result column="balance" property="balance" jdbcType="DOUBLE" />
-  <result column="freeze" property="freeze" jdbcType="INTEGER" />
-</resultMap>
-
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="user_image" property="userImage" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="freeze" property="freeze" jdbcType="INTEGER" />
+    <result column="pay_password" property="payPassword" jdbcType="INTEGER" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     user_id, user_name, password, user_image, phone, sex, birthday, user_email, register_time,
-    balance, freeze
-  </sql>
-  <sql id="User_View_List" >
-     user_name,user_image, phone, sex, birthday, user_email, register_time,
-    balance
+    balance, freeze, pay_password, real_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <select id="userSelect" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="User_View_List" />
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
@@ -43,11 +34,13 @@
     insert into user (user_id, user_name, password,
     user_image, phone, sex,
     birthday, user_email, register_time,
-    balance, freeze)
+    balance, freeze, pay_password,
+    real_name)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
     #{userImage,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
     #{birthday,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP},
-    #{balance,jdbcType=DOUBLE}, #{freeze,jdbcType=INTEGER})
+    #{balance,jdbcType=DOUBLE}, #{freeze,jdbcType=INTEGER}, #{payPassword,jdbcType=INTEGER},
+    #{realName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.User" >
     insert into user
@@ -85,6 +78,12 @@
       <if test="freeze != null" >
         freeze,
       </if>
+      <if test="payPassword != null" >
+        pay_password,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -119,6 +118,12 @@
       </if>
       <if test="freeze != null" >
         #{freeze,jdbcType=INTEGER},
+      </if>
+      <if test="payPassword != null" >
+        #{payPassword,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -155,6 +160,12 @@
       <if test="freeze != null" >
         freeze = #{freeze,jdbcType=INTEGER},
       </if>
+      <if test="payPassword != null" >
+        pay_password = #{payPassword,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -169,9 +180,13 @@
     user_email = #{userEmail,jdbcType=VARCHAR},
     register_time = #{registerTime,jdbcType=TIMESTAMP},
     balance = #{balance,jdbcType=DOUBLE},
-    freeze = #{freeze,jdbcType=INTEGER}
+    freeze = #{freeze,jdbcType=INTEGER},
+    pay_password = #{payPassword,jdbcType=INTEGER},
+    real_name = #{realName,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
+
   <update id="userUpdateInfo" parameterType="com.auction.model.User" >
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
