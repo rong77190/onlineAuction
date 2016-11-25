@@ -35,42 +35,7 @@ public class GoodServiceImpl implements GoodService {
     }
 
     public List<Good> searchGoodByKey(String key) {
-        Category category = categoryMapper.selectByName(key);
-        if (category ==null)
-        {
-            SubCategory subCategory = subCategoryMapper.selectBySelectiveName(key);
-            if(subCategory != null){
-                List<Good> goodList = goodMapper.selectBySelectiveName(key);
-                if (goodList != null && goodList.size() > 0){
-                    return getAllGood();
-                }else {
-                    return null;
-                }
-            } else {
-                List<Good> goodList = goodMapper.selectBySelectiveName(key);
-                if (goodList != null){
-                    return goodList;
-                }else {
-                    return null;
-                }
-            }
-
-        }
-        else{
-            SubCategory subCategory = subCategoryMapper.selectByCategoryId(category.getCategoryId());
-            if(subCategory != null)
-            {
-                return goodMapper.selectBySubCategoryId(subCategory.getSubCategoryId());
-            }
-            else {
-                List<Good> goodList = goodMapper.selectBySelectiveName(key);
-                if (goodList != null && goodList.size() > 0){
-                    return getAllGood();
-                }else {
-                    return null;
-                }
-            }
-        }
+        return goodMapper.selectBySelectiveName(key);
     }
 
     public int addGood(Good record) {
@@ -105,4 +70,7 @@ public class GoodServiceImpl implements GoodService {
         return 0;
     }
 
+    public List<Good> selectBySubCategoryId(int id){
+        return goodMapper.selectBySubCategoryId(id);
+    }
 }

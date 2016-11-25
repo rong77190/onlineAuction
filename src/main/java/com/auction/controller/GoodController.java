@@ -1,9 +1,13 @@
 package com.auction.controller;
 
 import com.auction.common.SpringMvcActionContext;
+import com.auction.model.Category;
 import com.auction.model.Good;
 import com.auction.model.PageBean;
+import com.auction.model.SubCategory;
+import com.auction.service.CategoryService;
 import com.auction.service.GoodService;
+import com.auction.service.SubCategoryService;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -21,22 +27,59 @@ public class GoodController extends SpringMvcActionContext {
 
 	@Resource
 	private GoodService goodService;
-	
+    @Resource
+    private CategoryService categoryService;
+    @Resource
+    private SubCategoryService subCategoryService;
+
+
+
 	@RequestMapping(value="searchGoodByKey")
     @ResponseBody
     public Object searchGoodByKey(String key){
-        List<Good> goodList = goodService.searchGoodByKey(key);
-        if(goodList != null && goodList.size() > 0){
-            return MyResult.getResult(1,"",goodList);
-        }else {
-            return MyResult.getResult(0,"没有查询结果","");
+        Category category = categoryService.selectByName(key);
+        if (category ==null)
+        {
+            SubCategory subCategory = subCategoryService.selectByName(key);
+            if(subCategory != null){
+                System.out.println("subCategory != null");
+                List<Good> goodList = goodService.selectBySubCategoryId(subCategory.getSubCategoryId());
+                System.out.println(goodList);
+                return MyResult.getResult(1,"",goodList);
+            } else {
+                System.out.println("subCategory == null");
+                List<Good> goodList = goodService.searchGoodByKey(key);
+                if (goodList != null){
+                    System.out.println("goodList != null");
+                    return MyResult.getResult(1,"",goodList);
+                }else {
+                    System.out.println("goodList == null");
+                    return MyResult.getResult(0,"没有查询结果","");
+                }
+            }
+        }
+        else{
+            List<SubCategory> subCategoryList = subCategoryService.selectByCategoryId(category.getCategoryId());
+            List<Good> c = new ArrayList<Good>();
+            for(int i = 0; i<subCategoryList.size();i++){
+                int id = subCategoryList.get(i).getSubCategoryId();
+                System.out.println(id);
+                List<Good> goodList = goodService.selectBySubCategoryId(id);
+                System.out.println(goodList);
+                Good good = new Good();
+                for (int j= 0; j < goodList.size();j++){
+                    good = goodList.get(j);
+                    c.add(good);
+                }
+            }
+            return MyResult.getResult(1,"",c);
         }
     }
 	
 	@RequestMapping(value="addGood")
     @ResponseBody
     public Object applyGood(Good good){
-		if(good.getBeginPrice() == null && good.getGoodName() == null 
+		if(good.getBeginPrice() == null && good.getGoodName() == null && good.getPrice()==null
 		   && good.getImage() == null && good.getIntroduction() == null)
 		{
 			return MyResult.getResult(0, "信息不全", "");

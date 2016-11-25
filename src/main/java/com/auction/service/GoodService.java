@@ -10,6 +10,9 @@ import java.util.Map;
  */
 public interface GoodService {
     Good findGoodById(int goodId);
+
+    public List<Good> selectBySubCategoryId(int id);
+
     int updateState(Good good);
 
     public List<Good> searchGoodByKey(String key);
