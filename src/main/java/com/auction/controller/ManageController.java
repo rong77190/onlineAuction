@@ -36,37 +36,6 @@ public class ManageController extends SpringMvcActionContext {
     @Resource
     private GoodService goodService;
 
-    /**
-     * 管理员登陆
-     *
-     * @param manager
-     * @return
-     */
-    @RequestMapping("login")
-    public String manageLogin(Manager manager) {
-        HttpSession session = getSession();
-        manager = managerService.login(manager);
-        if (manager == null) {
-            getSession().setAttribute("manager", manager);
-            getRequest().setAttribute("error", "用户名或密码错误");
-            return "/manage/syslogin";
-        } else {
-            session.setAttribute("manager", manager);
-            return "redirect:/manage/main.jsp";
-        }
-    }
-
-    /**
-     * 管理员登出
-     *
-     * @return
-     */
-    @RequestMapping("/logout")
-    @ResponseBody
-    public Object logout() {
-        getSession().removeAttribute("manager");
-        return MyResult.getResult();
-    }
 
 
     /**
@@ -187,66 +156,66 @@ public class ManageController extends SpringMvcActionContext {
     /*
    * 分页查询
    * */
-    @RequestMapping("/userList")
-    @ResponseBody
-    public Object userList(@RequestParam(value = "page",required = false)String page,@RequestParam(value = "rows",required = false)String rows,User s_user)throws Exception{
-        PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("userName", StringUtil.formatLike(s_user.getUserName()));
-        map.put("start", pageBean.getStart());
-        map.put("size", pageBean.getPageSize());
-        List<User> userList=userService.find(map);
-        Long total=userService.getTotal(map);
-        JSONObject result=new JSONObject();
-        JSONArray jsonArray= JSONArray.fromObject(userList);
-        result.put("rows", jsonArray);
-        result.put("total", total);
-        System.out.println(result.toString());
-        return result;
-    }
-    /**
-     * 删除用户
-     * @param ids
-     * @param res
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/delete")
-    public String delete(@RequestParam(value="ids") String ids,HttpServletResponse res) throws Exception{
-        String[] idStr = ids.split(",");
-        JSONObject jsonObject = new JSONObject();
-        for (String id : idStr) {
-            userService.delete(Integer.parseInt(id));
-        }
-        jsonObject.put("success", true);
-        ResponseUtil.write(res, jsonObject);
-        return null;
-    }
-
-
-
-
-    /*
-   * 分页查询
-   * */
-    @RequestMapping("/goodList")
-    @ResponseBody
-    public Object goodList(@RequestParam(value = "page",required = false)String page,@RequestParam(value = "rows",required = false)String rows,Good good)throws Exception{
-        PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("goodName", StringUtil.formatLike(good.getGoodName()));
-        map.put("start", pageBean.getStart());
-        map.put("size", pageBean.getPageSize());
-        List<Good> goodList=goodService.find(map);
-        Long total=goodService.getTotal(map);
-        JSONObject result=new JSONObject();
-        JSONArray jsonArray= JSONArray.fromObject(goodList);
-        result.put("rows", jsonArray);
-        result.put("total", total);
-        System.out.println(result.toString());
-//        ResponseUtil.write(getResponse(), result);
-        return result;
-        }
+//    @RequestMapping("/userList")
+//    @ResponseBody
+//    public Object userList(@RequestParam(value = "page",required = false)String page,@RequestParam(value = "rows",required = false)String rows,User s_user)throws Exception{
+//        PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
+//        Map<String,Object> map = new HashMap<String, Object>();
+//        map.put("userName", StringUtil.formatLike(s_user.getUserName()));
+//        map.put("start", pageBean.getStart());
+//        map.put("size", pageBean.getPageSize());
+//        List<User> userList=userService.find(map);
+//        Long total=userService.getTotal(map);
+//        JSONObject result=new JSONObject();
+//        JSONArray jsonArray= JSONArray.fromObject(userList);
+//        result.put("rows", jsonArray);
+//        result.put("total", total);
+//        System.out.println(result.toString());
+//        return result;
+//    }
+//    /**
+//     * 删除用户
+//     * @param ids
+//     * @param res
+//     * @return
+//     * @throws Exception
+//     */
+//    @RequestMapping("/delete")
+//    public String delete(@RequestParam(value="ids") String ids,HttpServletResponse res) throws Exception{
+//        String[] idStr = ids.split(",");
+//        JSONObject jsonObject = new JSONObject();
+//        for (String id : idStr) {
+//            userService.delete(Integer.parseInt(id));
+//        }
+//        jsonObject.put("success", true);
+//        ResponseUtil.write(res, jsonObject);
+//        return null;
+//    }
+//
+//
+//
+//
+//    /*
+//   * 分页查询
+//   * */
+//    @RequestMapping("/goodList")
+//    @ResponseBody
+//    public Object goodList(@RequestParam(value = "page",required = false)String page,@RequestParam(value = "rows",required = false)String rows,Good good)throws Exception{
+//        PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
+//        Map<String,Object> map = new HashMap<String, Object>();
+//        map.put("goodName", StringUtil.formatLike(good.getGoodName()));
+//        map.put("start", pageBean.getStart());
+//        map.put("size", pageBean.getPageSize());
+//        List<Good> goodList=goodService.find(map);
+//        Long total=goodService.getTotal(map);
+//        JSONObject result=new JSONObject();
+//        JSONArray jsonArray= JSONArray.fromObject(goodList);
+//        result.put("rows", jsonArray);
+//        result.put("total", total);
+//        System.out.println(result.toString());
+////        ResponseUtil.write(getResponse(), result);
+//        return result;
+//        }
 
 
 
