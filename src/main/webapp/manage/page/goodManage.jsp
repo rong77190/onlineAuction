@@ -117,11 +117,11 @@
 
 <table id="dg2" title="拍品管理" class="easyui-datagrid" fitColumns="true"
 	   pagination="true" rownumbers="true"
-	   url="${pageContext.request.contextPath}/manage/goodList" fit="true"
+	   url="${pageContext.request.contextPath}/manage/good/goodList" fit="true"
 	   toolbar="#tb">
 	<thead>
 	<tr>
-		<th field="cb1" checkbox="true" align="center"></th>
+		<th field="cb" checkbox="true" align="center"></th>
 		<th field="goodId" width="50" align="center">编号</th>
 		<th field="goodName" width="50" align="center">拍品名</th>
 		<th field="goodState" width="50" align="center">状态</th>
@@ -129,8 +129,7 @@
 		<th field="currPrice" width="50" align="center">当前价</th>
 		<th field="beginPrice" width="50" align="center">起拍价</th>
 
-		<%--<th field="password" width="50" align="center">密码</th>--%>
-		<%--<th field="sex" width="50" align="center">性别</th>--%>
+		<%--<th field="goodImage" width="50" align="center">性别</th>--%>
 		<%--<th field="birthday" width="50" align="center" > 出生年月</th>--%>
 		<%--<th field="createdate"  width="50" align="center">创建时间</th>--%>
 		<%--<th field="stuclass" width="50" align="center">班级</th>--%>

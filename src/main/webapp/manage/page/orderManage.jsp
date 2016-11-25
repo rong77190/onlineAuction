@@ -27,11 +27,13 @@
 	var url;
 	function searchUser() {
 		$("#dg").datagrid('load', {
-			"userName" : $("#userName1").val()
+			"userName" : $("#userName").val(),
+			"goodName" : $("#goodName").val(),
+			"orderId" : $("#orderId").val()
 		});
 	}
 	function openUserAddDialog() {
-		$("#dlg").dialog("open").dialog("setTitle", "添加用户信息");
+		$("#dlg").dialog("open").dialog("setTitle", "添加订单信息");
 		url = "${pageContext.request.contextPath}/manage/user/add";
 	}
 
@@ -68,15 +70,6 @@
 		});
 	}
 
-	function resetValue() {
-		$("#userName").val("");
-		$("#password").val("");
-	}
-
-	function closeUserDialog() {
-		$("#dlg").dialog("close");
-		resetValue();
-	}
 
 	function deleteUser() {
 		var selectedRows = $("#dg").datagrid("getSelections");
@@ -111,23 +104,24 @@
 
 <body style="margin: 1px">
 
-	<table id="dg" title="用户管理" class="easyui-datagrid" fitColumns="true"
+	<table id="dg" title="订单管理" class="easyui-datagrid" fitColumns="true"
 		pagination="true" rownumbers="true"
-		url="${pageContext.request.contextPath}/manage/userList" fit="true"
+		url="${pageContext.request.contextPath}/manage/order/orderList" fit="true"
 		toolbar="#tb">
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center"></th>
-				<th field="userId" width="50" align="center">用户Id</th>
+				<th field="orderId" align="center">订单Id</th>
+				<th field="userId"  align="center">用户Id</th>
 				<th field="userName" width="50" align="center">用户名</th>
-				<th field="sex" width="50" align="center">性别</th>
-				<th field="birthday" width="50" align="center">生日</th>
-				<%--<th field="userImage" width="50" align="center">头像</th>--%>
-				<th field="phone" width="50" align="center">手机号</th>
-				<%--<th id="" field="registerTime" width="50" align="center">注册时间</th>--%>
-				<th field="password" width="50" align="center">密码</th>
-				<th field="balance" width="50" align="center">余额</th>
-				<th field="freeze" width="50" align="center">冻结</th>
+				<th field="goodId" width="50" align="center">商品id</th>
+				<th field="goodName" width="100" align="center">商品名称</th>
+				<th field="orderPrice" width="50" align="center">订单金额</th>
+				<th field="orderState" width="50" align="center">状态</th>
+				<th field="payWay" width="50" align="center">支付方式</th>
+				<th field="updateBy"  align="center">操作员</th>
+				<th field="createTime"  align="center">创建时间</th>
+				<th field="updateTime"  align="center">更新时间</th>
 
 			</tr>
 		</thead>
@@ -140,38 +134,18 @@
 			href="javascript:deleteUser()" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true">删除</a>
 		<div>
-			&nbsp;用户名：&nbsp;<input type="text" id="userName1" size="20"
-				onkeydown="if(event.keyCode == 13)searchUser()" /> <a
+			&nbsp;用户名：&nbsp;
+			<input type="text" id="userName" size="5" placeholder="可选"
+				onkeydown="if(event.keyCode == 13)searchUser()" />
+			&nbsp;商品名：&nbsp;
+			<input type="text" id="goodName" size="5"  placeholder="可选"
+				   onkeydown="if(event.keyCode == 13)searchUser()" />
+			&nbsp;订单编号：&nbsp;
+			<input type="text" id="orderId" size="3" placeholder="可选"
+				   onkeydown="if(event.keyCode == 13)searchUser()" />
+			<a
 				href="javascript:searchUser()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a>
-		</div>
-
-		<div id="dlg-buttons">
-			<a href="javascript:saveUser()" class="easyui-linkbutton"
-				iconCls="icon-ok">保存</a> <a href="javascript:closeUserDialog()"
-				class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
-		</div>
-
-		<div id="dlg" class="easyui-dialog"
-			style="width: 730px;height:280px;padding:10px 10px;" closed="true"
-			buttons="#dlg-buttons">
-			<form method="post" id="fm">
-				<table cellspacing="8px;">
-					<tr>
-						<td>用户名：</td>
-						<td><input type="text" id="userName" name="userName"
-							class="easyui-validatebox" required="true" />&nbsp;<span
-							style="color: red">*</span>
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td>密码：</td>
-						<td><input type="password" id="password" name="password"
-							class="easyui-validatebox" required="true" />&nbsp;<span
-							style="color: red">*</span>
-						</td>
-					</tr>
-				</table>
-			</form>
 		</div>
 	</div>
 </body>

@@ -49,7 +49,9 @@
     <table style="padding:5px;" width="100%">
         <tr>
             <td>
-                <div style="height: 60px;width: 326px;background-color: #E0ECFF"; ><font color="#dc143c" size="40px">雪崩管理系统</font></div>
+                <div style="height: 60px;width: 326px;background-color: #E0ECFF; font:italic bold 40px/60px arial">
+                    雪崩管理系统
+                </div>
             </td>
             <td valign="bottom" align="right" width="100%">
                 <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${manager.name}
@@ -77,6 +79,8 @@
         <div title="基本管理"  data-options="iconCls:'icon-khgl'" style="padding:10px;">
             <a href="javascript:openTab('用户信息管理','userManage.jsp','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khxxgl'" style="width: 150px;">用户信息管理</a>
             <a href="javascript:openTab('拍品信息管理','goodManage.jsp','icon-good')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khlsgl'" style="width: 150px;">拍品信息管理</a>
+            <a href="javascript:openTab('订单信息管理','orderManage.jsp','icon-good')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khlsgl'" style="width: 150px;">订单信息管理</a>
+            <a href="javascript:openTab('押金信息管理','depositManage.jsp','icon-good')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khlsgl'" style="width: 150px;">押金信息管理</a>
         </div>
         <div title="基础数据管理"  data-options="iconCls:'icon-jcsjgl'" style="padding:10px">
             <a href="javascript:openTab('数据字典管理','dataDicManage.jsp','icon-sjzdgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-sjzdgl'" style="width: 150px;">数据字典管理</a>

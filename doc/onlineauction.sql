@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-11-21 22:37:11
+Date: 2016-11-25 19:27:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -137,10 +137,10 @@ CREATE TABLE `good` (
 -- ----------------------------
 INSERT INTO `good` VALUES ('1', '1', '操作系统', '10000.00', '119.23', '11', 'goodImages/bicycle.jpg', null, '2016-08-02 02:35:14', '0', '2016-08-16 12:31:18', '1', '2016-09-01 02:35:07', null, '1', null);
 INSERT INTO `good` VALUES ('2', '1', '1', '10000.00', '0.00', '2', null, null, '2016-08-23 12:31:12', '1', '2016-08-23 12:31:22', '1', '2016-09-01 12:31:31', null, null, null);
-INSERT INTO `good` VALUES ('3', '3', '不阿双方都', null, null, null, null, null, null, '0', null, '1', null, null, null, null);
-INSERT INTO `good` VALUES ('4', '3', '啊但是看见', null, null, null, null, null, null, '0', null, '1', null, null, null, null);
-INSERT INTO `good` VALUES ('5', null, '123', null, null, '1', '12', '123', null, '0', null, '1', null, null, null, null);
-INSERT INTO `good` VALUES ('6', null, '123', null, null, null, '12', '123', null, '0', null, '1', null, null, null, null);
+INSERT INTO `good` VALUES ('3', '3', '不阿双方都', null, null, null, null, null, '2016-11-11 10:49:32', '0', '2016-11-03 10:50:54', '1', '2016-11-25 10:49:36', null, null, null);
+INSERT INTO `good` VALUES ('4', '3', '啊但是看见', null, null, null, null, null, '2016-11-11 10:49:39', '0', '2016-11-09 10:50:58', '1', '2016-11-25 10:49:42', null, null, null);
+INSERT INTO `good` VALUES ('5', '3', '123', null, null, '1', '12', '123', '2016-11-02 10:49:45', '0', '2016-11-03 10:51:01', '1', '2016-11-25 10:49:49', null, null, null);
+INSERT INTO `good` VALUES ('6', '3', '123', null, null, null, '12', '123', '2016-11-01 10:49:52', '0', '2016-11-02 10:52:02', '1', '2016-11-25 10:49:56', null, null, null);
 
 -- ----------------------------
 -- Table structure for manager
@@ -247,9 +247,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '1', '1', null, '1', '1', '2016-07-22', '1', '2016-07-05 17:41:57', '196.96', '0', null, null);
-INSERT INTO `user` VALUES ('5', '王五', '12132123', null, null, '1', '2016-07-22', null, '2016-08-07 21:40:58', '0.00', '0', null, null);
-INSERT INTO `user` VALUES ('6', '找刘', '12321', null, null, '1', '2016-07-22', '140656', '2016-08-08 22:03:08', '0.00', '0', null, null);
-INSERT INTO `user` VALUES ('7', '谢楚荣', '123', null, null, '1', '2016-07-22', null, '2016-08-08 22:04:15', '1.23', '0', null, null);
-INSERT INTO `user` VALUES ('8', 'rty', '123456', null, null, null, null, null, '2016-10-14 12:01:44', '0.00', '0', null, null);
-INSERT INTO `user` VALUES ('9', 'ertyu', '12345123', null, null, null, null, '1406561459@qq.com', '2016-10-14 12:06:34', '0.00', '0', null, null);
+INSERT INTO `user` VALUES ('1', '1', '1', null, '1881231342', '男', '2016-07-22', '1', '2016-07-05 17:41:57', '196.96', '0', null, null);
+INSERT INTO `user` VALUES ('5', '王五', '12132123', null, '1881231342', '男', '2016-07-22', null, '2016-08-07 21:40:58', '0.00', '0', null, null);
+INSERT INTO `user` VALUES ('6', '找刘', '12321', null, '1881231342', '男', '2016-07-22', '140656', '2016-08-08 22:03:08', '0.00', '0', null, null);
+INSERT INTO `user` VALUES ('7', '谢楚荣', '123', null, '1881231342', '男', '2016-07-22', null, '2016-08-08 22:04:15', '1.23', '0', null, null);
+INSERT INTO `user` VALUES ('8', 'rty', '123456', null, '1881231342', '男', null, null, '2016-10-14 12:01:44', '0.00', '0', null, null);
+INSERT INTO `user` VALUES ('9', 'ertyu', '12345123', null, '1881231342', '男', null, '1406561459@qq.com', '2016-10-14 12:06:34', '0.00', '0', null, null);

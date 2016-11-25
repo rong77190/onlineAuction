@@ -1,9 +1,12 @@
 package com.auction.service;
 
+import com.auction.bean.OrderBean;
+import com.auction.model.Good;
 import com.auction.model.Torder;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface TorderService {
 
@@ -23,4 +26,18 @@ public interface TorderService {
     public int getsellerinfo(int orderId);
 
     public Date getTime();
+
+    //管理模块的订单
+    /**
+     * 订单查询
+     * @param map
+     * @return
+     */
+    public List<OrderBean> find(Map<String, Object> map);
+    /**
+     * 获取总记录数
+     * @param map
+     * @return
+     */
+    public Long getTotal(Map<String, Object> map);
 }

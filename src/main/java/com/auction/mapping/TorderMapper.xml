@@ -156,4 +156,65 @@
   </select>
 
 
+
+
+  <!--订单管理模块-->
+  <!-- 订单查询 -->
+
+  <resultMap id="OrderBeanResult" type="com.auction.bean.OrderBean">
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="good_id" property="goodId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="pay_way" property="payWay" jdbcType="INTEGER" />
+    <result column="update_by" property="updateBy" jdbcType="INTEGER" />
+    <result column="good_name" property="goodName" jdbcType="VARCHAR"/>
+    <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+  </resultMap>
+  <select id="find" parameterType="Map" resultMap="OrderBeanResult">
+    select  t.order_id, t.user_id, t.good_id, t.create_time, t.update_time, t.order_price, t.order_state, t.pay_way,
+    t.update_by,u.user_name,g.good_name
+    from
+    torder t
+    INNER  JOIN `user` u
+    INNER join good g
+    on u.user_id = t.user_id  AND g.good_id = t.good_id
+    <where>
+      <if test="goodName!=null and goodName!='' ">
+        and good_name like #{goodName}
+      </if>
+      <if test="userName!=null and userName!='' ">
+        and user_name like #{userName}
+      </if>
+      <if test="orderId!=null and orderId!='' ">
+        and order_id like #{orderId}
+      </if>
+    </where>
+    <if test="start!=null and size!=null">
+      limit #{start},#{size}
+    </if>
+  </select>
+
+  <select id="getTotal" parameterType="Map" resultType="Long">
+    select count(*)
+    from torder t
+    INNER  JOIN `user` u
+    INNER join good g
+    on u.user_id = t.user_id  AND g.good_id = t.good_id
+    <where>
+      <if test="goodName!=null and goodName!='' ">
+        and good_name like #{goodName}
+      </if>
+      <if test="userName!=null and userName!='' ">
+        and user_name like #{userName}
+      </if>
+      <if test="orderId!=null and orderId!='' ">
+        and order_id like #{orderId}
+      </if>
+    </where>
+  </select>
+
 </mapper>

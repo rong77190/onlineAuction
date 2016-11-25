@@ -1,5 +1,6 @@
 package com.auction.service.imp;
 
+import com.auction.bean.OrderBean;
 import com.auction.dao.TorderMapper;
 import com.auction.model.Torder;
 import com.auction.model.Good;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -19,6 +21,14 @@ public class TorderServiceImpl implements TorderService {
 
     public Date getTime() {
         return new Date();
+    }
+
+    public List<OrderBean> find(Map<String, Object> map) {
+        return torderMapper.find(map);
+    }
+
+    public Long getTotal(Map<String, Object> map) {
+        return torderMapper.getTotal(map);
     }
 
     public Torder getTorder(int orderId){

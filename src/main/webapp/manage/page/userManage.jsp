@@ -121,22 +121,22 @@
 
 	<table id="dg" title="用户管理" class="easyui-datagrid" fitColumns="true"
 		pagination="true" rownumbers="true"
-		url="${pageContext.request.contextPath}/manage/userList" fit="true"
+		url="${pageContext.request.contextPath}/manage/user/userList" fit="true"
 		toolbar="#tb">
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center"></th>
-				<th field="userId" width="50" align="center">用户Id</th>
+				<th field="userId"  align="center">用户Id</th>
 				<th field="userName" width="50" align="center">用户名</th>
-				<th field="sex" width="50" align="center">性别</th>
+				<th field="sex"  align="center">性别</th>
 				<th field="birthday" width="50" align="center">生日</th>
-				<%--<th field="userImage" width="50" align="center">头像</th>--%>
-				<th field="phone" width="50" align="center">手机号</th>
-				<%--<th id="" field="registerTime" width="50" align="center">注册时间</th>--%>
-				<th field="password" width="50" align="center">密码</th>
-				<th field="balance" width="50" align="center">余额</th>
-				<th field="freeze" width="50" align="center">冻结</th>
-
+				<th field="realName" align="center">真名</th>
+				<th field="phone" align="center">手机号</th>
+				<th align="center" data-options="field:'registerTime'
+					">注册时间</th>
+				<th field="userEmail" align="center">邮箱</th>
+				<th field="balance" align="center">余额</th>
+				<th field="freeze" align="center">冻结</th>
 			</tr>
 		</thead>
 	</table>

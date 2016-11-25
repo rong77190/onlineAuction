@@ -9,7 +9,6 @@ public class OrderBean extends Torder{
 
     private String  goodName;
     private String userName;
-
     public String getUserName() {
         return userName;
     }
