@@ -31,6 +31,10 @@ public class TorderServiceImpl implements TorderService {
         return torderMapper.getTotal(map);
     }
 
+    public int update(Torder torder) {
+        return torderMapper.updateByPrimaryKeySelective(torder);
+    }
+
     public Torder getTorder(int orderId){
         return torderMapper.selectByPrimaryKey(orderId);
     }

@@ -60,4 +60,26 @@ public class GoodController {
         return result;
     }
 
+
+    /**
+     * 修改(包括上架，下架)
+     * @param good
+     * @return
+     *
+     *
+     * */
+    @RequestMapping("edit")
+    @ResponseBody
+    public Object editGood(Good good){
+        int result = goodService.updateGood(good);
+        JSONObject jsonObject = new JSONObject();
+        if(result > 0){   //说明修改成功
+            jsonObject.put("success", true);
+        }else{
+            jsonObject.put("success", false);
+        }
+        return jsonObject;
+    }
+
+
 }

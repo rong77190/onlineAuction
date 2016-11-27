@@ -63,10 +63,17 @@ public class UserController {
      * @return
      *
      * */
-//    @RequestMapping
-//    @ResponseBody
-//    public Object editUser(User user){
-//        return 0;
-//    }
+    @RequestMapping
+    @ResponseBody
+    public Object editUser(User user){
+        int result = userService.update(user);
+        JSONObject jsonObject = new JSONObject();
+        if(result > 0){   //说明修改成功
+            jsonObject.put("success", true);
+        }else{
+            jsonObject.put("success", false);
+        }
+        return jsonObject;
+    }
 
 }

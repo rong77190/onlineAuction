@@ -25,7 +25,7 @@
 
 <script type="text/javascript">
 	var url;
-	function searchUser() {
+	function search() {
 		$("#dg").datagrid('load', {
 			"userName" : $("#userName").val(),
 			"goodName" : $("#goodName").val(),
@@ -136,15 +136,15 @@
 		<div>
 			&nbsp;用户名：&nbsp;
 			<input type="text" id="userName" size="5" placeholder="可选"
-				onkeydown="if(event.keyCode == 13)searchUser()" />
+				onkeydown="if(event.keyCode == 13)search()" />
 			&nbsp;商品名：&nbsp;
 			<input type="text" id="goodName" size="5"  placeholder="可选"
-				   onkeydown="if(event.keyCode == 13)searchUser()" />
+				   onkeydown="if(event.keyCode == 13)search()" />
 			&nbsp;订单编号：&nbsp;
 			<input type="text" id="orderId" size="3" placeholder="可选"
 				   onkeydown="if(event.keyCode == 13)searchUser()" />
 			<a
-				href="javascript:searchUser()" class="easyui-linkbutton"
+				href="javascript:search()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a>
 		</div>
 	</div>

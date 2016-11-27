@@ -107,12 +107,75 @@
 		});
 	}
 
-	function formatBirthday(val,row){
-		if (val < 2022-08-02){
-			return '<span style="color:red;">('+val+')</span>';
+//	function formatBirthday(val,row){
+//		if (val < 2022-08-02){
+//			return '<span style="color:red;">('+val+')</span>';
+//		} else {
+//			return val;
+//		}
+//	}
+
+	var editIndex = undefined;
+	function endEditing(){
+		if (editIndex == undefined){return true}
+		if ($('#dg').datagrid('validateRow', editIndex)){
+			$('#dg').datagrid('endEdit', editIndex);
+			editIndex = undefined;
+			return true;
 		} else {
-			return val;
+			return false;
 		}
+	}
+	function onClickCell(index, field){
+		if (editIndex != index){
+			if (endEditing()){
+				$('#dg').datagrid('selectRow', index)
+						.datagrid('beginEdit', index);
+				var ed = $('#dg').datagrid('getEditor', {index:index,field:field});
+				if (ed){
+					($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+				}
+				editIndex = index;
+			} else {
+				setTimeout(function(){
+					$('#dg').datagrid('selectRow', editIndex);
+				},0);
+			}
+		}
+	}
+	function onEndEdit(index, row){
+		var ed = $(this).datagrid('getEditor', {
+			index: index,
+			field: 'userId'
+		});
+		row.userId = $(ed.target).combobox('getText');
+	}
+	function append(){
+		if (endEditing()){
+			$('#dg').datagrid('appendRow',{status:'P'});
+			editIndex = $('#dg').datagrid('getRows').length-1;
+			$('#dg').datagrid('selectRow', editIndex)
+					.datagrid('beginEdit', editIndex);
+		}
+	}
+	function removeit(){
+		if (editIndex == undefined){return}
+		$('#dg').datagrid('cancelEdit', editIndex)
+				.datagrid('deleteRow', editIndex);
+		editIndex = undefined;
+	}
+	function accept(){
+		if (endEditing()){
+			$('#dg').datagrid('acceptChanges');
+		}
+	}
+	function reject(){
+		$('#dg').datagrid('rejectChanges');
+		editIndex = undefined;
+	}
+	function getChanges(){
+		var rows = $('#dg').datagrid('getChanges');
+		alert(rows.length+' rows are changed!');
 	}
 </script>
 </head>
@@ -121,22 +184,39 @@
 
 	<table id="dg" title="用户管理" class="easyui-datagrid" fitColumns="true"
 		pagination="true" rownumbers="true"
-		url="${pageContext.request.contextPath}/manage/user/userList" fit="true"
-		toolbar="#tb">
+
+
+		   data-options="
+		   		fitColumns:true,
+				pagination:true,
+				rownumbers:true,
+                iconCls: 'icon-edit',
+                fit:true,
+                singleSelect: true,
+                toolbar: '#tb',
+                url: '${pageContext.request.contextPath}/manage/user/userList',
+                method: 'get',
+                onClickCell: onClickCell,
+                onEndEdit: onEndEdit
+            ">
 		<thead>
 			<tr>
-				<th field="cb" checkbox="true" align="center"></th>
-				<th field="userId"  align="center">用户Id</th>
-				<th field="userName" width="50" align="center">用户名</th>
-				<th field="sex"  align="center">性别</th>
-				<th field="birthday" width="50" align="center">生日</th>
-				<th field="realName" align="center">真名</th>
-				<th field="phone" align="center">手机号</th>
+				<th field="cb" checkbox="true" align="center" ></th>
+				<th data-options = "field:'userId',
+					formatter:function(value,row){
+                            return row.userId;
+                    }
+					" align="center">用户Id</th>
+				<th data-options = "field:'userName',editor:'textbox'" align="center">用户名</th>
+				<th data-options = "field:'sex',editor:'textbox'"  align="center">性别</th>
+				<th data-options = "field:'birthday',editor:'textbox'" width="50" align="center">生日</th>
+				<th data-options = "field:'realName',editor:'textbox'" align="center">真名</th>
+				<th data-options = "field:'phone',editor:'textbox'" align="center">手机号</th>
 				<th align="center" data-options="field:'registerTime'
 					">注册时间</th>
 				<th field="userEmail" align="center">邮箱</th>
 				<th field="balance" align="center">余额</th>
-				<th field="freeze" align="center">冻结</th>
+				<th data-options = "field:'freeze',editor:'textbox'" align="center">冻结</th>
 			</tr>
 		</thead>
 	</table>

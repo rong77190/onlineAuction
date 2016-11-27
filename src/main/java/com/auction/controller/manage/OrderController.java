@@ -37,7 +37,7 @@ public class OrderController {
      * 分页查询
      * @param page
      * @param rows
-     * @param torder
+     * @param orderBean
      * @return
      *
      *
@@ -62,6 +62,27 @@ public class OrderController {
         result.put("total", total);
         System.out.println(result.toString());
         return result;
+    }
+
+
+    /**
+     * 修改(包括上架，下架)
+     * @param torder
+     * @return
+     *
+     *
+     * */
+    @RequestMapping("edit")
+    @ResponseBody
+    public Object editOrder(Torder torder){
+        int result = torderService.update(torder);
+        JSONObject jsonObject = new JSONObject();
+        if(result > 0){   //说明修改成功
+            jsonObject.put("success", true);
+        }else{
+            jsonObject.put("success", false);
+        }
+        return jsonObject;
     }
 
 

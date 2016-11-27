@@ -40,4 +40,11 @@ public interface TorderService {
      * @return
      */
     public Long getTotal(Map<String, Object> map);
+
+    /**
+     * 可选修改
+     * @param torder
+     * @return
+     */
+    public int update(Torder torder);
 }

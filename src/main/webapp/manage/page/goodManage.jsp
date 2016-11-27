@@ -25,7 +25,7 @@
 
 	<script type="text/javascript">
 		var url;
-		function searchGood() {
+		function search() {
 			$("#dg2").datagrid('load', {
 				"goodName" : $("#goodName").val()
 			});
@@ -146,8 +146,8 @@
 			iconCls="icon-remove" plain="true">删除</a>
 	<div>
 		&nbsp;商品名：&nbsp;<input type="text" id="goodName" size="20"
-							   onkeydown="if(event.keyCode == 13)searchGood()" /> <a
-			href="javascript:searchGood()" class="easyui-linkbutton"
+							   onkeydown="if(event.keyCode == 13)search()" /> <a
+			href="javascript:search()" class="easyui-linkbutton"
 			iconCls="icon-search" plain="true">查询</a>
 	</div>
 
