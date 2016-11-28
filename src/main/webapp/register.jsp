@@ -1,6 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +27,8 @@
 
 <link rel="stylesheet" href="<c:url value='resources/css/app/main.css?version=20160108' />">
 <link rel="stylesheet" href="<c:url value='resources/css/app/mycss.css?version=20160108' />">
-
+    <script src="static/jquery/1.9.1/jquery.js"></script>
+    <script src="birthday.js"></script>
 </head>
 <body>
 
@@ -51,34 +56,46 @@
           <input type="password"  id="password"  name="password"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
         </li>
         
-          <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
-          <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">E-mail</span>
-          <input type="text"  id="email"  name="userEmail"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
-          <button type="button" onclick="send()">发送验证码</button>
-        </li>
-        
-        
+
              <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
           <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.2em; font-weight:bold;">邮箱验证码</span>
           <input type="text"  id="validCode"  name="validCode"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
-         
-        </li> 
-        
-     <!--    <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
-          <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">E-mail</span>
-          <input type="text"  id="email"  name="email"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
-        </li> -->
-        
+
+        </li>
+          <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+              <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.2em; font-weight:bold;">电话</span>
+              <input type="text"  id="phone"  name="phone"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
+
+          </li>
+
+
+          <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+              <label> 生日：</label>
+              <select id= "year" class="sel_year" rel="2000"> </select> 年
+              <select id="month" class="sel_month" rel="2"> </select> 月
+              <select id="day" class="sel_day" rel="14"> </select> 日
+          </li>
+
+          <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+              <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">E-mail</span>
+              <input type="text"  id="email"  name="userEmail"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
+              <button type="button" onclick="send()">发送验证码</button>
+          </li>
+          <!--    <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
+               <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">E-mail</span>
+               <input type="text"  id="email"  name="email"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
+             </li> -->
+
       <!--   <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
           <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">密码</span>
           <input type="password"  id="password"  name="password"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
         </li> -->
-        
+
       <!--   <li style="list-style-type:none; padding:0.8em 0 0.8em 0;">
           <span style="display:-moz-inline-box;display:inline-block;width:5em; text-align:center; font-size:1.5em; font-weight:bold;">确认密码</span>
           <input type="password"  id="rpassword"  name="rpassword"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;">
         </li>
-        
+
          -->
         <li style="list-style-type:none;padding:0.5em 0 0.5em 0.8em;">
           <input type="button" onclick="finish()" value="确定" style="padding:0.4em 1em; color:#fff; font-size:1.2em; height:100%; border:none; border-radius:0.3em; background-color:#5bc0de;">
@@ -101,8 +118,8 @@
 	function cancle(){
 		window.location = "<c:url value='login.jsp' />";
 	}
-	
-	function finish(){
+
+    function finish(){
         var data = {
             //			  "userame": $("#pname").val(),
             //			  "password": $("#password").val(),
@@ -113,6 +130,8 @@
 //            "userEmail":$("#email").val()
             "userName":$("#userName").val(),
             "password":$("#password").val(),
+            "phone":$("phone").val(),
+            "date":$("date").val(),
             "validCode":$("#validCode").val()
         }
 
@@ -175,4 +194,16 @@
 		    });
 	  };
 </script>
+<script type="text/javascript" src="birthday.js"></script>
+<script>
+    $(function () {
+        $.ms_DatePicker({
+            YearSelector: ".sel_year",
+            MonthSelector: ".sel_month",
+            DaySelector: ".sel_day"
+        });
+        $.ms_DatePicker();
+    });
+</script>
+
 </html>

@@ -69,9 +69,17 @@
 <script type="text/javascript">
     function register(){
     	window.location = "<c:url value='register.jsp' />";
+
+
+
     }
     function checkin(){
     	window.location = "<c:url value='loginEnd.jsp' />";
+
+
+
+
+
     }
     
     var wait = setInterval(function(){ 
