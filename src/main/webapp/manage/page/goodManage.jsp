@@ -133,6 +133,7 @@
 		<%--<th field="birthday" width="50" align="center" > 出生年月</th>--%>
 		<%--<th field="createdate"  width="50" align="center">创建时间</th>--%>
 		<%--<th field="stuclass" width="50" align="center">班级</th>--%>
+		<%--<th width="60">操作</th>--%>
 	</tr>
 	</thead>
 </table>
@@ -157,67 +158,7 @@
 									   class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 	</div>
 
-	<div id="dlg2" class="easyui-dialog"
-		 style="width: 730px;height:280px;padding:10px 10px;" closed="true"
-		 buttons="#dlg-buttons">
-		<form method="post" id="goodForm">
-			<table cellspacing="8px;">
-				<%--<tr>--%>
-				<%--<td>学号：</td>--%>
-				<%--<td><input type="text"  name="id"--%>
-				<%--class="easyui-validatebox" required="true" />&nbsp;<span--%>
-				<%--style="color: red">*</span>--%>
-				<%--</td>--%>
-				<%--</tr>--%>
-				<tr>
-					<td>拍品名：</td>
-					<td><input type="text"  name="name" id="name"
-							   class="easyui-validatebox" required="true" />&nbsp;<span
-							style="color: red">*</span>
-					</td>
-				</tr>
-				<tr>
-					<td>密码：</td>
-					<td><input type="text"  name="password" id="password"
-							   class="easyui-validatebox" required="true" />&nbsp;<span
-							style="color: red">*</span>
-					</td>
-				</tr>
-				<tr>
-					<td>性别：</td>
-					<td>
-						<select class="easyui-validatebox" required="true"  id="sex" name="sex">
-							<option value="男">男</option>
-							<option value="女">女</option>
-						</select>
-						&nbsp;<span
-							style="color: red">*</span>
-					</td>
-				</tr>
-				<tr>
-					<td>出生年月：</td>
-					<td><input class="easyui-datebox" name="birthday" id="birthday"
-							   class="easyui-validatebox" required="true" />&nbsp;<span
-							style="color: red">*</span>
-					</td>
-				</tr>
-				<%--<tr>--%>
-				<%--<td>创建时间：</td>--%>
-				<%--<td><input class="easyui-datebox" name="createDate"--%>
-				<%--class="easyui-validatebox"/>&nbsp;<span--%>
-				<%--style="color: red">*</span>--%>
-				<%--</td>--%>
-				<%--</tr>--%>
-				<tr>
-					<td>班级：</td>
-					<td><input type="text" name="stuclass" id="stuclass"
-							   class="easyui-validatebox" required="true" />&nbsp;<span
-							style="color: red">*</span>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
+
 </div>
 </body>
 </html>

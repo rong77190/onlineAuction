@@ -11,6 +11,7 @@ import com.auction.util.StringUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,7 @@ import java.util.Map;
 @Controller("manageOrderController")
 @RequestMapping("manage/order")
 public class OrderController {
-
-
+    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(OrderController.class);
     @Resource
     private TorderService torderService;
     /**
@@ -60,7 +60,7 @@ public class OrderController {
         JSONArray jsonArray= JSONArray.fromObject(torderList,jsonConfig);
         result.put("rows", jsonArray);
         result.put("total", total);
-        System.out.println(result.toString());
+        log.info(result.toString());
         return result;
     }
 
@@ -78,8 +78,10 @@ public class OrderController {
         int result = torderService.update(torder);
         JSONObject jsonObject = new JSONObject();
         if(result > 0){   //说明修改成功
+            log.info("editOrder修改成功");
             jsonObject.put("success", true);
         }else{
+            log.info("editOrder修改失败");
             jsonObject.put("success", false);
         }
         return jsonObject;

@@ -6,6 +6,7 @@ import com.auction.model.PageBean;
 import com.auction.service.DepositService;
 import com.auction.util.StringUtil;
 import net.sf.json.JSONArray;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import java.util.Map;
 @Controller("manageDepositController")
 @RequestMapping("manage/deposit")
 public class DepositController {
+    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(DepositController.class);
 
 
 //    @Resource

@@ -4,6 +4,7 @@ import com.auction.common.SpringMvcActionContext;
 import com.auction.model.Manager;
 import com.auction.service.ManagerService;
 import com.auction.util.MyResult;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpSession;
 @Controller("manageAdminController")
 @RequestMapping("manage/admin")
 public class AdminController extends SpringMvcActionContext{
+
+    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(AdminController.class);
     @Resource
     private ManagerService managerService;
     /**

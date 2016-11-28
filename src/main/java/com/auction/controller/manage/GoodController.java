@@ -8,6 +8,7 @@ import com.auction.util.StringUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,7 @@ import java.util.Map;
 @Controller("manageGoodController")
 @RequestMapping("manage/good")
 public class GoodController {
-
+    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(GoodController.class);
     @Resource
     private GoodService goodService;
 

@@ -8,6 +8,7 @@ import com.auction.util.StringUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,8 @@ import java.util.Map;
 @Controller("manageUserController")
 @RequestMapping("manage/user")
 public class UserController {
+
+    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(UserController.class);
 
     @Resource
     private UserService userService;
@@ -53,7 +56,7 @@ public class UserController {
         JSONArray jsonArray= JSONArray.fromObject(userList,jsonConfig);
         result.put("rows", jsonArray);
         result.put("total", total);
-        System.out.println(result.toString());
+        log.info(result.toString());
         return result;
     }
 
