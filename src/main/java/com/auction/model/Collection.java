@@ -5,6 +5,8 @@ public class Collection {
 
     private Integer goodId;
 
+    private String goodName;
+
     public Integer getUserId() {
         return userId;
     }
@@ -19,5 +21,13 @@ public class Collection {
 
     public void setGoodId(Integer goodId) {
         this.goodId = goodId;
+    }
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodId( String goodName) {
+        this.goodName = goodName;
     }
 }

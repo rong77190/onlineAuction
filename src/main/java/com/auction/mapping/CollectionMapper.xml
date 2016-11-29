@@ -7,9 +7,9 @@
   </resultMap>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select *
-    from collection
-    where user_id=#{userId,jdbcType=INTEGER}
+    select collection.user_id,collection.good_id,good.good_name
+    from collection,good
+    where user_id=#{userId,jdbcType=INTEGER} AND collection.good_id=good.good_id
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.auction.model.Collection" >
     delete from collection

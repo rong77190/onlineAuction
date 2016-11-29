@@ -116,10 +116,15 @@ public class UserController extends SpringMvcActionContext{
     @ResponseBody
     public Object userCollection(){
         User user = (User)getSession().getAttribute("user");
+        //collectionList包括了拍卖品名，可以直接调用
         List<Collection> collectionList = collectionService.getCollection(user.getUserId());
         return MyResult.getResult(1,"",collectionList);
     }
 
-
-
+    @RequestMapping(value = "deleteCollection")
+    public String deleteCollection(int goodId){
+        User user = (User)getSession().getAttribute("user");
+         collectionService.deleteCollection(user.getUserId(),goodId);
+        return "redirect:user/collection";
+    }
 }
