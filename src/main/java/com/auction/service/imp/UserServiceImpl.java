@@ -45,14 +45,18 @@ public class UserServiceImpl implements UserService {
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
-    public int userUpdate(String phone,String sex,String birthday){
-        User record=new User();
+    public int userUpdate(Integer userId,String phone,String sex,String birthday){
+        User record=userMapper.selectByPrimaryKey(userId);
         record.setPhone(phone);
         record.setSex(sex);
         record.setBirthday(birthday);
         return  userMapper.userUpdateInfo(record);
     }
-
+    public int updateImage(Integer userId,String userImage){
+        User user=userMapper.selectByPrimaryKey(userId);
+        user.setUserImage(userImage);
+        return userMapper.userUpdateInfo(user);
+    }
     public List<User> find(Map<String, Object> map) {
         return userMapper.find(map);
     }

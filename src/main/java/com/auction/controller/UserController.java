@@ -1,8 +1,10 @@
 package com.auction.controller;
 
 import com.auction.common.SpringMvcActionContext;
+import com.auction.model.Collection;
 import com.auction.model.User;
 import com.auction.service.UserService;
+import com.auction.service.CollectionService;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ public class UserController extends SpringMvcActionContext{
     @Resource
     private UserService userService;
 
+    @Resource
+    private CollectionService collectionService;
 
     /**
      * 查询用户列表
@@ -39,7 +43,7 @@ public class UserController extends SpringMvcActionContext{
     /**
      * 用户查询个人信息
      */
-    @RequestMapping(value = "userInfo")
+    @RequestMapping(value = "userInfo",method=RequestMethod.GET)
     @ResponseBody
     public Object checkUserInfo(){
         User user = (User)getSession().getAttribute("user");
@@ -71,7 +75,7 @@ public class UserController extends SpringMvcActionContext{
     //跳转到添加用户页面
     @RequestMapping(value = "toUpdate", method = RequestMethod.GET)
     public ModelAndView toUpdateUser(HttpServletRequest request) {
-        return new ModelAndView("user/user_update");
+        return new ModelAndView("user/updateUserInfo");
     }
 
 
@@ -93,11 +97,28 @@ public class UserController extends SpringMvcActionContext{
 
 //    接受修改页面的表单接受后生成的user，对数据库进行更新后重定向到用户信息
     @RequestMapping(value = "updateUserInfo",method=RequestMethod.POST)
-    public String updateUserInfo(User user) {
-        userService.userUpdate(user.getPhone(),user.getSex(),user.getBirthday());
+    public String updateUserInfo(User dirty) {
+        User user = (User)getSession().getAttribute("user");
+        userService.userUpdate(user.getUserId(),dirty.getPhone(),dirty.getSex(),dirty.getBirthday());
         return "redirect:/user/userInfo";
     }
+    //    接受修改头像请求，上传图片且对数据库进行更新后重定向到用户信息
+//    @RequestMapping(value = "updateUserImage",method=RequestMethod.POST)
+//    public String updateUserImage(String userImage) {
+//        User user = (User)getSession().getAttribute("user");
+//        userService.updateImage(user.getUserId(),userImage);
+//        return "redirect:/user/userInfo";
+//    }
 
+
+    // 查看用户个人收藏夹
+    @RequestMapping(value = "collection")
+    @ResponseBody
+    public Object userCollection(){
+        User user = (User)getSession().getAttribute("user");
+        List<Collection> collectionList = collectionService.getCollection(user.getUserId());
+        return MyResult.getResult(1,"",collectionList);
+    }
 
 
 

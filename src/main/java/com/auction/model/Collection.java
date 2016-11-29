@@ -1,6 +1,6 @@
 package com.auction.model;
 
-public class CollectionKey {
+public class Collection {
     private Integer userId;
 
     private Integer goodId;

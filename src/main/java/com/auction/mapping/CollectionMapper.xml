@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.auction.dao.CollectionMapper" >
-  <resultMap id="BaseResultMap" type="com.auction.model.CollectionKey" >
+  <resultMap id="BaseResultMap" type="com.auction.model.Collection" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <id column="good_id" property="goodId" jdbcType="INTEGER" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="com.auction.model.CollectionKey" >
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from collection
+    where user_id=#{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.auction.model.Collection" >
     delete from collection
     where user_id = #{userId,jdbcType=INTEGER}
     and good_id = #{goodId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.auction.model.CollectionKey" >
+  <insert id="insert" parameterType="com.auction.model.Collection" >
     insert into collection (user_id, good_id)
     values (#{userId,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.auction.model.CollectionKey" >
+  <insert id="insertSelective" parameterType="com.auction.model.Collection" >
     insert into collection
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
