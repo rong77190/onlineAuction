@@ -71,7 +71,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color:transparent">拍卖管理 <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="<c:url value='/gdpt/index'/>">我的收藏</a></li>
+              <li><a href="<c:url value='/user/collection'/>">我的收藏</a></li>
               <li><a href="<c:url value='/page.jsp'/>">我的拍卖</a></li>
                    <li><a href="<c:url value='/index.jsp'/>">回到主页</a></li>
             </ul>

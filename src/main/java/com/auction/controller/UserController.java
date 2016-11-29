@@ -2,7 +2,9 @@ package com.auction.controller;
 
 import com.auction.common.SpringMvcActionContext;
 import com.auction.model.Collection;
+import com.auction.model.Torder;
 import com.auction.model.User;
+import com.auction.service.TorderService;
 import com.auction.service.UserService;
 import com.auction.service.CollectionService;
 import com.auction.util.MyResult;
@@ -28,12 +30,15 @@ public class UserController extends SpringMvcActionContext{
     private UserService userService;
 
     @Resource
+    private TorderService torderService;
+
+    @Resource
     private CollectionService collectionService;
 
     /**
      * 查询用户列表
      */
-    @RequestMapping(value = "list")
+    @RequestMapping(value = "userList")
     @ResponseBody
     public Object selectUser(){
         List<User> userList = userService.selectAll();
@@ -82,13 +87,13 @@ public class UserController extends SpringMvcActionContext{
     /**
      * 修改用户
      */
-    @RequestMapping(value = "update")
-    @ResponseBody
-    public Object updateUser(User user) {
-        userService.update(user);
-//        return "redirect:/user/list";
-        return MyResult.getResult(1,"",user);
-    }
+//    @RequestMapping(value = "update")
+//    @ResponseBody
+//    public Object updateUser(User user) {
+//        userService.update(user);
+////        return "redirect:/user/list";
+//        return MyResult.getResult(1,"",user);
+//    }
 
 
     /**
@@ -121,10 +126,21 @@ public class UserController extends SpringMvcActionContext{
         return MyResult.getResult(1,"",collectionList);
     }
 
+    //删除后使用重定向刷新页面
     @RequestMapping(value = "deleteCollection")
-    public String deleteCollection(int goodId){
+    public String deleteCollection(@RequestParam int goodId){
         User user = (User)getSession().getAttribute("user");
          collectionService.deleteCollection(user.getUserId(),goodId);
         return "redirect:user/collection";
+    }
+
+
+    //个人中心查看个人所有订单
+    @RequestMapping(value="userOrder")
+    @ResponseBody
+    public Object usersTorders(){
+        User user = (User)getSession().getAttribute("user");
+        List<Torder> orders=torderService.getUserAllTorders(user.getUserId());
+        return  MyResult.getResult(1, "", orders);
     }
 }
