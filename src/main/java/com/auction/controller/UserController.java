@@ -1,5 +1,6 @@
 package com.auction.controller;
 
+import com.auction.common.SpringMvcActionContext;
 import com.auction.model.User;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/user")
-public class UserController{
+public class UserController extends SpringMvcActionContext{
 
     @Resource
     private UserService userService;
@@ -38,11 +39,13 @@ public class UserController{
     /**
      * 用户查询个人信息
      */
-    @RequestMapping(value = "checkUserInfo")
+    @RequestMapping(value = "userInfo")
     @ResponseBody
-    public Object checkUserInfo(@RequestParam int userId){
-        User user = userService.userInfo(userId);
-        return MyResult.getResult(1,"",user);
+    public Object checkUserInfo(){
+        User user = (User)getSession().getAttribute("user");
+        Integer userId = user.getUserId();
+        User userInfo=userService.findById(userId);
+        return MyResult.getResult(1,"",userInfo);
     }
 
     //跳转到添加用户页面
@@ -50,6 +53,7 @@ public class UserController{
     public ModelAndView toAddUser(HttpServletRequest request) {
         return new ModelAndView("user/user_add");
     }
+
 
     /**
      * 添加用户

@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByPrimaryKey(userId);
     }
 
-    public User userInfo(int userId){return userMapper.userSelect(userId);}
+//    public User userInfo(int userId){userMapper.selectByPrimaryKey(userId);}
 
     public int backDepositToUser(int userId, double price) {
         return userMapper.backDepositToUser(userId,price);

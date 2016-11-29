@@ -14,7 +14,7 @@ public interface UserService {
 
     User findById(int userId);
 
-    User userInfo(int userId);
+//    User userInfo(int userId);
 
     int backDepositToUser(int userId,double price);
 
