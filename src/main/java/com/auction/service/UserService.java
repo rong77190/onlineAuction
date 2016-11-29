@@ -24,7 +24,7 @@ public interface UserService {
 
     int update(User user);
 
-    int userUpdate(Integer userId,String userName,String phone,String sex,String birthday,String userEmail);
+    int userUpdate(String phone,String sex,String birthday);
 
     /**
      * 用户查询

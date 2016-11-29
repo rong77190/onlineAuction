@@ -90,12 +90,13 @@ public class UserController extends SpringMvcActionContext{
     /**
      * 用户修改个人信息
      */
-//    @RequestMapping(value = "updateUserInfo")
-//    @ResponseBody
-//    public Object updateUserInfo(User user) {
-//        userService.userUpdate(Integer userId,String userName,String phone,String sex,String birthday,String userEmail);
-//        return MyResult.getResult(1,"",user);
-//    }
+
+//    接受修改页面的表单接受后生成的user，对数据库进行更新后重定向到用户信息
+    @RequestMapping(value = "updateUserInfo",method=RequestMethod.POST)
+    public String updateUserInfo(User user) {
+        userService.userUpdate(user.getPhone(),user.getSex(),user.getBirthday());
+        return "redirect:/user/userInfo";
+    }
 
 
 
