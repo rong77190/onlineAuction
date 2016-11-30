@@ -66,7 +66,7 @@ public class UserController {
      * @return
      *
      * */
-    @RequestMapping
+    @RequestMapping("edit")
     @ResponseBody
     public Object editUser(User user){
         int result = userService.update(user);

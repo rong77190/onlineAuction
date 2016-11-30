@@ -59,6 +59,10 @@ public class TorderServiceImpl implements TorderService {
         torderMapper.insert(torder);
     }
 
+    public int addOrder(Torder torder) {
+        return torderMapper.insertSelective(torder);
+    }
+
     public void updateTorder(int orderId,int goodId, Double orderPrice,int orderState,int payWay){ //仅允许管理员修改成交价，成交状态，支付方式
         Torder torder=getTorder(orderId);
         torder.setGoodId(goodId);
@@ -82,4 +86,5 @@ public class TorderServiceImpl implements TorderService {
     public int getsellerinfo(int orderId){
         return torderMapper.selectsellerid(orderId);
     }
+
 }

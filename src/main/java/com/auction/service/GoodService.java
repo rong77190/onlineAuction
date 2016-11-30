@@ -63,4 +63,6 @@ public interface GoodService {
     public int delete(Integer userId);
 
 
+    public List getComplete();
+
 }

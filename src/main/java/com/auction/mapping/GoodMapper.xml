@@ -245,8 +245,9 @@
   <select id="getNotAudit" resultMap="BaseResultMap">
     SELECT *
     FROM good
-    where  good_state=0
+    where  good_state=0 and is_delete = 0
   </select>
+
 
 
   <select id="selectBySelectiveName" resultMap="BaseResultMap" parameterType="java.lang.String" >
