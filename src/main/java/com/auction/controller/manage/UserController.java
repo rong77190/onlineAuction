@@ -48,8 +48,8 @@ public class UserController {
         map.put("userName", StringUtil.formatLike(s_user.getUserName()));
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
-        List<User> userList=userService.find(map);
-        Long total=userService.getTotal(map);
+        List<User> userList = userService.find(map);
+        Long total = userService.getTotal(map);
         JSONObject result=new JSONObject();
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.registerJsonValueProcessor(java.util.Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh-mm-ss"));

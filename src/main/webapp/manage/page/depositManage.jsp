@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'userManage.jsp' starting page</title>
+<title>押金页面</title>
 	<link rel="stylesheet" type="text/css"
 		href="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css"
@@ -21,13 +21,13 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+			src="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript"
 			src="${pageContext.request.contextPath}/manage/js/easyuiExtension.js"></script>
 
 <script type="text/javascript">
 	var url;
-	function searchUser() {
+	function searchDeposit() {
 		$("#dg").datagrid('load', {
 			"userName" : $("#userName1").val()
 		});
@@ -145,12 +145,46 @@
 			}
 		}
 	}
+
+	 function onAfterEdit(index, row, changes) {
+
+		 var rows = $('#dg').datagrid('getChanges');
+//		console.info(row);
+		 if (rows.length == 1){
+			 var data = {
+				 "depositId":row.depositId,
+				 "state":row.state
+			 }
+			 $.ajax({
+				 url: '${pageContext.request.contextPath}/manage/deposit/edit',
+				 data: data,
+				 type: 'POST',
+				 success: function (data) {
+					 if (data.success == true){
+						 $.messager.show({
+							 title:'押金修改',
+							 msg:'成功!',
+						 });
+					 }else {
+						 alert(data.success);
+						 $.messager.show({
+							 title:'押金修改',
+							 msg:'失败!',
+						 });
+					 }
+				 }
+			 });
+		 }
+
+		editIndex = undefined;
+	}
+
 	function onEndEdit(index, row){
 		var ed = $(this).datagrid('getEditor', {
 			index: index,
-			field: 'userId'
+			field: 'depositId'
 		});
-		row.userId = $(ed.target).combobox('getText');
+		row.depositId = $(ed.target).combobox('getText');
 	}
 	function append(){
 		if (endEditing()){
@@ -179,21 +213,24 @@
 		var rows = $('#dg').datagrid('getChanges');
 		alert(rows.length+' rows are changed!');
 	}
-	function onAfterEdit(index, row, changes) {
-		//endEdit该方法触发此事件
-		$.post("${pageContext.request.contextPath}/manage/user/edit", {
-					ids : ids
-				}, function(result) {
-					if (result.success) {
-						$.messager.alert("系统提示", "数据已成功删除！");
-						$("#dg").datagrid("reload");
-					} else {
-						$.messager.alert("系统提示", "数据删除失败，请联系系统管理员！");
-					}
-				}, "json"
-		);
-		$.console.info(row);
-		editRow = undefined;
+	 function rowStyler(index,row){
+		if (index%2 == 0){
+			return 'background-color:#d5d5d5;color:#000;';
+		}
+	}
+
+	function formatOper(val,row,index){
+		return '<a href="#" onclick="editUser('+index+')">修改</a>';
+	}
+
+	function editUser(index){
+		$('#dg').datagrid('selectRow',index);// 关键在这里
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			$('#dlg').dialog('open').dialog('setTitle','修改学生信息');
+			$('#fm').form('load',row);
+			url = '${ctx}updateStudent.do?id='+row.id;
+		}
 	}
 </script>
 </head>
@@ -202,54 +239,57 @@
 
 	<table id="dg" title="用户管理" class="easyui-datagrid" fitColumns="true"
 		pagination="true" rownumbers="true"
-
-
 		   data-options="
 		   		fitColumns:true,
+		   		fit: true,
+                striped: true,
+                border: false,
 				pagination:true,
 				rownumbers:true,
                 iconCls: 'icon-edit',
-                fit:true,
                 singleSelect: true,
                 toolbar: '#tb',
-                url: '${pageContext.request.contextPath}/manage/user/userList',
+                url: '${pageContext.request.contextPath}/manage/deposit/depositList',
                 method: 'get',
                 onClickCell: onClickCell,
+                onAfterEdit:onAfterEdit,
                 onEndEdit: onEndEdit,
-                onAfterEdit:onAfterEdit
+
             ">
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center" ></th>
-				<th data-options = "field:'userId',
-                    editor:'textbox'
-					" align="center">用户Id</th>
-				<th data-options = "field:'userName',editor:'textbox'" align="center">用户名</th>
-				<th data-options = "field:'sex',editor:'textbox'"  align="center">性别</th>
-				<th data-options = "field:'birthday',editor:'datebox'" width="50" align="center">生日</th>
-				<th data-options = "field:'realName',editor:'textbox'" align="center">真名</th>
-				<th data-options = "field:'phone',editor:'textbox'" align="center">手机号</th>
-				<th align="center" data-options="field:'registerTime'
-					">注册时间</th>
-				<th field="userEmail" align="center">邮箱</th>
-				<th field="balance" align="center">余额</th>
-				<th data-options = "field:'freeze',editor:'textbox'" align="center">冻结</th>
+				<th data-options = "field:'depositId',editor:'numberbox',sortable:true" align="center">押金ID</th>
+				<th data-options = "field:'userId',editor:'numberbox',sortable:true" align="center">用户ID</th>
+				<th data-options = "field:'goodId',editor:'numberbox',sortable:true"  align="center">拍品ID</th>
+				<th data-options = "field:'price',sortable:true,editor:{type:'numberbox',options:{precision:2}}" width="50" align="center">押金金额/元</th>
+				<th data-options = "field:'state',sortable:true,editor:{type:'checkbox',options:{on:'1',off:'0'}}" align="center">状态</th>
+				<th data-options = "field:'createTime',sortable:true,width:100,editor:'datetimebox'" align="center">创建时间</th>
+				<th data-options = "field:'updateTime',sortable:true,width:100,editor:'datetimebox'" align="center">更新时间</th>
+				<th data-options = "field:'123',formatter:formatOper">操作</th>
+			</tr>
+			<tr>
+
 			</tr>
 		</thead>
 	</table>
 	<div id="tb">
 		<a href="javascript:append()" class="easyui-linkbutton"
 			iconCls="icon-add" plain="true">添加</a> <a
-			href="javascript:onClickCell()" class="easyui-linkbutton"
+			href="javascript:openUserModifyDialog()" class="easyui-linkbutton"
 			iconCls="icon-edit" plain="true">修改</a> <a
 			href="javascript:saveUser()" class="easyui-linkbutton"
 			iconCls="icon-save" plain="true">保存</a> <a
 			href="javascript:deleteUser()" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true">删除</a>
 		<div>
-			&nbsp;用户名：&nbsp;<input type="text" id="userName1" size="20"
-				onkeydown="if(event.keyCode == 13)searchUser()" /> <a
-				href="javascript:searchUser()" class="easyui-linkbutton"
+			&nbsp;押金编号：&nbsp;<input type="text" id="deopsitId" size="20" placeholder="可选"
+				onkeydown="if(event.keyCode == 13)searchDeposit()" />
+			&nbsp;用户编号：&nbsp;<input type="text" id="userId" size="20" placeholder="可选"
+				   onkeydown="if(event.keyCode == 13)searchDeposit()" />
+			&nbsp;拍品编号：&nbsp;<input type="text" id="goodId" size="20" placeholder="可选"
+				   onkeydown="if(event.keyCode == 13)searchDeposit()" /><a
+				href="jav	ascript:searchDeposit()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a>
 		</div>
 
@@ -257,6 +297,28 @@
 			<a href="javascript:saveUser()" class="easyui-linkbutton"
 				iconCls="icon-ok">保存</a> <a href="javascript:closeUserDialog()"
 				class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+		</div>
+
+		<div id="dlg" class="easyui-dialog"
+			style="width: 730px;height:280px;padding:10px 10px;" closed="true"
+			buttons="#dlg-buttons">
+			<form method="post" id="fm">
+				<table cellspacing="8px;">
+					<tr>
+						<td>用户名：</td>
+						<td><input type="text" id="userName" name="userName"
+							class="easyui-validatebox" required="true" />&nbsp;<span
+							style="color: red">*</span>
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>密码：</td>
+						<td><input type="password" id="password" name="password"
+							class="easyui-validatebox" required="true" />&nbsp;<span
+							style="color: red">*</span>
+						</td>
+					</tr>
+				</table>
+			</form>
 		</div>
 	</div>
 </body>

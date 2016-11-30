@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.java2d.loops.GraphicsPrimitiveProxy;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -105,9 +106,11 @@ public class AuctionController extends SpringMvcActionContext {
         }
         Integer userId = user.getUserId();
         System.out.println("userid>>>>>>>>>"+user);
-        if (user.getBalance()<depositPrice){
+        if (user.getBalance() < depositPrice){
             return MyResult.getResult(0,"余额不足","");
         }else {
+
+            
             Deposit deposit = new Deposit();
             deposit.setGoodId(goodId);
             deposit.setUserId(userId);
@@ -161,9 +164,10 @@ public class AuctionController extends SpringMvcActionContext {
             MyResult.getResult(0,"请前往登陆","");
         }
         int userId = user.getUserId();
-//        int result1 = userService.pay(userId,currPrice);
-
-        int result2 = auctionService.updateCurrPrice(userId,goodId,currPrice);
+        Good good = goodService.findGoodById(goodId);
+        good.setBuyerId(userId);
+        good.setCurrPrice(currPrice);
+        int result2 = goodService.updateGood(good);
         if (result2 > 0){
             return MyResult.getResult();
         }else{
@@ -202,9 +206,6 @@ public class AuctionController extends SpringMvcActionContext {
      * @param goodId
      * @return
      */
-
-
-
 
 
 }

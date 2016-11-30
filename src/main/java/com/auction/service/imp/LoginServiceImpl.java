@@ -24,8 +24,7 @@ import javax.servlet.http.HttpSession;
 public class LoginServiceImpl implements LoginService{
 
 
-    @Resource
-    private UserMapper userMapper;
+
     @Resource
     private LoginMapper loginMapper;
     @Resource

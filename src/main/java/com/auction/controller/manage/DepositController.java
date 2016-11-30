@@ -4,8 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.auction.model.Deposit;
 import com.auction.model.PageBean;
 import com.auction.service.DepositService;
-import com.auction.util.StringUtil;
+import com.auction.util.DateJsonValueProcessor;
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,34 +27,59 @@ public class DepositController {
     private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(DepositController.class);
 
 
-//    @Resource
-//    private DepositService depositService;
-//
-//    /**
-//     * 分页查询
-//     * @param page
-//     * @param rows
-//     * @param s_user
-//     * @return
-//     *
-//     * */
-//    @RequestMapping("/depositList")
-//    @ResponseBody
-//    public Object userList(@RequestParam(value = "page",required = false)String page, @RequestParam(value = "rows",required = false)String rows, Deposit deposit)throws Exception{
-//        PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
-//        Map<String,Object> map = new HashMap<String, Object>();
-//        map.put("userName", StringUtil.formatLike(deposit.));
-//        map.put("userName", StringUtil.formatLike(orderBean.getUserName()));
-//        map.put("goodName", StringUtil.formatLike(orderBean.getGoodName()));
-//        map.put("start", pageBean.getStart());
-//        map.put("size", pageBean.getPageSize());
-//        List<Deposit>  depositList = depositService.find(map);
-//        Long total=depositList.getTotal(map);
-//        JSONObject result=new JSONObject();
-//        JSONArray jsonArray= JSONArray.fromObject(depositList);
-//        result.put("rows", jsonArray);
-//        result.put("total", total);
-//        System.out.println(result.toString());
-//        return result;
-//    }
+    @Resource
+    private DepositService depositService;
+    /**
+     * 分页查询
+     * @param page
+     * @param rows
+     * @param deposit
+     * @return
+     *
+     * */
+    @RequestMapping("/depositList")
+    @ResponseBody
+    public Object depositList(@RequestParam(value = "page",required = false)String page, @RequestParam(value = "rows",required = false)String rows, Deposit deposit)throws Exception{
+        PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("userId", deposit.getUserId());
+        map.put("depositId",deposit.getDepositId());
+        map.put("goodName",deposit.getGoodId());
+        map.put("start", pageBean.getStart());
+        map.put("size", pageBean.getPageSize());
+        List<Deposit>  depositList = depositService.find(map);
+        Long total=depositService.getTotal(map);
+        net.sf.json.JSONObject result=new net.sf.json.JSONObject();
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.registerJsonValueProcessor(java.util.Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh:mm:ss"));
+        JSONArray jsonArray= JSONArray.fromObject(depositList,jsonConfig);
+        result.put("rows", jsonArray);
+        result.put("total", total);
+        System.out.println(result.toString());
+        return result;
+    }
+
+
+    /**
+     * 修改(包括返还)
+     * @param deposit
+     * @return
+     *
+     * */
+
+    @RequestMapping("edit")
+    @ResponseBody
+    public Object editDeposit(Deposit deposit) throws  Exception{
+        int result = depositService.update(deposit);
+        net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
+        if(result > 0){   //说明修改成功
+            log.debug("editOrder修改成功");
+            jsonObject.put("success", true);
+        }else{
+            log.debug("editOrder修改失败");
+            jsonObject.put("success", false);
+        }
+        return jsonObject;
+    }
 }
+

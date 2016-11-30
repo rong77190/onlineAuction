@@ -21,10 +21,7 @@ import java.util.Map;
 public class GoodServiceImpl implements GoodService {
     @Resource
     private GoodMapper goodMapper;
-    @Resource
-    private CategoryMapper categoryMapper;
-    @Resource
-    private SubCategoryMapper subCategoryMapper;
+
 
     public Good findGoodById(int goodId) {
         return goodMapper.selectByPrimaryKey(goodId);

@@ -142,4 +142,42 @@
     ORDER BY create_time DESC
   </select>
 
+
+
+  <select id="find" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from deposit
+    <where>
+      <if test="goodId != null and goodId != '' ">
+        and good_id like #{goodId}
+      </if>
+      <if test="userId!=null and userId!='' ">
+        and user_id like #{userId}
+      </if>
+      <if test="orderId != null and orderId!='' ">
+        and order_id like #{orderId}
+      </if>
+    </where>
+    <if test="start!=null and size!=null">
+      limit #{start},#{size}
+    </if>
+  </select>
+
+  <select id="getTotal" parameterType="Map" resultType="Long">
+    select count(*)
+    from deposit
+    <where>
+      <if test="goodId != null and goodId != '' ">
+        and good_id like #{goodId}
+      </if>
+      <if test="userId!=null and userId!='' ">
+        and user_id like #{userId}
+      </if>
+      <if test="orderId != null and orderId!='' ">
+        and order_id like #{orderId}
+      </if>
+    </where>
+  </select>
+
 </mapper>

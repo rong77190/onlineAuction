@@ -35,7 +35,7 @@ public interface GoodMapper {
     List<Good> getNotAudit();
 
     /**
-     * 用户查询
+     * 拍品查询
      * @param map
      * @return用户集合
      */

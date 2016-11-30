@@ -22,6 +22,8 @@
 	src="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript"
+			src="${pageContext.request.contextPath}/manage/js/easyuiExtension.js"></script>
 
 <script type="text/javascript">
 	var url;
@@ -111,10 +113,10 @@
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center"></th>
-				<th field="orderId" align="center">订单Id</th>
+				<th data-options = "field:'orderId',sortable:true"  align="center">订单Id</th>
 				<th field="userId"  align="center">用户Id</th>
 				<th field="userName" width="50" align="center">用户名</th>
-				<th field="goodId" width="50" align="center">商品id</th>
+				<th data-options = "field:'goodId',sortable:true"  width="50" align="center">商品id</th>
 				<th field="goodName" width="100" align="center">商品名称</th>
 				<th field="orderPrice" width="50" align="center">订单金额</th>
 				<th field="orderState" width="50" align="center">状态</th>
@@ -131,17 +133,19 @@
 			iconCls="icon-add" plain="true">添加</a> <a
 			href="javascript:openUserModifyDialog()" class="easyui-linkbutton"
 			iconCls="icon-edit" plain="true">修改</a> <a
+			href="javascript:saveUser()" class="easyui-linkbutton"
+			iconCls="icon-save" plain="true">保存</a> <a
 			href="javascript:deleteUser()" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true">删除</a>
 		<div>
 			&nbsp;用户名：&nbsp;
-			<input type="text" id="userName" size="5" placeholder="可选"
+			<input type="text" id="userName" size="20" placeholder="可选"
 				onkeydown="if(event.keyCode == 13)search()" />
 			&nbsp;商品名：&nbsp;
-			<input type="text" id="goodName" size="5"  placeholder="可选"
+			<input type="text" id="goodName" size="20"  placeholder="可选"
 				   onkeydown="if(event.keyCode == 13)search()" />
 			&nbsp;订单编号：&nbsp;
-			<input type="text" id="orderId" size="3" placeholder="可选"
+			<input type="text" id="orderId" size="20" placeholder="可选"
 				   onkeydown="if(event.keyCode == 13)searchUser()" />
 			<a
 				href="javascript:search()" class="easyui-linkbutton"
