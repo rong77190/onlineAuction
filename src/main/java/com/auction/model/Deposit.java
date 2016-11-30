@@ -72,4 +72,17 @@ public class Deposit {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "depositId=" + depositId +
+                ", userId=" + userId +
+                ", goodId=" + goodId +
+                ", createTime=" + createTime +
+                ", price=" + price +
+                ", state=" + state +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

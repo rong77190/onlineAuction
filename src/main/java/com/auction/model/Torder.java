@@ -92,4 +92,19 @@ public class Torder {
     public void setUpdateBy(Integer updateBy) {
         this.updateBy = updateBy;
     }
+
+    @Override
+    public String toString() {
+        return "Torder{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", goodId=" + goodId +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", orderPrice=" + orderPrice +
+                ", orderState=" + orderState +
+                ", payWay=" + payWay +
+                ", updateBy=" + updateBy +
+                '}';
+    }
 }

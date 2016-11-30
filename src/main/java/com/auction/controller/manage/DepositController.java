@@ -3,8 +3,11 @@ package com.auction.controller.manage;
 import com.alibaba.fastjson.JSONObject;
 import com.auction.model.Deposit;
 import com.auction.model.PageBean;
+import com.auction.model.User;
 import com.auction.service.DepositService;
+import com.auction.service.UserService;
 import com.auction.util.DateJsonValueProcessor;
+import com.auction.util.ResponseUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 import org.slf4j.Logger;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +34,8 @@ public class DepositController {
 
     @Resource
     private DepositService depositService;
+    @Resource
+    private UserService userService;
     /**
      * 分页查询
      * @param page
@@ -44,7 +51,9 @@ public class DepositController {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("userId", deposit.getUserId());
         map.put("depositId",deposit.getDepositId());
-        map.put("goodName",deposit.getGoodId());
+        map.put("goodId",deposit.getGoodId());
+        map.put("state",deposit.getState());
+        log.debug(deposit.toString());
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
         List<Deposit>  depositList = depositService.find(map);
@@ -81,5 +90,36 @@ public class DepositController {
         }
         return jsonObject;
     }
+
+    /**
+     * 返回押金
+     * @param ids
+     * @param res
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/backDeposit")
+    public String delete(@RequestParam(value="ids") String ids,HttpServletResponse res) throws Exception{
+        String[] idStr = ids.split(",");
+        net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
+        for (String id : idStr){
+            Deposit deposit = depositService.findById(Integer.parseInt(id));
+            int userId = deposit.getUserId();
+            double price = deposit.getPrice();
+            User user = userService.findById(userId);
+            user.setBalance(user.getBalance()+price);
+            deposit.setState(1);
+            deposit.setUpdateTime(new Date());
+            synchronized (this) {
+                userService.update(user);
+                depositService.update(deposit);
+            }
+        }
+        jsonObject.put("success", true);
+        ResponseUtil.write(res, jsonObject);
+        return null;
+    }
+
+
 }
 

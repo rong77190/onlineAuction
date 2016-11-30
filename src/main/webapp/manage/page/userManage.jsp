@@ -46,7 +46,7 @@
 		var row = selectedRows[0];
 			$("#dlg").dialog("open").dialog("setTitle", "编辑用户信息");
 			$("#fm").form("load", row);
-			url = "${pageContext.request.contextPath}/manage/user/save?userId=" + row.userId;
+			url = "${pageContext.request.contextPath}/manage/user/?userId=" + row.userId;
 		}
 
 	function saveUser() {

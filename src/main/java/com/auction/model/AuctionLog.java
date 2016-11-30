@@ -40,4 +40,5 @@ public class AuctionLog {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 }
