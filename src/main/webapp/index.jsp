@@ -133,7 +133,7 @@
                   <a href="page.jsp">  <button class="btn btn-glass">我的拍卖</button>
                 </a>
                 <div style="display: inline-block;position: relative" id="startbody">
-                   <a href="user/user"> <button class="btn btn-glass tip-rec" id="start" >个人中心</button></a>
+                   <a href="user/userInfo"> <button class="btn btn-glass tip-rec" id="start" >个人中心</button></a>
                     
                  <!--  <!--  -->  <ul class="down-menu" id="start-menu">
                         <li class="one"><a class="tip-rec" href="#">食品</a></li>
