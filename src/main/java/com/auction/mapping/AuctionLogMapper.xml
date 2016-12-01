@@ -11,7 +11,7 @@
     id, user_id, good_id, price
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from auction_log
     where id = #{id,jdbcType=INTEGER}
@@ -21,10 +21,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.auction.model.AuctionLog" >
-    insert into auction_log (id, user_id, good_id,
-    price)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER},
-    #{price,jdbcType=DOUBLE})
+    insert into auction_log (id, user_id, good_id, 
+      price)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.auction.model.AuctionLog" >
     insert into auction_log

@@ -273,6 +273,12 @@
       <if test="goodName!=null and goodName!='' ">
         and good_name like #{goodName}
       </if>
+      <if test="goodId!=null and goodId!='' ">
+        and good_id like #{goodId}
+      </if>
+      <if test="goodState!=null and goodState!='' ">
+        and good_state like #{goodState}
+      </if>
     </where>
     <if test="start!=null and size!=null">
       limit #{start},#{size}
@@ -284,6 +290,12 @@
     <where>
       <if test="goodName!=null and goodName!='' ">
         and good_name like #{goodName}
+      </if>
+      <if test="goodId!=null and goodId!='' ">
+        and good_id like #{goodId}
+      </if>
+      <if test="goodState!=null and goodState!='' ">
+        and good_state = #{goodState}
       </if>
     </where>
   </select>

@@ -122,11 +122,7 @@ public class FinishAuction {
                 }else {
                     log.debug("生成订单失败");
                 }
-
             }
-
         }
-
-
     }
 }

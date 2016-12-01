@@ -46,6 +46,8 @@ public class GoodController {
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("goodName", StringUtil.formatLike(good.getGoodName()));
+        map.put("goodId",good.getGoodId());
+        map.put("goodState",good.getGoodState());
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
         List<Good> goodList=goodService.find(map);
@@ -81,6 +83,7 @@ public class GoodController {
         }
         return jsonObject;
     }
+
 
 
 }

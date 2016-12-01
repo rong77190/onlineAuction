@@ -30,16 +30,17 @@ public class AdminController extends SpringMvcActionContext{
      * @return
      */
     @RequestMapping("login")
-    public String manageLogin(Manager manager) {
+    @ResponseBody
+    public Object manageLogin(Manager manager) {
         HttpSession session = getSession();
         manager = managerService.login(manager);
         if (manager == null) {
             getSession().setAttribute("manager", manager);
             getRequest().setAttribute("error", "用户名或密码错误");
-            return "/manage/syslogin";
+            return MyResult.getResult(0,"用户名或密码错误","");
         } else {
             session.setAttribute("manager", manager);
-            return "redirect:/manage/main.jsp";
+            return MyResult.getResult();
         }
     }
 
