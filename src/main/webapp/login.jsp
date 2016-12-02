@@ -38,11 +38,17 @@
       <ul style="padding-left: 1em;">
         <li style="list-style-type:none; padding:1em 0 1em 0">
           <span style="display:-moz-inline-box;display:inline-block;width:4em; text-align:center; font-size:1.5em; font-weight:bold;">用户名</span>
-          <input id="nail" type="text"  id="j_username"  name="j_username"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;" required="required">
+          <input type="text"  id="userName"  name="userName" placeholder="用户名"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;" required="required">
         </li>
         <li style="list-style-type:none; padding:1em 0 1em 0;">
           <span style="display:-moz-inline-box;display:inline-block;width:4em; text-align:center; font-size:1.5em; font-weight:bold;">密码</span>
-          <input type="password"  id="j_password"  name="j_password"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;" required="required">
+          <input type="password"  id="password"  name="password" placeholder="密码"  autocomplete="off" style="font-size:1.5em; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;" required="required">
+        <span><a href="resetPassword.jsp" >忘记密码</a></span>
+        </li >
+        <li style="list-style-type:none; padding:1em 0 1em 0;">
+          <span style="display:-moz-inline-box;display:inline-block;width:4em; text-align:center; font-size:1.5em; font-weight:bold;">验证码</span>
+          <input id="validCode" name="validCode" type="text" placeholder="验证码"  style="font-size:1.5em;width: 130px; border:1px solid #ccc; border-radius:0.3em; text-indent:0.5em;" required="required">
+          <img alt="验证码" title="点击更换" id="img_captcha" height="30px;" width="90px;" onclick="this.src='${ctx}/login/getNewValidCode?id='+Math.random();" src="${ctx}/login/getNewValidCode"/> <a id="kanbuq" onclick="javascript:refreshCaptcha();" href="javascript:;">看不清，换一张</a>
         </li>
         <li style="list-style-type:none;padding:0.5em 0 0.5em 0.8em;">
           <input type="button" onclick="checkin()" value="登陆" style="padding:0.4em 1em; color:#fff; font-size:1.2em; height:100%; border:none; border-radius:0.3em; background-color:#5bc0de;">
@@ -69,17 +75,37 @@
 <script type="text/javascript">
     function register(){
     	window.location = "<c:url value='register.jsp' />";
-
-
-
     }
     function checkin(){
-    	window.location = "<c:url value='loginEnd.jsp' />";
+        var data = {
+            "userName":$("#userName").val(),
+            "password":$("#password").val(),
+            "validCode":$("#validCode").val(),
+        }
 
-
-
-
-
+        $.ajax({
+            type: "post",
+            url: "/login/login",
+            data: data,
+            dataType: "json",
+            success:function(data){
+                if (data.status=="0"){
+                    alert("登录失败");
+                }
+                if (data.status=="1"){
+                    alert("登陆成功");
+                }
+                <%--showMessage(data.updated,true,"#form");--%>
+                <%--$("body").animate({scrollTop:0},200);--%>
+//                setTimeout(function(){
+                    <%--window.location = "<c:url value='index.jsp'/>";--%>
+//                },1500);
+            }
+//            error:function(XMLHttpRequest){
+//                showMessage(XMLHttpRequest.responseJSON["not-found"],false,"#form");
+//            }
+        });
+    	<%--window.location = "<c:url value='loginEnd.jsp' />";--%>
     }
     
     var wait = setInterval(function(){ 
