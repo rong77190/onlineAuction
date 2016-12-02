@@ -56,7 +56,7 @@ public class OrderController {
         Long total=torderService.getTotal(map);
         JSONObject result=new JSONObject();
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.registerJsonValueProcessor(java.util.Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh-mm-ss"));
+        jsonConfig.registerJsonValueProcessor(java.util.Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh:mm:ss"));
         JSONArray jsonArray= JSONArray.fromObject(torderList,jsonConfig);
         result.put("rows", jsonArray);
         result.put("total", total);

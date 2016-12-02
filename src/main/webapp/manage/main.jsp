@@ -40,6 +40,9 @@
             }
         }
 
+        function logout(){
+
+        }
     </script>
 </head>
 
@@ -90,7 +93,7 @@
         </div>
         <div title="系统管理"  data-options="iconCls:'icon-item'" style="padding:10px">
             <a href="javascript:openPasswordModifyDialog()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
-            <a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
+            <a href="${pageContext.request.contextPath}/manage/admin/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
         </div>
     </div>
 </div>

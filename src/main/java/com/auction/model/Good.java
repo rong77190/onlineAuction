@@ -162,4 +162,26 @@ public class Good {
     public void setClick(Integer click) {
         this.click = click;
     }
+
+    @Override
+    public String toString() {
+        return "Good{" +
+                "goodId=" + goodId +
+                ", subCategoryId=" + subCategoryId +
+                ", goodName='" + goodName + '\'' +
+                ", price=" + price +
+                ", currPrice=" + currPrice +
+                ", beginPrice=" + beginPrice +
+                ", image='" + image + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", createTime=" + createTime +
+                ", isDelete=" + isDelete +
+                ", upTime=" + upTime +
+                ", goodState=" + goodState +
+                ", completeTime=" + completeTime +
+                ", sellerId=" + sellerId +
+                ", buyerId=" + buyerId +
+                ", click=" + click +
+                '}';
+    }
 }

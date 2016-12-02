@@ -1,6 +1,7 @@
 package com.auction.controller;
 
 import com.auction.model.Torder;
+import com.auction.common.SpringMvcActionContext;
 import com.auction.model.User;
 import com.auction.service.TorderService;
 import com.auction.service.UserService;
@@ -17,35 +18,31 @@ import java.util.List;
 
 
 @Controller
-public class TorderController {
+@RequestMapping("/order")
+public class TorderController extends SpringMvcActionContext {
     @Resource
     private TorderService torderService;
+    @Resource
     private UserService userService;
 
-    @ResponseBody
-    @RequestMapping("/order/{userId}")
-    public Object usersTorders(@PathVariable int userId){
-        List<Torder> torders=torderService.getUserAllTorders(userId);
-        return  MyResult.getResult(1, "", torders);
-    }
 
+    @RequestMapping("/manage/orders")
     @ResponseBody
-    @RequestMapping("/manage/torders")
     public Object checkTorders(){
         List<Torder> torders=torderService.getAllTorders();
         return  MyResult.getResult(1, "", torders);
     }
 
-    @ResponseBody
     @RequestMapping("/manage/torders/search")
+    @ResponseBody
     public  Object searchTorder(@RequestParam int orderId){
         Torder torder=torderService.getTorder(orderId);
         return  MyResult.getResult(1, "", torder);
     }
 
 
-    @ResponseBody
     @RequestMapping("/manage/torders/{orderId}")
+    @ResponseBody
     public  Object checkTorder(@PathVariable int orderId){
         Torder torder=torderService.getTorder(orderId);
         return  MyResult.getResult(1, "", torder);
@@ -53,8 +50,8 @@ public class TorderController {
 
 
 
-    @ResponseBody
     @RequestMapping("/manage/torders/{orderId}/tradersinfo")
+    @ResponseBody
     public  Object checkBuyerSellerInfo(@PathVariable int orderId){
         int buyerId=torderService.getbuyerinfo(orderId);
         User buyer=userService.findById(buyerId);

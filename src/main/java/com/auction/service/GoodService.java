@@ -29,7 +29,7 @@ public interface GoodService {
 
 
     /**
-     * 用户查询
+     * 拍品查询
      * @param map
      * @return
      */
@@ -61,5 +61,8 @@ public interface GoodService {
      * @return
      */
     public int delete(Integer userId);
+
+
+    public List getComplete();
 
 }

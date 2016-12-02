@@ -9,4 +9,5 @@ public interface OrderService {
 
     public int pay(Torder order);
 
+    public int add(Torder torder);
 }

@@ -22,7 +22,8 @@
 			src="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
 	<script type="text/javascript"
 			src="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
-
+	<script type="text/javascript"
+			src="${pageContext.request.contextPath}/manage/js/easyuiExtension.js"></script>
 	<script type="text/javascript">
 		var url;
 		function search() {

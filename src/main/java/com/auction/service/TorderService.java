@@ -17,6 +17,7 @@ public interface TorderService {
 
     public void createTorder(int userId, int goodId,Double orderPrice,int orderState,int payWay);
 
+
     public void deleteTorder(int orderId);
 
     public void updateTorder(int orderId,int goodId, Double orderPrice,int orderState,int payWay);
@@ -47,4 +48,6 @@ public interface TorderService {
      * @return
      */
     public int update(Torder torder);
+
+    public int addOrder(Torder torder);
 }

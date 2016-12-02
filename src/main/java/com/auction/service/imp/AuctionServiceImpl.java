@@ -31,8 +31,4 @@ public class AuctionServiceImpl implements AuctionService {
         return depositMapper.insertSelective(deposit);
     }
 
-    //更新当前价格
-    public int updateCurrPrice(int buyerId, int goodId, double currPrice) {
-        return goodMapper.updateCurrPrice(buyerId,goodId,currPrice);
-    }
 }

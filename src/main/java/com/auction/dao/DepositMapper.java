@@ -1,9 +1,11 @@
 package com.auction.dao;
 
 import com.auction.model.Deposit;
+import com.auction.model.Good;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DepositMapper {
     int deleteByPrimaryKey(Integer depositId);
@@ -26,4 +28,19 @@ public interface DepositMapper {
 
     //获取某商品未返押金信息
     List getDepositByGoodId2(@Param("goodId") int goodId);
+
+    /**
+     * 押金查询
+     * @param map
+     * @return押金集合
+     */
+    public List<Deposit> find(Map<String, Object> map);
+
+
+    /**
+     * 获取总记录数
+     * @param map
+     * @return获取的total数
+     */
+    public Long getTotal(Map<String, Object> map);
 }

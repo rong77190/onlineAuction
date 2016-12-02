@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +23,7 @@ import java.util.Map;
 public class GoodServiceImpl implements GoodService {
     @Resource
     private GoodMapper goodMapper;
-    @Resource
-    private CategoryMapper categoryMapper;
-    @Resource
-    private SubCategoryMapper subCategoryMapper;
+
 
     public Good findGoodById(int goodId) {
         return goodMapper.selectByPrimaryKey(goodId);
@@ -68,6 +67,17 @@ public class GoodServiceImpl implements GoodService {
 
     public int delete(Integer userId) {
         return 0;
+    }
+
+    public List getComplete() {
+        List<Good> goodList = goodMapper.getAllGood();
+        List list = new LinkedList();
+        for (int i =0; i < goodList.size(); i++){
+//            list.add(i,goodList.get(i).getCompleteTime());
+            if (goodList.get(i).getCompleteTime().after(new Date()))
+            list.add(goodList.get(i).getCompleteTime());
+        }
+        return list;
     }
 
     public List<Good> selectBySubCategoryId(int id){

@@ -14,7 +14,7 @@ public interface UserService {
 
     User findById(int userId);
 
-    User userInfo(int userId);
+//    User userInfo(int userId);
 
     int backDepositToUser(int userId,double price);
 
@@ -24,7 +24,9 @@ public interface UserService {
 
     int update(User user);
 
-    int userUpdate(Integer userId,String userName,String phone,String sex,String birthday,String userEmail);
+    int userUpdate(Integer userId,String phone,String sex,String birthday);
+
+    int updateImage(Integer userId,String userImage);
 
     /**
      * 用户查询
