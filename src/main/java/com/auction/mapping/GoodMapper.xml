@@ -277,7 +277,7 @@
         and good_id like #{goodId}
       </if>
       <if test="goodState!=null and goodState!='' ">
-        and good_state like #{goodState}
+        and good_state = #{goodState}
       </if>
     </where>
     <if test="start!=null and size!=null">

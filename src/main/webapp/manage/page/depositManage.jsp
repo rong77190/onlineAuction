@@ -32,6 +32,7 @@
 	function searchDeposit() {
 //		alert($('#state').combobox('getValue'));
 		$("#dg").datagrid('load', {
+
 			"depositId" : $("#depositId").val(),
 			"userId": $("#userId").val(),
 			"goodId": $("#goodId").val(),

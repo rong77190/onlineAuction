@@ -28,7 +28,9 @@
 		var url;
 		function search() {
 			$("#dg2").datagrid('load', {
-				"goodName" : $("#goodName").val()
+				"goodId" : $("#goodId").val(),
+				"goodName" : $("#goodName").val(),
+				"goodState" : $('#goodState').combobox('getValue')
 			});
 		}
 		function openGoodAddDialog() {
@@ -147,17 +149,24 @@
 			href="javascript:deleteGood()" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true">删除</a>
 	<div>
-		&nbsp;商品名：&nbsp;<input type="text" id="goodName" size="20"
-							   onkeydown="if(event.keyCode == 13)search()" /> <a
+		&nbsp;拍品名：&nbsp;<input type="text" id="goodName" size="20"
+							   onkeydown="if(event.keyCode == 13)search()" />
+		&nbsp;拍品编号：&nbsp;<input type="text" id="goodId" size="20"
+							   onkeydown="if(event.keyCode == 13)search()" />
+		&nbsp;状态：&nbsp;
+		<select id="goodState" class="easyui-combobox" name="goodState" size="30" labelPosition="top">
+			<option value="" selected>可选...</option>
+			<option value="0">待审核</option>
+			<option value="1">审核上架</option>
+			<option value="2">竞拍结束</option>
+			<option value="-1">审核不通过</option>
+		</select>
+
+		<a
 			href="javascript:search()" class="easyui-linkbutton"
 			iconCls="icon-search" plain="true">查询</a>
 	</div>
 
-	<div id="dlg-buttons">
-		<a href="javascript:saveGood()" class="easyui-linkbutton"
-		   iconCls="icon-ok">保存</a> <a href="javascript:closeGoodDialog()"
-									   class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
-	</div>
 
 
 </div>

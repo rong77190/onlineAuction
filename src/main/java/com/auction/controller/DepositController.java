@@ -6,10 +6,12 @@ import com.auction.model.User;
 import com.auction.service.DepositService;
 import com.auction.service.UserService;
 import com.auction.util.MyResult;
+import com.fasterxml.jackson.databind.Module;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,23 +55,6 @@ public class DepositController extends SpringMvcActionContext{
      *
      *
      * */
-//    @RequestMapping("getDeposit")
-//    @ResponseBody
-//    public Object getDeposit(int userId,int goodId){
-//
-//        Deposit deposit = null;
-//        deposit = depositService.find(map);
-//        if (deposit == null){
-//            return MyResult.getResult(0,"没有押金记录","");
-//        }else if (deposit.getState() == 1){
-////            deposit.setCreateTime(deposit.getCreateTime().);
-//            return MyResult.getResult(1,"",deposit);
-//        }else{
-//            return MyResult.getResult(1,"",deposit);
-//        }
-//    }
-
-
 
 
     /**
@@ -80,7 +65,7 @@ public class DepositController extends SpringMvcActionContext{
      */
     @RequestMapping("/addDeposit")
     @ResponseBody
-    public Object payDeposit(int goodId,double depositPrice){
+    public Object payDeposit( int goodId, double depositPrice){
         User user = (User)getSession().getAttribute("user");
         Integer userId = user.getUserId();
         if (user.getBalance()<depositPrice){
@@ -91,11 +76,34 @@ public class DepositController extends SpringMvcActionContext{
             deposit.setUserId(userId);
             deposit.setPrice(depositPrice);
             deposit.setCreateTime(new Date());
+            deposit.setUpdateTime(new Date());
             synchronized (this){
                 depositService.add(deposit);
                 userService.pay(userId,depositPrice);
             }
             return MyResult.getResult();
+        }
+    }
+
+
+    /**
+     * 检查押金状态
+     * @param userId
+     * @param goodId
+     * @return
+     */
+    @RequestMapping("checkDepositState")
+    @ResponseBody
+    public Object checkDepositState(int userId,int goodId){
+
+        Deposit deposit = null;
+        deposit = depositService.checkDepositState(userId,goodId);
+        if (deposit == null){
+            return MyResult.getResult(0,"没有押金记录","");
+        }else if (deposit.getState() == 1){
+            return MyResult.getResult(1,"",deposit);
+        }else{
+            return MyResult.getResult(0,"",deposit);
         }
     }
 

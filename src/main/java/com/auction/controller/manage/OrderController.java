@@ -50,6 +50,11 @@ public class OrderController {
         map.put("orderId", orderBean.getOrderId());
         map.put("userName", StringUtil.formatLike(orderBean.getUserName()));
         map.put("goodName", StringUtil.formatLike(orderBean.getGoodName()));
+        if (orderBean.getOrderState() == null){
+            map.put("orderState",orderBean.getOrderState());
+        }else {
+            map.put("orderState",orderBean.getOrderState().toString());
+        }
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
         List<OrderBean> torderList= torderService.find(map);

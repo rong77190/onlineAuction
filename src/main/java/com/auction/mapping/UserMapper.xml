@@ -220,6 +220,9 @@
       <if test="userName!=null and userName!='' ">
         and user_name like #{userName}
       </if>
+      <if test="freeze!=null and freeze!='' ">
+        and freeze = #{freeze}
+      </if>
     </where>
     <if test="start!=null and size!=null">
       limit #{start},#{size}
@@ -230,6 +233,9 @@
     <where>
       <if test="userName!=null and userName!='' ">
         and user_name like #{userName}
+      </if>
+      <if test="freeze!=null and freeze!='' ">
+        and freeze = #{freeze}
       </if>
     </where>
   </select>

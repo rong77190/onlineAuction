@@ -32,4 +32,14 @@ public interface DepositService {
      * @return
      */
     public int update(Deposit deposit);
+
+
+    /**
+     * 检查押金
+     * @param userId
+     * @param goodId
+     * @return
+     */
+    Deposit checkDepositState(int userId, int goodId);
+
 }

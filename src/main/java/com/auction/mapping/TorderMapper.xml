@@ -192,10 +192,14 @@
       <if test="orderId!=null and orderId!='' ">
         and order_id like #{orderId}
       </if>
+      <if test="orderState!=null and orderState!='' ">
+        and order_state like #{orderState}
+      </if>
     </where>
     <if test="start!=null and size!=null">
       limit #{start},#{size}
     </if>
+
   </select>
 
   <select id="getTotal" parameterType="Map" resultType="Long">
@@ -213,6 +217,9 @@
       </if>
       <if test="orderId!=null and orderId!='' ">
         and order_id like #{orderId}
+      </if>
+      <if test="orderState!=null and orderState!='' ">
+        and order_state like #{orderState}
       </if>
     </where>
   </select>

@@ -37,4 +37,8 @@ public class DepositServiceImpl implements DepositService {
     public int update(Deposit deposit) {
         return depositMapper.updateByPrimaryKeySelective(deposit);
     }
+
+    public Deposit checkDepositState(int userId, int goodId) {
+        return depositMapper.checkDepositState(userId,goodId);
+    }
 }

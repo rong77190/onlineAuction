@@ -159,7 +159,7 @@
         and deposit_id like #{depositId}
       </if>
       <if test="state != null and state!='' ">
-        and state like #{state}
+        and state = #{state}
       </if>
     </where>
     <if test="start!=null and size!=null">

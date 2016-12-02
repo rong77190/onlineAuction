@@ -47,14 +47,19 @@ public class GoodController {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("goodName", StringUtil.formatLike(good.getGoodName()));
         map.put("goodId",good.getGoodId());
-        map.put("goodState",good.getGoodState());
+        if (good.getGoodState() == null){
+            map.put("goodState",good.getGoodState());
+        }else {
+            map.put("goodState",good.getGoodState().toString());
+        }
+
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
         List<Good> goodList=goodService.find(map);
         Long total=goodService.getTotal(map);
         JSONObject result=new JSONObject();
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.registerJsonValueProcessor(java.util.Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh-mm-ss"));
+        jsonConfig.registerJsonValueProcessor(java.util.Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh:mm:ss"));
         JSONArray jsonArray= JSONArray.fromObject(goodList,jsonConfig);
         result.put("rows", jsonArray);
         result.put("total", total);
@@ -83,6 +88,37 @@ public class GoodController {
         }
         return jsonObject;
     }
+
+//    @RequestMapping("/test")
+//    @ResponseBody
+//    public Object test(@RequestParam(value = "page",required = false)String page, @RequestParam(value = "rows",required = false)String rows, Good good)throws Exception{
+//        PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
+//        Map<String,Object> map = new HashMap<String, Object>();
+//        map.put("goodName", StringUtil.formatLike(good.getGoodName()));
+//        map.put("goodId",good.getGoodId());
+//        if (good.getGoodState()== null){
+//            map.put("goodState",good.getGoodState());
+//        }else {
+//            map.put("goodState",good.getGoodState().toString());
+//        }
+//        map.put("start", pageBean.getStart());
+//        map.put("size", pageBean.getPageSize());
+//        List<Good> goodList=goodService.find(map);
+//        Long total=goodService.getTotal(map);
+//        JSONObject result=new JSONObject();
+//        JsonConfig jsonConfig = new JsonConfig();
+//        jsonConfig.registerJsonValueProcessor(java.util.Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh:mm:ss"));
+//        JSONArray jsonArray= JSONArray.fromObject(goodList,jsonConfig);
+//        result.put("rows", jsonArray);
+//        result.put("total", total);
+//        System.out.println(result.toString());
+////        ResponseUtil.write(getResponse(), result);
+//        return result;
+//    }
+
+
+
+
 
 
 

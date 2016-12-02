@@ -29,7 +29,9 @@
 	var url;
 	function searchUser() {
 		$("#dg").datagrid('load', {
-			"userName" : $("#userName1").val()
+			"userName" : $("#userName").val(),
+			"realName" : $("#realName").val(),
+			"freeze" : $('#freeze').combobox('getValue')
 		});
 	}
 	function openUserAddDialog() {
@@ -218,22 +220,42 @@
                 onEndEdit: onEndEdit,
                 onAfterEdit:onAfterEdit
             ">
+		<%--<thead frozen="true">--%>
+		<%--<tr>--%>
+			<%--<th field="userId" width="80">用户编号</th>--%>
+		<%--</tr>--%>
+		<%--</thead>--%>
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true" align="center" ></th>
 				<th data-options = "field:'userId',
                     editor:'textbox'
 					" align="center">用户Id</th>
-				<th data-options = "field:'userName',editor:'textbox'" align="center">用户名</th>
-				<th data-options = "field:'sex',editor:'textbox'"  align="center">性别</th>
-				<th data-options = "field:'birthday',editor:'datebox'" width="50" align="center">生日</th>
-				<th data-options = "field:'realName',editor:'textbox'" align="center">真名</th>
-				<th data-options = "field:'phone',editor:'textbox'" align="center">手机号</th>
+				<th data-options = "field:'userName'" align="center">用户名</th>
+				<th data-options = "field:'sex'"  align="center">性别</th>
+				<th data-options = "field:'birthday'" width="50" align="center">生日</th>
+				<th data-options = "field:'realName'" align="center">真名</th>
+				<th data-options = "field:'phone'" align="center">手机号</th>
 				<th align="center" data-options="field:'registerTime'
 					">注册时间</th>
 				<th field="userEmail" align="center">邮箱</th>
 				<th field="balance" align="center">余额</th>
-				<th data-options = "field:'freeze',editor:'textbox'" align="center">冻结</th>
+				<th data-options = "field:'freeze', formatter:function(value,row){
+                          						  if(row.freeze == 1)
+                          						  	return '冻结';
+                          						  else
+                          						  	return '正常';
+                        					},editor:{
+                        						type:'combobox',
+                        						options:{
+                        							valueField:'freeze',
+													textField:'chinese',
+													method:'get',
+													panelHeight:'42.5px',
+													url:'/manage/page/my.json',
+													required:true
+                        						}
+                        					}" align="center" width="20">状态</th>
 			</tr>
 		</thead>
 	</table>
@@ -247,16 +269,19 @@
 			href="javascript:deleteUser()" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true">删除</a>
 		<div>
-			&nbsp;用户名：&nbsp;<input type="text" id="userName1" size="20"
-				onkeydown="if(event.keyCode == 13)searchUser()" /> <a
+			&nbsp;用户名：&nbsp;<input type="text" id="userName" size="20"
+				onkeydown="if(event.keyCode == 13)searchUser()" />
+			&nbsp;真名：&nbsp;<input type="text" id="realName" size="20"
+								   onkeydown="if(event.keyCode == 13)searchUser()" />
+			&nbsp; 状态：&nbsp;
+			<select id="freeze" class="easyui-combobox" name="freeze" size="20" labelPosition="top">
+				<option value="" selected>可选...</option>
+				<option value="0">正常</option>
+				<option value="1">冻结</option>
+			</select>
+			<a
 				href="javascript:searchUser()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a>
-		</div>
-
-		<div id="dlg-buttons">
-			<a href="javascript:saveUser()" class="easyui-linkbutton"
-				iconCls="icon-ok">保存</a> <a href="javascript:closeUserDialog()"
-				class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 		</div>
 	</div>
 </body>

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * Created by Administrator on 2016/12/1/001.
+ * Created by xiechur on 2016/12/1/001.
  */
 @Service
 public class AuctionLogServiceImpl implements AuctionLogService {

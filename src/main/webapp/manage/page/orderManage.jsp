@@ -31,7 +31,8 @@
 		$("#dg").datagrid('load', {
 			"userName" : $("#userName").val(),
 			"goodName" : $("#goodName").val(),
-			"orderId" : $("#orderId").val()
+			"orderId" : $("#orderId").val(),
+			"orderState": $('#orderState').combobox('getValue')
 		});
 	}
 	function openUserAddDialog() {
@@ -119,12 +120,26 @@
 				<th data-options = "field:'goodId',sortable:true"  width="50" align="center">商品id</th>
 				<th field="goodName" width="100" align="center">商品名称</th>
 				<th field="orderPrice" width="50" align="center">订单金额</th>
-				<th field="orderState" width="50" align="center">状态</th>
+				<th data-options="field:'orderState',formatter:function(value,row){
+                          						  if(row.orderState == 0)
+                          						  	return '未付款';
+                          						  if(row.orderState == 1)
+                          						  	return '已付款未发货';
+                          						  if(row.orderState == 2)
+                          						  	return '已发货未收货';
+                          						  if(row.orderState == 3)
+                          						    return '已收货';
+                          						  if(row.orderState == 4)
+                          						    return  '结束'
+                          						  if(row.orderState == -1)
+                          						    return  '取消订单';
+                          						  if(row.order.orderState == -2)
+                          							return '退货';
+                        						}" width="50" align="center">状态</th>
 				<th field="payWay" width="50" align="center">支付方式</th>
 				<th field="updateBy"  align="center">操作员</th>
 				<th field="createTime"  align="center">创建时间</th>
 				<th field="updateTime"  align="center">更新时间</th>
-
 			</tr>
 		</thead>
 	</table>
@@ -147,6 +162,17 @@
 			&nbsp;订单编号：&nbsp;
 			<input type="text" id="orderId" size="20" placeholder="可选"
 				   onkeydown="if(event.keyCode == 13)searchUser()" />
+			&nbsp;&nbsp;状态：&nbsp;
+			<select id="orderState" class="easyui-combobox" name="state" size="30" labelPosition="top">
+				<option value="" selected>可选...</option>
+				<option value="0">未付款</option>
+				<option value="1">已付款未发货</option>
+				<option value="2">已发货未收货</option>
+				<option value="3">已收货</option>
+				<option value="4">结束订单</option>
+				<option value="-1">取消订单</option>
+				<option value="-2">退货</option>
+			</select>
 			<a
 				href="javascript:search()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a>

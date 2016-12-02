@@ -52,7 +52,11 @@ public class DepositController {
         map.put("userId", deposit.getUserId());
         map.put("depositId",deposit.getDepositId());
         map.put("goodId",deposit.getGoodId());
-        map.put("state",deposit.getState());
+        if (deposit.getState() == null){
+            map.put("state",deposit.getState());
+        }else {
+            map.put("state",deposit.getState().toString());
+        }
         log.debug(deposit.toString());
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());

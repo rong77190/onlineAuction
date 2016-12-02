@@ -46,6 +46,11 @@ public class UserController {
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("userName", StringUtil.formatLike(s_user.getUserName()));
+        if (s_user.getFreeze() == null){
+            map.put("freeze",s_user.getFreeze());
+        }else {
+            map.put("freeze",s_user.getFreeze().toString());
+        }
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
         List<User> userList = userService.find(map);

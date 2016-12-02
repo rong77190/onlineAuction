@@ -100,24 +100,31 @@
                 <div class="modal-body-defined">
                     <!-- <P>请先登录才可查看已参与项目或发起众筹</P> -->
                 </div>
-                <div class="modal-footer-defined">
-                    <a href="Login.jsp"><button class="btn-sm-glass-black" data-dismiss="modal">登录</button></a>
-                    <a href="register.jsp"><button class="btn-sm-glass-black" data-dismiss="modal">注册</button></a>
-                </div>
+                <%--<div class="modal-footer-defined">--%>
+                    <%--<a href="Login.jsp"><button class="btn-sm-glass-black" data-dismiss="modal">登录</button></a>--%>
+                    <%--<a href="register.jsp"><button class="btn-sm-glass-black" data-dismiss="modal">注册</button></a>--%>
+                <%--</div>--%>
             </div>
         </div>
     </div>
     <div class="body-type">
         <div class="navbar-defined">
-            <div class="navbar-left-defined">
-                <a href="login.jsp"><button class="btn btn-sm-glass">登录</button></a>
-                <a href="register.jsp"><button class="btn btn-sm-glass">注册</button></a>
-            </div>
-            <div class="navbar-user">
-                <a class="data-inline" href="#">用户名</a>
-                <h4 class="data-inline">|</h4>
-                <a class="data-inline" href="#">登出</a>
-            </div>
+            <c:choose>
+                <c:when test="${user == null}">
+                    <div class="navbar-left-defined">
+                        <a href="login.jsp"><button class="btn btn-sm-glass">登录</button></a>
+                        <a href="register.jsp"><button class="btn btn-sm-glass">注册</button></a>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="navbar-user">
+                        <a class="data-inline" href="#">${user.userName}</a>
+                        <h4 class="data-inline">|</h4>
+                        <a class="data-inline" href="/login/logout">登出</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
             <div class="navbar-right-defined">
                 <a href="Home.html"><button class="btn btn-glass">首页</button></a>
                 <div style="display: inline-block;position: relative" id="browsbody">

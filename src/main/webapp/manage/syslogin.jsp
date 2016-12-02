@@ -75,7 +75,7 @@ A:active {
 </head>
 <body>
 <FORM id=adminlogin  method=post
-	name=adminlogin action="${pageContext.request.contextPath}/manage/login"  >
+	name=adminlogin action="${pageContext.request.contextPath}/manage/admin/login"  >
 <DIV></DIV>
 <TABLE style="MARGIN: auto; WIDTH: 100%; HEIGHT: 100%" border=0
 	cellSpacing=0 cellPadding=0>
