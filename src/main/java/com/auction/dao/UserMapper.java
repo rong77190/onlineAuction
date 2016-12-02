@@ -29,6 +29,7 @@ public interface UserMapper {
 
     int backDepositToUser(@Param("userId") int userId, @Param("price") double price);
 
+    User findByName(@Param("userName") String userName);
 
     List<User> selectAll();
 

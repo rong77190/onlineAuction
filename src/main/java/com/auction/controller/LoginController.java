@@ -5,6 +5,7 @@ import com.auction.model.Login;
 import com.auction.model.Register;
 import com.auction.model.User;
 import com.auction.service.LoginService;
+import com.auction.service.UserService;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,9 @@ public class LoginController extends SpringMvcActionContext {
 
     @Resource
     private LoginService loginService;
+
+    @Resource
+    private UserService userService;
 
 
 
@@ -82,12 +86,13 @@ public class LoginController extends SpringMvcActionContext {
         if(!checkValidCode(register.getValidCode(),registerValidCode)){
             System.out.println("验证码错误");
             return MyResult.getResult(0,"验证码错误","");
-        }
-        int result = loginService.register(register);
-        if (result >= 0){
-            return MyResult.getResult(1,"注册成功","");
         }else {
-            return MyResult.getResult(0,"注册失败","");
+            int result = loginService.register(register);
+            if (result >= 0) {
+                return MyResult.getResult(1, "注册成功", "");
+            } else {
+                return MyResult.getResult(0, "注册失败", "");
+            }
         }
     }
 
@@ -173,12 +178,14 @@ public class LoginController extends SpringMvcActionContext {
     }
 
     /**
-     * 忘记密码发送验证码大到邮箱
+     * 忘记密码发送验证码到邮箱
      * @return
      */
     @RequestMapping(value = "sendResetValidCode")
     @ResponseBody
-    public Object sendResetValidCode(@RequestParam("userEmail") String userEmail){
+    public Object sendResetValidCode(@RequestParam("userName") String userName){
+        User user = userService.findByName(userName);
+        String userEmail = user.getUserEmail();
         if (userEmail==null || userEmail == ""){
             return MyResult.getResult(0,"邮箱不能为空","");
         }else {
@@ -197,12 +204,9 @@ public class LoginController extends SpringMvcActionContext {
      */
     @RequestMapping(value = "resetPassword")
     @ResponseBody
-    public Object resetPassword(@RequestParam("resetValidCode") String resetValidCode, @RequestParam("password") String password, HttpServletRequest request){
+    public Object resetPassword(@RequestParam("resetValidCode") String resetValidCode,@RequestParam("password") String password, HttpServletRequest request){
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
-        if (user ==null){
-            return MyResult.getResult(0,"未登录,请前往登录","");
-        }
 //        System.out.println(user.toString());
         int userId = user.getUserId();
         if (resetValidCode.equals(session.getAttribute("resetValidCode").toString())){
@@ -217,5 +221,37 @@ public class LoginController extends SpringMvcActionContext {
         }
     }
 
+
+
+
+    /**
+     * 用户名查重
+     * @return
+     */
+    @RequestMapping(value = "duplicateNameChecking")
+    @ResponseBody
+    public Object duplicateNameChecking(String userName){
+        int result = loginService.duplicateNameChecking(userName);
+        if(result != 0){
+            return MyResult.getResult(0,"该用户名已被占用","");
+        }else {
+            return MyResult.getResult();
+        }
+    }
+
+    /**
+     * 邮箱查重
+     * @return
+     */
+    @RequestMapping(value = "duplicateEmailChecking")
+    @ResponseBody
+    public Object duplicateEmailChecking(String userEmail){
+        int result = loginService.duplicateEmailChecking(userEmail);
+        if(result != 0){
+            return MyResult.getResult(0,"该邮箱已注册","");
+        }else {
+            return MyResult.getResult();
+        }
+    }
 
 }

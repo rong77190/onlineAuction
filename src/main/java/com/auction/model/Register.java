@@ -1,6 +1,7 @@
 package com.auction.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by dell on 2016/7/22.
@@ -10,6 +11,8 @@ public class Register implements Serializable {
     private String userName;
     private String password;
     private String phone;
+    private String sex;
+    private Date birthday;
     private String validCode;
     private String userEmail;
 

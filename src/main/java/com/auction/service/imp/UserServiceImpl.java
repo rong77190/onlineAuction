@@ -68,4 +68,7 @@ public class UserServiceImpl implements UserService {
     public int delete(Integer userId) {
         return userMapper.deleteByPrimaryKey(userId);
     }
+
+    public User findByName(String userName) { return userMapper.findByName(userName);}
+
 }

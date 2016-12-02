@@ -61,4 +61,7 @@ public interface UserService {
      * @return
      */
     public int delete(Integer userId);
+
+    User findByName(String userName);
+
 }

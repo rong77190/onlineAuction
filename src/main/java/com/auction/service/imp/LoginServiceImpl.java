@@ -136,7 +136,13 @@ public class LoginServiceImpl implements LoginService{
         }
     }
 
+    public int  duplicateNameChecking(String userName){
+        return loginMapper.duplicateNameChecking(userName);
+    }
 
+    public int  duplicateEmailChecking(String userEmail){
+        return loginMapper.duplicateEmailChecking(userEmail);
+    }
 
 
 }

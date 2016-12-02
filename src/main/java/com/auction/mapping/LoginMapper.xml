@@ -37,6 +37,17 @@
         WHERE `user_id`=#{userId}
     </update>
 
+    <!-- 用户名查重 -->
+    <select id="duplicateNameChecking" resultType="Integer" parameterType="java.lang.String">
+        select count(*) from user
+        where user_name = #{userName}
+    </select>
+
+    <!-- 用户邮箱查重 -->
+    <select id="duplicateEmailChecking" resultType="Integer" parameterType="java.lang.String">
+        select count(*) from user
+        where user_email = #{userEmail}
+    </select>
 
 
 </mapper>

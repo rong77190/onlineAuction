@@ -26,6 +26,9 @@ public interface LoginService {
 
     public int updatePassword(int userId,String password);
 
-
     public Object SendResetValidCodeToEmail(String userEmail , HttpSession session);
+
+    public int  duplicateNameChecking(String userName);
+
+    public int  duplicateEmailChecking(String userEmail);
 }

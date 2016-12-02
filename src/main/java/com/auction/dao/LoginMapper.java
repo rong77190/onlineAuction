@@ -12,4 +12,6 @@ public interface LoginMapper {
 //    public Register register(@Param("userName")String userName, @Param("password")String password,@Param("userEmail")String userEmail);
     int register(Register register);
     int updatePassword(@Param("userId") int userId, @Param("password") String password);
+    int duplicateNameChecking(String userName);
+    int duplicateEmailChecking(String userEmail);
 }
