@@ -153,6 +153,61 @@ public class GoodController extends SpringMvcActionContext {
 
     }
 
+    /**
+     * 获取最新上架的拍品
+     * @return
+     */
 
+    @RequestMapping("/getNewlyGoods")
+    @ResponseBody
+    public Object getNewlyGoods(){
+        List<Good> goodList = goodService.getNewlyGoods();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+    /**
+     * 获取推荐的拍品
+     * @return
+     */
+
+    @RequestMapping("/getRecommendedGoods")
+    @ResponseBody
+    public Object getRecommendedGoods(){
+        List<Good> goodList = goodService.getRecommendedGoods();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+    /**
+     * 获取热门的拍品
+     * @return
+     */
+
+    @RequestMapping("/getHotGoods")
+    @ResponseBody
+    public Object getHotGoods(){
+        List<Good> goodList = goodService.getHotGoods();
+        return MyResult.getResult(1,"",goodList);
+
+    }
+
+    /**
+     * 拍品展示
+     */
+    @RequestMapping(value="/showItems")
+    public ModelAndView showItems(){
+        ModelAndView modelAndView = new ModelAndView("index");
+        List<Good> goodList = goodService.getHotGoods();
+        modelAndView.addObject("goodList",goodList);
+
+        List<Good> goodList1 = goodService.getNewlyGoods();
+        modelAndView.addObject("goodList1",goodList1);
+
+        List<Good> goodList2 = goodService.getRecommendedGoods();
+        modelAndView.addObject("goodList2",goodList2);
+
+        return modelAndView;
+    }
 
 }

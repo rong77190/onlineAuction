@@ -300,5 +300,31 @@
     </where>
   </select>
 
+  <select id="getHotGoods" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from good
+    where good_state = 1
+    order by click desc
+    limit 8
+  </select>
+
+  <select id="getNewlyGoods" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from good
+    where good_state = 1
+    order by up_time desc
+    limit 4
+  </select>
+
+  <select id="getRecommendedGoods" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from good
+    where good_state = 2
+    order by complete_time asc
+    limit 4
+  </select>
 
 </mapper>

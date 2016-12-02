@@ -21,6 +21,12 @@ public interface GoodMapper {
 
     int updateByPrimaryKey(Good record);
 
+    List<Good> getHotGoods();
+
+    List<Good> getNewlyGoods();
+
+    List<Good> getRecommendedGoods();
+
     //更新当前价
     int updateCurrPrice(@Param("buyerId") int buyerId, @Param("goodId") int goodId, @Param("currPrice") double currPrice);
 

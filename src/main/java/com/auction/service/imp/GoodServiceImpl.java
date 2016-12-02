@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by xiechur on 2016/8/22.
@@ -82,5 +79,18 @@ public class GoodServiceImpl implements GoodService {
 
     public List<Good> selectBySubCategoryId(int id){
         return goodMapper.selectBySubCategoryId(id);
+    }
+
+    public List<Good> getHotGoods(){
+        return goodMapper.getHotGoods();
+    }
+
+    public List<Good> getNewlyGoods(){
+        return goodMapper.getNewlyGoods();
+    }
+
+    public List<Good> getRecommendedGoods(){
+
+        return  goodMapper.getRecommendedGoods();
     }
 }

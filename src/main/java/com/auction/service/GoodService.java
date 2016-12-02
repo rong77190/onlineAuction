@@ -27,6 +27,11 @@ public interface GoodService {
 
     List<Good> getNotAudit();
 
+    List<Good> getHotGoods();
+
+    List<Good> getNewlyGoods();
+
+    List<Good> getRecommendedGoods();
 
     /**
      * 拍品查询
