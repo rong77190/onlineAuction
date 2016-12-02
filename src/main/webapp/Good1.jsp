@@ -260,7 +260,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="pandect">
                         <div class="body-panel-content">
-                            当前价￥<h3 id="onceprice" >270</h3>
+                            当前价￥<h3 id="oncePrice" >270</h3>
                             <div class="progress bar-defined">
                                 <div class="progress-bar progress-bar-warning" style="width: 60%"></div>
                             </div>
@@ -268,7 +268,7 @@
                             <div class="divider-defined"></div>
                              <div style="text-align: center">
                一口价：500￥<a href="good1End.jsp"> <button id="once" class="btn btn-glass-black"><font color="red">一口价拿下</font></button></a>
-            加价：20￥         <button class="btn btn-glass-black" onclick="getSold()">加价</button>
+            加价：￥<input id="addPrice"   name="addPrice"  autocomplete="off" style="font-size:0.1em; border:0.1px solid #ccc; border-radius:0.1em; text-indent:0.5em;"alt="请输入加价">      <button class="btn btn-glass-black" onclick="addPrice()">加价</button>
                 <button class="btn btn-glass-black">收藏</button>
             </div>
                             热度
@@ -322,7 +322,7 @@
                                                                 <img src="tu/portrait.jpg">
                                                             </div>
                                                         </td>
-                                                       
+
                                <!--                  <td align="left">
                                                     <h4>用户名</h4>
                                                     支持金额￥<span class="data-money-sm">3</span>
@@ -369,9 +369,13 @@
     <div class="body-footer-child"></div>
 
 <script>
-function getSold(){
-	x=document.getElementById("onceprice");
-	x.innerHTML="290"
+function addPrice(){
+	var x=document.getElementById("oncePrice");
+   var X=parseInt(x);
+    var y=document.getElementById("addPrice");
+    var Y=parseInt(y);
+    var z=X+Y;
+  	document.getElementById("oncePrice").innerHTML= z.toString();
 }
 function getEnd(){
 	x=document.getElementById("endDate")
