@@ -32,6 +32,8 @@ public class AuctionController extends SpringMvcActionContext {
     @Resource
     private UserService userService;
     @Resource
+    private CollectionService collectionService;
+    @Resource
     private TorderService torderService;
     @Resource
     private DepositService depositService;
@@ -144,7 +146,23 @@ public class AuctionController extends SpringMvcActionContext {
             return MyResult.getResult(0,"出价失败","");
         }
     }
-
+    @RequestMapping("addtocollection")
+    @ResponseBody
+    public Object addGoodtoCollection( @RequestParam int goodId){
+        User user = (User)getSession().getAttribute("user");
+        Collection collection=new Collection();
+        collection.setUserId(user.getUserId());
+        collection.setGoodId(goodId);
+        collectionService.insertCollection(collection);
+        return MyResult.getResult(1,"","加入收藏成功！");
+    }
+    @RequestMapping("deletecollection")
+    @ResponseBody
+    public Object deleteCollection(@RequestParam int userId, @RequestParam int goodId){
+        User user = (User)getSession().getAttribute("user");
+        collectionService.deleteCollection(user.getUserId(), goodId);
+        return MyResult.getResult(1,"","取消收藏成功！");
+    }
 
 
 

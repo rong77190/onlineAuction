@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * Created by xiechur on 2016/8/25.
@@ -107,13 +112,52 @@ public class UserController extends SpringMvcActionContext{
         userService.userUpdate(user.getUserId(),dirty.getPhone(),dirty.getSex(),dirty.getBirthday());
         return "redirect:/user/userInfo";
     }
-    //    接受修改头像请求，上传图片且对数据库进行更新后重定向到用户信息
-//    @RequestMapping(value = "updateUserImage",method=RequestMethod.POST)
-//    public String updateUserImage(String userImage) {
-//        User user = (User)getSession().getAttribute("user");
-//        userService.updateImage(user.getUserId(),userImage);
-//        return "redirect:/user/userInfo";
-//    }
+    @RequestMapping(value="updateUserImage",method=RequestMethod.POST)
+    @ResponseBody
+    public Object addUser(@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws IOException {
+        User user = (User)getSession().getAttribute("user");
+        System.out.println("fileName---->" + file.getOriginalFilename());
+        //项目暂时只需要image
+        HashMap<String, String> extMap = new HashMap<String, String>();
+        extMap.put("image", "gif,jpg,jpeg,png,bmp");
+        String dirName = "image";
+        String fileName = file.getOriginalFilename();
+        //检查扩展名
+        String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+        System.out.println("<<<<<<<<<<<fileExt<<<<<<<<<<<<<"+fileExt);
+        if (!Arrays.<String>asList(extMap.get(dirName).split(",")).contains(fileExt)) {
+            return MyResult.getResult(0,"上传文件扩展名是不允许的扩展名。\n只允许" + extMap.get(dirName) + "格式。","");
+        }
+        if(!file.isEmpty()){
+            String basePath = "resources/upload";//上传基本路径
+            String savePath = request.getSession().getServletContext().getRealPath(basePath);//上传保存路径，绝对路径
+//			System.out.println("savePath》》》》》》》》》》》》》》》》》》》》》"+savePath);
+            String newImageName = new Date().getTime() + file.getOriginalFilename();//文件重命名，防止重复
+            String imagePath = savePath + "/"+ newImageName;//文件保存绝对路径
+//			System.out.println("imagePath》》》》》》》》》》》》》》》》》》》》》"+imagePath);
+            try {
+                FileOutputStream os = new FileOutputStream(imagePath);
+                InputStream in = file.getInputStream();
+                int b = 0;
+                while((b=in.read()) != -1)	{
+                    os.write(b);
+                }
+                os.flush();
+                os.close();
+                in.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                return MyResult.getResult(0,"文件上传错误","");
+            }
+            userService.updateImage(user.getUserId(),basePath+"/"+newImageName);
+            Map<String , Object> map = new HashMap<String, Object>();
+            map.put("image",user.getUserImage());
+            return MyResult.getResult(1,"",map);
+        }else {
+            return MyResult.getResult(0,"上传文件为空","");
+        }
+
+    }
 
 
     // 查看用户个人收藏夹
