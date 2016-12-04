@@ -60,9 +60,8 @@ public class UserController extends SpringMvcActionContext{
     @RequestMapping(value = "userInfo",method=RequestMethod.GET)
     @ResponseBody
     public Object checkUserInfo(){
-//        User user = (User)getSession().getAttribute("user");
-//        Integer userId = user.getUserId();
-        Integer userId = 7;
+        User user = (User)getSession().getAttribute("user");
+        Integer userId = user.getUserId();
         User userInfo=userService.findById(userId);
         return MyResult.getResult(1,"",userInfo);
     }
@@ -199,7 +198,7 @@ public class UserController extends SpringMvcActionContext{
     public ModelAndView usersTorders(){
         User user = (User)getSession().getAttribute("user");
         List<Torder> orders=torderService.getUserAllTorders(user.getUserId());
-        ModelAndView mav=new ModelAndView("userOrders");
+        ModelAndView mav=new ModelAndView("userOrder");
         int ordernum=orders.size();
         List<String> goodNames=new ArrayList<String>();
         for(int i=0;i<ordernum;i++) {
