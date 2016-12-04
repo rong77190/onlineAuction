@@ -4,11 +4,13 @@ import com.auction.common.SpringMvcActionContext;
 import com.auction.model.Collection;
 import com.auction.model.Torder;
 import com.auction.model.User;
+import com.auction.service.GoodService;
 import com.auction.service.TorderService;
 import com.auction.service.UserService;
 import com.auction.service.CollectionService;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +41,8 @@ public class UserController extends SpringMvcActionContext{
 
     @Resource
     private CollectionService collectionService;
+    @Resource
+    private GoodService goodService;
 
     /**
      * 查询用户列表
@@ -56,8 +60,9 @@ public class UserController extends SpringMvcActionContext{
     @RequestMapping(value = "userInfo",method=RequestMethod.GET)
     @ResponseBody
     public Object checkUserInfo(){
-        User user = (User)getSession().getAttribute("user");
-        Integer userId = user.getUserId();
+//        User user = (User)getSession().getAttribute("user");
+//        Integer userId = user.getUserId();
+        Integer userId = 7;
         User userInfo=userService.findById(userId);
         return MyResult.getResult(1,"",userInfo);
     }
@@ -162,12 +167,22 @@ public class UserController extends SpringMvcActionContext{
 
     // 查看用户个人收藏夹
     @RequestMapping(value = "collection")
-    @ResponseBody
-    public Object userCollection(){
+    public  ModelAndView userCollection(){
         User user = (User)getSession().getAttribute("user");
         //collectionList包括了拍卖品名，可以直接调用
+        ModelAndView mav=new ModelAndView("collection");
         List<Collection> collectionList = collectionService.getCollection(user.getUserId());
-        return MyResult.getResult(1,"",collectionList);
+        int collectionnum=collectionList.size();
+        List<String> goodNames=new ArrayList<String>();
+        List<Double> goodPrices=new ArrayList<Double>();
+        for(int i=0;i<collectionnum;i++) {
+            goodNames.add((goodService.findGoodById(collectionList.get(i).getGoodId()).getGoodName()));
+            goodPrices.add((goodService.findGoodById(collectionList.get(i).getGoodId()).getCurrPrice()));
+        }
+        mav.addObject("collectionList",collectionList);
+        mav.addObject("goodNames",goodNames);
+        mav.addObject("goodPrices",goodPrices);
+        return mav;
     }
 
     //删除后使用重定向刷新页面
@@ -181,10 +196,18 @@ public class UserController extends SpringMvcActionContext{
 
     //个人中心查看个人所有订单
     @RequestMapping(value="userOrder")
-    @ResponseBody
-    public Object usersTorders(){
+    public ModelAndView usersTorders(){
         User user = (User)getSession().getAttribute("user");
         List<Torder> orders=torderService.getUserAllTorders(user.getUserId());
-        return  MyResult.getResult(1, "", orders);
+        ModelAndView mav=new ModelAndView("userOrders");
+        int ordernum=orders.size();
+        List<String> goodNames=new ArrayList<String>();
+        for(int i=0;i<ordernum;i++) {
+            goodNames.add((goodService.findGoodById(orders.get(i).getGoodId()).getGoodName()));
+        }
+        mav.addObject("orders",orders);
+        mav.addObject("goodNames",goodNames);
+
+        return mav;
     }
 }
