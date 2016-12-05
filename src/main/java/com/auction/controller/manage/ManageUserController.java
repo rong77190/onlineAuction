@@ -45,6 +45,7 @@ public class ManageUserController {
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("userName", StringUtil.formatLike(s_user.getUserName()));
+        map.put("realName", StringUtil.formatLike(s_user.getRealName()));
         if (s_user.getFreeze() == null){
             map.put("freeze",s_user.getFreeze());
         }else {

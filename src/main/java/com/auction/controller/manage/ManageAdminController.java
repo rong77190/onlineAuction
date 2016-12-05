@@ -71,7 +71,7 @@ public class ManageAdminController extends SpringMvcActionContext {
      * @return
      * @throws Exception
      */
-    @RequestMapping("managerList")
+    @RequestMapping("adminList")
     @ResponseBody
     public Object managerList(@RequestParam(value = "page",required = false)String page, @RequestParam(value = "rows",required = false)String rows, Manager manager)throws Exception{
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));

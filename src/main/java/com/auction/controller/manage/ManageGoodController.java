@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +47,8 @@ public class ManageGoodController {
     @ResponseBody
     public Object goodList(@RequestParam(value = "page",required = false)String page, @RequestParam(value = "rows",required = false)String rows, Good good)throws Exception{
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("goodName", StringUtil.formatLike(good.getGoodName()));
         map.put("goodId",good.getGoodId());
@@ -78,7 +83,17 @@ public class ManageGoodController {
      * */
     @RequestMapping("edit")
     @ResponseBody
-    public Object editGood(Good good){
+    public Object editGood(@RequestParam(value = "finishTime",required = false)String finishTime,Good good)throws Exception{
+        if (finishTime!=null){
+            Date date = new Date();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            date = dateFormat.parse(finishTime);
+            good.setCompleteTime(date);
+            log.debug(">>>>>>>>>>>>>>>>>>>>>>");
+        }
+        if(good.getGoodState() == 1){
+            good.setUpTime(new Date());
+        }
         int result = goodService.updateGood(good);
         JSONObject jsonObject = new JSONObject();
         if(result > 0){   //说明修改成功

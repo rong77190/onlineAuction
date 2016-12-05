@@ -220,6 +220,9 @@
       <if test="userName!=null and userName!='' ">
         and user_name like #{userName}
       </if>
+      <if test="realName!=null and realName!='' ">
+        and real_name like #{realName}
+      </if>
       <if test="freeze!=null and freeze!='' ">
         and freeze = #{freeze}
       </if>
@@ -233,6 +236,9 @@
     <where>
       <if test="userName!=null and userName!='' ">
         and user_name like #{userName}
+      </if>
+      <if test="realName!=null and realName!='' ">
+        and real_name like #{realName}
       </if>
       <if test="freeze!=null and freeze!='' ">
         and freeze = #{freeze}

@@ -11,7 +11,7 @@
 <head>
 	<base href="<%=basePath%>">
 
-	<title>拍品页面</title>
+	<title>My JSP 'goodManage.jsp' starting page</title>
 	<link rel="stylesheet" type="text/css"
 		  href="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css"
@@ -24,151 +24,191 @@
 			src="${pageContext.request.contextPath}/manage/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript"
 			src="${pageContext.request.contextPath}/manage/js/easyuiExtension.js"></script>
+
 	<script type="text/javascript">
 		var url;
-		function search() {
-			$("#dg2").datagrid('load', {
-				"goodId" : $("#goodId").val(),
+		function searchgood() {
+			$("#dg").datagrid('load', {
 				"goodName" : $("#goodName").val(),
-				"goodState" : $('#goodState').combobox('getValue')
+				"realName" : $("#realName").val(),
+				"freeze" : $('#freeze').combobox('getValue')
 			});
 		}
-		function openGoodAddDialog() {
-			$("#dlg2").dialog("open").dialog("setTitle", "添加拍品信息");
-			url = "${pageContext.request.contextPath}/manage/good/save";
-		}
 
-		function openGoodModifyDialog() {
-			var selectedRows = $("#dg2").datagrid("getSelections");
-			if (selectedRows.length != 1) {
-				$.messager.alert("系统提示", "请选择一条要编辑的数据！");
-				return;
+		var editIndex = undefined;
+		function endEditing(){
+			if (editIndex == undefined){return true}
+			if ($('#dg').datagrid('validateRow', editIndex)){
+				$('#dg').datagrid('endEdit', editIndex);
+				editIndex = undefined;
+				return true;
+			} else {
+				return false;
 			}
-			var row = selectedRows[0];
-			$("#dlg2").dialog("open").dialog("setTitle", "编辑拍品信息");
-			$("#goodForm").form("load", row);
-			url = "${pageContext.request.contextPath}/manage/good/save?id=" + row.id;
 		}
-
-		function saveGood() {
-			$("#goodForm").form("submit", {
-				url : url,
-				onSubmit : function() {
-					return $(this).form("validate");
-				},
-				success : function(result) {
-					var result = eval('(' + result + ')');
-					if (result.success) {
-						$.messager.alert("系统提示", "保存成功！");
-						resetValue();
-						$("#dlg2").dialog("close");
-						$("#dg2").datagrid("reload");
-					} else {
-						$.messager.alert("系统提示", "保存失败！");
-						return;
+		function onClickCell(index, field){
+			if (editIndex != index){
+				if (endEditing()){
+					$('#dg').datagrid('selectRow', index)
+							.datagrid('beginEdit', index);
+					var ed = $('#dg').datagrid('getEditor', {index:index,field:field});
+					if (ed){
+						($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
 					}
+					editIndex = index;
+				} else {
+					setTimeout(function(){
+						$('#dg').datagrid('selectRow', editIndex);
+					},0);
 				}
-			});
-		}
-//		function resetValue() {
-//			$("#name").val("");
-//			$("#password").val("");
-//			$("#sex").val("");
-//			$("#birthday").val("");
-//			$("#stuclass").val("");
-//
-//
-//		}
-
-
-		function closeGoodDialog() {
-			$("#dlg2").dialog("close");
-			$('#goodName   input').val('');
-		}
-
-		function deleteGood() {
-			var selectedRows = $("#dg2").datagrid("getSelections");
-			if (selectedRows.length == 0) {
-				$.messager.alert("系统提示", "请选择要删除的数据！");
-				return;
 			}
-			var strIds = [];
-			for ( var i = 0; i < selectedRows.length; i++) {
-				strIds.push(selectedRows[i].id);
-			}
-			var ids = strIds.join(",");
-			$.messager.confirm("系统提示", "您确定要删除这<font color=red>"
-					+ selectedRows.length + "</font>条数据吗？", function(r) {
-				if (r) {
-					$.post("${pageContext.request.contextPath}/manage/good/delete", {
-						ids : ids
-					}, function(result) {
-						if (result.success) {
-							$.messager.alert("系统提示", "数据已成功删除！");
-							$("#dg2").datagrid("reload");
-						} else {
-							$.messager.alert("系统提示", "数据删除失败，请联系系统管理员！");
-						}
-					}, "json");
-				}
+		}
+		function onEndEdit(index, row){
+			var ed = $(this).datagrid('getEditor', {
+				index: index,
+				field: 'goodId'
 			});
+			row.goodId = $(ed.target).combobox('getText');
+		}
+		function append(){
+			if (endEditing()){
+				$('#dg').datagrid('appendRow',{status:'P'});
+				editIndex = $('#dg').datagrid('getRows').length-1;
+				$('#dg').datagrid('selectRow', editIndex)
+						.datagrid('beginEdit', editIndex);
+			}
+		}
+		function removeit(){
+			if (editIndex == undefined){return}
+			$('#dg').datagrid('cancelEdit', editIndex)
+					.datagrid('deleteRow', editIndex);
+			editIndex = undefined;
+		}
+		function accept(){
+			if (endEditing()){
+				$('#dg').datagrid('acceptChanges');
+			}
+		}
+		function reject(){
+			$('#dg').datagrid('rejectChanges');
+			editIndex = undefined;
+		}
+		function getChanges(){
+			var rows = $('#dg').datagrid('getChanges');
+			alert(rows.length+' rows are changed!');
+		}
+		function onAfterEdit(index, row, changes) {
+			var rows = $('#dg').datagrid('getChanges');
+			if (rows.length == 1){
+				//endEdit该方法触发此事件
+				$.post("${pageContext.request.contextPath}/manage/good/edit", {
+							goodId : row.goodId,
+							goodState : row.goodState,
+							finishTime : row.completeTime
+						}, function(result) {
+							if (result.success) {
+								$.messager.alert("系统提示", "数据已成功修改！");
+								$("#dg").datagrid("reload");
+							} else {
+								$.messager.alert("系统提示", "数据修改失败！");
+							}
+						}, "json"
+				);
+
+				editRow = undefined;
+			}
+
 		}
 	</script>
 </head>
 
 <body style="margin: 1px">
 
-<table id="dg2" title="拍品管理" class="easyui-datagrid" fitColumns="true"
-	   pagination="true" rownumbers="true"
-	   url="${pageContext.request.contextPath}/manage/good/goodList" fit="true"
-	   toolbar="#tb">
+<table id="dg" title="拍品管理" class="easyui-datagrid"
+	   data-options="
+		   		fitColumns:true,
+				pagination:true,
+				rownumbers:true,
+                iconCls: 'icon-edit',
+                fit:true,
+                singleSelect: true,
+                toolbar: '#tb',
+                url: '${pageContext.request.contextPath}/manage/good/goodList',
+                method: 'get',
+                onClickCell: onClickCell,
+                onEndEdit: onEndEdit,
+                onAfterEdit:onAfterEdit
+            ">
+	<%--<thead frozen="true">--%>
+	<%--<tr>--%>
+	<%--<th field="goodId" width="80">用户编号</th>--%>
+	<%--</tr>--%>
+	<%--</thead>--%>
 	<thead>
 	<tr>
-		<th field="cb" checkbox="true" align="center"></th>
-		<th field="goodId" width="50" align="center">编号</th>
-		<th field="goodName" width="50" align="center">拍品名</th>
-		<th field="goodState" width="50" align="center">状态</th>
-		<th field="price" width="50" align="center">一口价</th>
-		<th field="currPrice" width="50" align="center">当前价</th>
-		<th field="beginPrice" width="50" align="center">起拍价</th>
+		<th field="cb" checkbox="true" align="center" ></th>
+		<th data-options = "field:'goodId',editor:'textbox'" align="center">编号</th>
+		<th data-options = "field:'goodName'" align="center">拍品名</th>
 
-		<%--<th field="goodImage" width="50" align="center">性别</th>--%>
-		<%--<th field="birthday" width="50" align="center" > 出生年月</th>--%>
-		<%--<th field="createdate"  width="50" align="center">创建时间</th>--%>
-		<%--<th field="stuclass" width="50" align="center">班级</th>--%>
-		<%--<th width="60">操作</th>--%>
+		<th data-options = "field:'price'" align="center">一口价</th>
+		<th data-options = "field:'currPrice'" align="center">当前价</th>
+		<th data-options = "field:'beginPrice'" align="center">起拍价</th>
+		<th data-options = "field:'sellerId'" align="center">卖者</th>
+		<th data-options = "field:'buyerId'" align="center">买者</th>
+		<th data-options = "field:'click'" align="center">点击量</th>
+
+		<th align="center" data-options="field:'createTime'">创建时间</th>
+		<th align="center" data-options="field:'upTime'">上架时间</th>
+		<th align="center" data-options="field:'completeTime',editor:'datetimebox'">结束时间</th>
+
+
+		<th data-options = "field:'introduction'" width="25" align="center">简述</th>
+		<th data-options = "field:'goodState' ,formatter:function(value,row){
+													if(row.goodState == 0)
+														return '未审核';
+													if(row.goodState == 1)
+														return '审核上架';
+													if(row.goodState == 2)
+														return '竞拍结束';
+													if(row.goodState == -1)
+														return '审核不通过'
+													},editor:{
+														type:'combobox',
+														options:{
+														valueField:'goodState',
+														textField:'chinese',
+														method:'get',
+														url:'/manage/page/goodState.json',
+														required:true
+													}
+												}" align="center">状态</th>
 	</tr>
 	</thead>
 </table>
 <div id="tb">
-	<a href="javascript:openGoodAddDialog()" class="easyui-linkbutton"
+	<a href="javascript:append()" class="easyui-linkbutton"
 	   iconCls="icon-add" plain="true">添加</a> <a
-		href="javascript:openGoodModifyDialog()" class="easyui-linkbutton"
-		iconCls="icon-edit" plain="true">修改</a>
-	<a
-			href="javascript:deleteGood()" class="easyui-linkbutton"
-			iconCls="icon-remove" plain="true">删除</a>
+		href="javascript:onClickCell()" class="easyui-linkbutton"
+		iconCls="icon-edit" plain="true">修改</a> <a
+		href="javascript:savegood()" class="easyui-linkbutton"
+		iconCls="icon-save" plain="true">保存</a> <a
+		href="javascript:deletegood()" class="easyui-linkbutton"
+		iconCls="icon-remove" plain="true">删除</a>
 	<div>
-		&nbsp;拍品名：&nbsp;<input type="text" id="goodName" size="20"
-							   onkeydown="if(event.keyCode == 13)search()" />
-		&nbsp;拍品编号：&nbsp;<input type="text" id="goodId" size="20"
-							   onkeydown="if(event.keyCode == 13)search()" />
-		&nbsp;状态：&nbsp;
-		<select id="goodState" class="easyui-combobox" name="goodState" size="30" labelPosition="top">
+		&nbsp;拍品名：&nbsp;<input type="text" id="goodName" size="20" placeholder="可选"
+							   onkeydown="if(event.keyCode == 13)searchgood()" />
+		&nbsp;真名：&nbsp;<input type="text" id="realName" size="20" placeholder="可选"
+							  onkeydown="if(event.keyCode == 13)searchgood()" />
+		&nbsp; 状态：&nbsp;
+		<select id="freeze" class="easyui-combobox" name="freeze" size="20" labelPosition="top">
 			<option value="" selected>可选...</option>
-			<option value="0">待审核</option>
-			<option value="1">审核上架</option>
-			<option value="2">竞拍结束</option>
-			<option value="-1">审核不通过</option>
+			<option value="0">正常</option>
+			<option value="1">冻结</option>
 		</select>
-
 		<a
-			href="javascript:search()" class="easyui-linkbutton"
-			iconCls="icon-search" plain="true">查询</a>
+				href="javascript:searchgood()" class="easyui-linkbutton"
+				iconCls="icon-search" plain="true">查询</a>
 	</div>
-
-
-
 </div>
 </body>
 </html>

@@ -145,20 +145,24 @@
 			alert(rows.length+' rows are changed!');
 		}
 		function onAfterEdit(index, row, changes) {
-			//endEdit该方法触发此事件
-			$.post("${pageContext.request.contextPath}/manage/user/edit", {
-					 sysUserId : row.sysUserId,
-					 freeze : row.freeze
-					}, function(result) {
-						if (result.success) {
-							$.messager.alert("系统提示", "数据已成功修改！");
-							$("#dg").datagrid("reload");
-						} else {
-							$.messager.alert("系统提示", "数据修改失败！");
-						}
-					}, "json"
-			);
-			$.console.info(row);
+			var rows = $('#dg').datagrid('getChanges');
+			if (rows.length == 1){
+				//endEdit该方法触发此事件
+				$.post("${pageContext.request.contextPath}/manage/admin/edit", {
+						 sysUserId : row.sysUserId,
+						 freeze : row.freeze
+						}, function(result) {
+							if (result.success) {
+								$.messager.alert("系统提示", "数据已成功修改！");
+								$("#dg").datagrid("reload");
+							} else {
+								$.messager.alert("系统提示", "数据修改失败！");
+							}
+						}, "json"
+				);
+				$.console.info(row);
+
+			}
 			editRow = undefined;
 		}
 	</script>
@@ -178,7 +182,7 @@
                 fit:true,
                 singleSelect: true,
                 toolbar: '#tb',
-                url: '${pageContext.request.contextPath}/manage/admin/manageList',
+                url: '${pageContext.request.contextPath}/manage/admin/adminList',
                 method: 'get',
                 onClickCell: onClickCell,
                 onEndEdit: onEndEdit,
@@ -195,9 +199,9 @@
 		<th data-options = "field:'sysUserId',
                     editor:'textbox'
 					" align="center">用户Id</th>
-		<th data-options = "field:'name'" align="center">登陆名</th>
-		<th data-options = "field:'password'"  align="center">密码</th>
-		<th data-options = "field:'manageEmail'" width="50" align="center">生日</th>
+		<th data-options = "field:'name'" align="center" width="30">登陆名</th>
+		<th data-options = "field:'password'"  align="center" width="30">密码</th>
+		<th data-options = "field:'manageEmail'" align="center" width="50">生日</th>
 		<th data-options = "field:'freeze', formatter:function(value,row){
                           						  if(row.freeze == 1)
                           						  	return '冻结';
@@ -210,10 +214,10 @@
 													textField:'chinese',
 													method:'get',
 													panelHeight:'42.5px',
-													url:'/manage/page/my.json',
+													url:'/manage/page/freeze.json',
 													required:true
                         						}
-                        					}" align="center" width="20">状态</th>
+                        					}" align="center" width="30">状态</th>
 	</tr>
 	</thead>
 </table>
@@ -227,10 +231,10 @@
 		href="javascript:deleteUser()" class="easyui-linkbutton"
 		iconCls="icon-remove" plain="true">删除</a>
 	<div>
-		&nbsp;登录名：&nbsp;<input type="text" id="name" size="20"
+		&nbsp;登录名：&nbsp;<input type="text" id="name" size="20" placeholder="可选"
 							   onkeydown="if(event.keyCode == 13)searchUser()" />
 		&nbsp; 状态：&nbsp;
-		<select id="freeze" class="easyui-combobox" name="freeze" size="20" labelPosition="top">
+		<select id="freeze" class="easyui-combobox" name="freeze" size="20"  labelPosition="top">
 			<option value="" selected>可选...</option>
 			<option value="0">正常</option>
 			<option value="1">冻结</option>

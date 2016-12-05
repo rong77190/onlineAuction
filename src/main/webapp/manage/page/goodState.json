@@ -1,0 +1,7 @@
+[
+{"goodState":0,"chinese":"待审核"},
+{"goodState":1,"chinese":"审核上架"},
+  {"goodState":2,"chinese":"竞拍结束"},
+  {"goodState":-1,"chinese":"审核不通过"}
+
+]

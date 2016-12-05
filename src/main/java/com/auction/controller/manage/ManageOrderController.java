@@ -1,6 +1,8 @@
 package com.auction.controller.manage;
 
 import com.auction.bean.OrderBean;
+import com.auction.common.SpringMvcActionContext;
+import com.auction.model.Manager;
 import com.auction.model.PageBean;
 import com.auction.model.Torder;
 import com.auction.service.TorderService;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +31,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("manage/order")
-public class ManageOrderController {
+public class ManageOrderController extends SpringMvcActionContext{
     private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(ManageOrderController.class);
     @Resource
     private TorderService torderService;
@@ -44,6 +49,8 @@ public class ManageOrderController {
     public Object goodList(@RequestParam(value = "page",required = false)String page, @RequestParam(value = "rows",required = false)String rows, OrderBean orderBean)throws Exception{
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
         Map<String,Object> map = new HashMap<String, Object>();
+
+
         map.put("orderId", orderBean.getOrderId());
         map.put("userName", StringUtil.formatLike(orderBean.getUserName()));
         map.put("goodName", StringUtil.formatLike(orderBean.getGoodName()));
@@ -77,6 +84,9 @@ public class ManageOrderController {
     @RequestMapping("edit")
     @ResponseBody
     public Object editOrder(Torder torder){
+//        Manager manager = (Manager) getSession().getAttribute("manager");
+        torder.getUpdateTime();
+//        torder.setUpdateBy(manager.getSysUserId());
         int result = torderService.update(torder);
         JSONObject jsonObject = new JSONObject();
         if(result > 0){   //说明修改成功

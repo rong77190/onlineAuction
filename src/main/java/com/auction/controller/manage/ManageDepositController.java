@@ -82,6 +82,7 @@ public class ManageDepositController {
     @RequestMapping("edit")
     @ResponseBody
     public Object editDeposit(Deposit deposit) throws  Exception{
+        deposit.setUpdateTime(new Date());
         int result = depositService.update(deposit);
         net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
         if(result > 0){   //说明修改成功

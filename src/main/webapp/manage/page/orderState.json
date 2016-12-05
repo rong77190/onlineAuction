@@ -1,0 +1,9 @@
+[
+{"orderState":0,"chinese":"未付款"},
+  {"orderState":1,"chinese":"已付款未发货"},
+  {"orderState":2,"chinese":"已发货未收货"},
+  {"orderState":3,"chinese":"已收货"},
+  {"orderState":4,"chinese":"结束订单"},
+  {"orderState":-1,"chinese":"取消订单"},
+  {"orderState":-2,"chinese":"退货"}
+]

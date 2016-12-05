@@ -182,21 +182,28 @@
 		alert(rows.length+' rows are changed!');
 	}
 	function onAfterEdit(index, row, changes) {
-		//endEdit该方法触发此事件
-		$.post("${pageContext.request.contextPath}/manage/user/edit", {
-					userId : row.userId,
-					freeze : row.freeze
-				}, function(result) {
-					if (result.success) {
-						$.messager.alert("系统提示", "数据已成功修改！");
-						$("#dg").datagrid("reload");
-					} else {
-						$.messager.alert("系统提示", "数据修改失败！");
-					}
-				}, "json"
-		);
-		$.console.info(row);
-		editRow = undefined;
+//		var selectedRows = $("#dg").datagrid("getSelections");
+//		if (selectedRows.length == 0) {
+//			return;
+		var rows = $('#dg').datagrid('getChanges');
+		if (rows.length == 1){
+			//endEdit该方法触发此事件
+			$.post("${pageContext.request.contextPath}/manage/user/edit", {
+						userId : row.userId,
+						freeze : row.freeze
+					}, function(result) {
+						if (result.success) {
+							$.messager.alert("系统提示", "数据已成功修改！");
+							$("#dg").datagrid("reload");
+						} else {
+							$.messager.alert("系统提示", "数据修改失败！");
+						}
+					}, "json"
+			);
+
+			editRow = undefined;
+		}
+
 	}
 </script>
 </head>
@@ -270,9 +277,9 @@
 			href="javascript:deleteUser()" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true">删除</a>
 		<div>
-			&nbsp;用户名：&nbsp;<input type="text" id="userName" size="20"
+			&nbsp;用户名：&nbsp;<input type="text" id="userName" size="20" placeholder="可选"
 				onkeydown="if(event.keyCode == 13)searchUser()" />
-			&nbsp;真名：&nbsp;<input type="text" id="realName" size="20"
+			&nbsp;真名：&nbsp;<input type="text" id="realName" size="20" placeholder="可选"
 								   onkeydown="if(event.keyCode == 13)searchUser()" />
 			&nbsp; 状态：&nbsp;
 			<select id="freeze" class="easyui-combobox" name="freeze" size="20" labelPosition="top">
