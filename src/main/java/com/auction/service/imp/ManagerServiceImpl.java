@@ -1,14 +1,13 @@
 package com.auction.service.imp;
 
-import com.auction.dao.DepositMapper;
 import com.auction.dao.ManagerMapper;
-import com.auction.model.Deposit;
 import com.auction.model.Manager;
 import com.auction.service.ManagerService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dell on 2016/8/21.
@@ -18,8 +17,6 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Resource
     private ManagerMapper managerMapper;
-    @Resource
-    private DepositMapper depositMapper;
 
 
     /**
@@ -33,18 +30,16 @@ public class ManagerServiceImpl implements ManagerService {
         return managerMapper.login(name,password);
     }
 
-//    获取某商品所有押金信息
-    public List getDepositByGoodId(int goodId) {
-        return depositMapper.getDepositByGoodId(goodId);
+    public List<Manager> find(Map<String, Object> map) {
+        return managerMapper.find(map);
     }
 
-//    获取某商品未返押金信息
-    public List getDepositByGoodId2(int goodId) {
-        return depositMapper.getDepositByGoodId2(goodId);
+    public Long getTotal(Map<String, Object> map) {
+        return managerMapper.getTotal(map);
     }
 
-//    设置状态为1  已经返还
-    public int backDeposit(Deposit deposit) {
-        return depositMapper.updateByPrimaryKeySelective(deposit);
+    public int update(Manager manager) {
+        return managerMapper.updateByPrimaryKeySelective(manager);
     }
+
 }

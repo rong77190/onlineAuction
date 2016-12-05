@@ -100,10 +100,10 @@
 					ids : ids
 				}, function(result) {
 					if (result.success) {
-						$.messager.alert("系统提示", "数据已成功删除！");
+						$.messager.alert("系统提示", "数据成功修改！");
 						$("#dg").datagrid("reload");
 					} else {
-						$.messager.alert("系统提示", "数据删除失败，请联系系统管理员！");
+						$.messager.alert("系统提示", "数据修改失败！");
 					}
 				}, "json"
 			);
@@ -184,13 +184,14 @@
 	function onAfterEdit(index, row, changes) {
 		//endEdit该方法触发此事件
 		$.post("${pageContext.request.contextPath}/manage/user/edit", {
-					ids : ids
+					userId : row.userId,
+					freeze : row.freeze
 				}, function(result) {
 					if (result.success) {
-						$.messager.alert("系统提示", "数据已成功删除！");
+						$.messager.alert("系统提示", "数据已成功修改！");
 						$("#dg").datagrid("reload");
 					} else {
-						$.messager.alert("系统提示", "数据删除失败，请联系系统管理员！");
+						$.messager.alert("系统提示", "数据修改失败！");
 					}
 				}, "json"
 		);
@@ -252,7 +253,7 @@
 													textField:'chinese',
 													method:'get',
 													panelHeight:'42.5px',
-													url:'/manage/page/my.json',
+													url:'/manage/page/freeze.json',
 													required:true
                         						}
                         					}" align="center" width="20">状态</th>

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -79,20 +80,20 @@
 
 <div region="west" style="width:200px;" title="导航菜单" split="true">
     <div class="easyui-accordion" data-options="fit:true,border:false">
-        <div title="基本管理"  data-options="iconCls:'icon-khgl'" style="padding:10px;">
-            <a href="javascript:openTab('用户信息管理','userManage.jsp','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khxxgl'" style="width: 150px;">用户信息管理</a>
+        <div title="业务信息管理"  data-options="iconCls:'icon-khgl'" style="padding:10px;">
             <a href="javascript:openTab('拍品信息管理','goodManage.jsp','icon-good')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khlsgl'" style="width: 150px;">拍品信息管理</a>
             <a href="javascript:openTab('订单信息管理','orderManage.jsp','icon-good')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khlsgl'" style="width: 150px;">订单信息管理</a>
             <a href="javascript:openTab('押金信息管理','depositManage.jsp','icon-good')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khlsgl'" style="width: 150px;">押金信息管理</a>
         </div>
-        <div title="基础数据管理"  data-options="iconCls:'icon-jcsjgl'" style="padding:10px">
-            <a href="javascript:openTab('数据字典管理','dataDicManage.jsp','icon-sjzdgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-sjzdgl'" style="width: 150px;">数据字典管理</a>
-            <a href="javascript:openTab('产品信息查询','productSearch.jsp','icon-cpxxgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-cpxxgl'" style="width: 150px;">产品信息查询</a>
-            <a href="javascript:openTab('用户信息管理','userManage.jsp','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">用户信息管理</a>
-            <a href="javascript:openTab('拍品信息管理','goodManage.jsp','icon-student')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-student'" style="width: 150px;">拍品信息管理</a>
-        </div>
+        <%--<c:choose>--%>
+            <%--<c:when test="${manage.sysUserId}==1">--%>
+                <div title="系统管理员专属管理"  data-options="iconCls:'icon-jcsjgl'" style="padding:10px">
+                    <a href="javascript:openTab('用户信息管理','userManage.jsp','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khxxgl'" style="width: 150px;">用户信息管理</a>
+                    <a href="javascript:openTab('业务管理员信息管理','adminManage.jsp','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khxxgl'" style="width: 150px;">业务管理员信息管理</a>
+                </div>
+            <%--</c:when>--%>
+        <%--</c:choose>--%>
         <div title="系统管理"  data-options="iconCls:'icon-item'" style="padding:10px">
-            <a href="javascript:openPasswordModifyDialog()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
             <a href="${pageContext.request.contextPath}/manage/admin/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
         </div>
     </div>
