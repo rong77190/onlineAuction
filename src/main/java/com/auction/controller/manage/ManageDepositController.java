@@ -1,6 +1,5 @@
 package com.auction.controller.manage;
 
-import com.alibaba.fastjson.JSONObject;
 import com.auction.model.Deposit;
 import com.auction.model.PageBean;
 import com.auction.model.User;
@@ -24,12 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by xiechur on 2016/11/25/025.
+ * Created by xiechur on 2016/11/25/
  */
-@Controller("manageDepositController")
+@Controller
 @RequestMapping("manage/deposit")
-public class DepositController {
-    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(DepositController.class);
+public class ManageDepositController {
+    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(ManageDepositController.class);
 
 
     @Resource
@@ -64,7 +63,7 @@ public class DepositController {
         Long total=depositService.getTotal(map);
         net.sf.json.JSONObject result=new net.sf.json.JSONObject();
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.registerJsonValueProcessor(java.util.Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh:mm:ss"));
+        jsonConfig.registerJsonValueProcessor(Date.class,new DateJsonValueProcessor("yyyy-MM-dd hh:mm:ss"));
         JSONArray jsonArray= JSONArray.fromObject(depositList,jsonConfig);
         result.put("rows", jsonArray);
         result.put("total", total);
@@ -103,7 +102,7 @@ public class DepositController {
      * @throws Exception
      */
     @RequestMapping("/backDeposit")
-    public String delete(@RequestParam(value="ids") String ids,HttpServletResponse res) throws Exception{
+    public String delete(@RequestParam(value="ids") String ids, HttpServletResponse res) throws Exception{
         String[] idStr = ids.split(",");
         net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
         for (String id : idStr){

@@ -1,10 +1,8 @@
 package com.auction.controller.manage;
 
 import com.auction.bean.OrderBean;
-import com.auction.model.Good;
 import com.auction.model.PageBean;
 import com.auction.model.Torder;
-import com.auction.service.OrderService;
 import com.auction.service.TorderService;
 import com.auction.util.DateJsonValueProcessor;
 import com.auction.util.StringUtil;
@@ -13,7 +11,6 @@ import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,13 +21,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by xiechur on 2016/11/25/025.
+ * Created by xiechur on 2016/11/25
  */
 
-@Controller("manageOrderController")
+@Controller
 @RequestMapping("manage/order")
-public class OrderController {
-    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(OrderController.class);
+public class ManageOrderController {
+    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(ManageOrderController.class);
     @Resource
     private TorderService torderService;
     /**
@@ -44,7 +41,7 @@ public class OrderController {
      * */
     @RequestMapping("/orderList")
     @ResponseBody
-    public Object goodList(@RequestParam(value = "page",required = false)String page, @RequestParam(value = "rows",required = false)String rows,OrderBean orderBean)throws Exception{
+    public Object goodList(@RequestParam(value = "page",required = false)String page, @RequestParam(value = "rows",required = false)String rows, OrderBean orderBean)throws Exception{
         PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("orderId", orderBean.getOrderId());

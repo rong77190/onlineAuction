@@ -20,12 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by xiechur on 2016/11/25/025.
+ * Created by xiechur on 2016/11/25
  */
-@Controller("manageGoodController")
+@Controller
 @RequestMapping("manage/good")
-public class GoodController {
-    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(GoodController.class);
+public class ManageGoodController {
+    private static final transient Logger log = org.slf4j.LoggerFactory.getLogger(ManageGoodController.class);
     @Resource
     private GoodService goodService;
 

@@ -10,6 +10,7 @@ import com.auction.service.GoodService;
 import com.auction.service.SubCategoryService;
 import com.auction.util.MyResult;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +34,26 @@ public class GoodController extends SpringMvcActionContext {
     private SubCategoryService subCategoryService;
 
 
+    @RequestMapping("{goodId}")
+    public ModelAndView goodDetail (@PathVariable("goodId")int goodId){
+        ModelAndView modelAndView = new ModelAndView();
+        Good good = null;
+        good = goodService.findGoodById(goodId);
+        if (good == null){
+            modelAndView.setViewName("/error");
+            return modelAndView;
+        }else{
+            good.setClick((good.getClick()+1));
+            goodService.updateGood(good);
+            modelAndView.setViewName("showGood");
+            modelAndView.addObject("good",good);
+            return modelAndView;
+        }
+    }
+
+
+
+//    @RequestMapping("")
 
 	@RequestMapping(value="searchGoodByKey")
     @ResponseBody
@@ -82,10 +103,10 @@ public class GoodController extends SpringMvcActionContext {
 		if(good.getBeginPrice() == null && good.getGoodName() == null && good.getPrice()==null
 		   && good.getImage() == null && good.getIntroduction() == null)
 		{
-			return MyResult.getResult(0, "信息不全", "");
-		}else{
             int result = goodService.addGood(good);
             return MyResult.getResult();
+		}else{
+            return MyResult.getResult(0, "信息不全", "");
 		}
     }
 	
